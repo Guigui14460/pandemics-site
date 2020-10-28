@@ -137,8 +137,8 @@ class View {
     protected function getMenu() {
 		return array(
 			"Accueil" => $this->router->getHomeURL(),
-			"Animaux" => $this->router->getPandemicListURL(),
-			"Nouvel Pandemic" => $this->router->getPandemicCreationURL(),
+			"Maladies" => $this->router->getPandemicListURL(),
+			"Nouvelle maladie" => $this->router->getPandemicCreationURL(),
 		);
     }
     
