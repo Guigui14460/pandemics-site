@@ -93,6 +93,7 @@ class View {
 
     public function makePandemicUpdatePage($builder, $id){
         $this->title = "Modifier votre maladie";
+        $this->css = "./src/css/HomePage.css";
         $s = '<form action="'.$this->router->getPandemicUpdateURL($id).'" method="POST">'."\n";
 
         $s .= "<input type=\"hidden\" name=\"Pandemic_id\" value=\"$id\"  />";
@@ -126,6 +127,7 @@ class View {
 
     public function makeDescriptionPage(){
         $this->title = "à propos";
+        $this->css = "./src/css/HomePage.css";
         $this->content = "<p><h1>Le projet</h1></p>";
         $this->content .= "<p>21804030 Guillaume LETELLIER</p>";
         $this->content .= "<p>21803752 Corentin PIERRE</p>";
