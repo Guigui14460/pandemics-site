@@ -27,9 +27,9 @@ class View {
     }
 
     public function makeHomePage(){
-        $this->title = "Page d'accueil niklecovid";
+        $this->title = "Pandémonium";
         $this->css = "./src/css/HomePage.css";
-        $this->content = "<p>Bienvenue sur notre site dont le thème est les meilleures maladies, les plus drôle, préparez vous à vous fendre la poire hihi ! Alors confinez vous et cliquez !</p> <img src='src/img/covid.png'>";
+        $this->content = "<h1>Bienvenue sur notre site Pandémonium !</h1> <img src='src/img/covid.png'/>";
     }
 
     public function makePandemicPage($pandemic, $id){
