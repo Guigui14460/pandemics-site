@@ -27,7 +27,7 @@ class View {
     }
 
     public function makeHomePage(){
-        $this->title = "Page d'accueil";
+        $this->title = "Page d'accueil GROS C'EST LA VIOLENCEUH";
         $this->css = "./src/css/HomePage.css";
         $this->content = "<p style=\"color: green; font-weight: bold;\">Bienvenue sur notre site !</p>";
     }
