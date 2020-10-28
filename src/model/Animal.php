@@ -1,11 +1,11 @@
 <?php
 
 class Animal {
-    private string $name;
-    private string $species;
-    private int $age;
+    private $name;
+    private $species;
+    private $age;
 
-    public function __construct(string $name, string $species, int $age){
+    public function __construct($name, $species, $age){
         $this->setName($name);
         $this->setSpecies($species);
         $this->setAge($age);
@@ -23,21 +23,21 @@ class Animal {
         return $this->age;
     }
 
-    public function setName(string $name){
+    public function setName($name){
         if(!self::isNameValid($name)){
             throw new Exception("Invalid name");
         }
         $this->name = $name;
     }
 
-    public function setSpecies(string $species){
+    public function setSpecies($species){
         if(!self::isSpeciesValid($species)){
             throw new Exception("Invalid species");
         }
         $this->species = $species;
     }
 
-    public function setAge(int $age){
+    public function setAge($age){
         if(!self::isAgeValid($age)){
             throw new Exception("Invalid age");
         }

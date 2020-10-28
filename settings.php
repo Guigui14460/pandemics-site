@@ -10,9 +10,9 @@ require_once("mysql_config.php");
 
 // $db = new AnimalStorageStub();
 
-// $db = new AnimalStorageFile("data/storage.txt");
+$db = new AnimalStorageFile("data/storage.txt");
 // $db->reinit();
 
-$db = new AnimalStorageMySQL(new PDO("mysql:host=".MYSQL_HOST.";port=".MYSQL_PORT.";dbname=".MYSQL_DB.";charset=utf8", MYSQL_USER, MYSQL_PASSWORD));
+// $db = new AnimalStorageMySQL(new PDO("mysql:host=".MYSQL_HOST.";port=".MYSQL_PORT.";dbname=".MYSQL_DB.";charset=utf8", MYSQL_USER, MYSQL_PASSWORD));
 
 ?>

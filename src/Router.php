@@ -4,10 +4,11 @@ require_once("controller/Controller.php");
 require_once("model/AnimalStorage.php");
 
 class Router {
-    private View $view;
+    private $view;
 
-    public function main(AnimalStorage $db){
-        $path_exploded = array_slice(explode('/', $_SERVER['PATH_INFO']), 1);
+    public function main($db){
+        var_export($_SERVER);
+        $path_exploded = array_slice(explode('/', $_SERVER['REQUEST_URI']), 2);
         
         $this->view = new View($this);
         try {
@@ -56,27 +57,27 @@ class Router {
     }
 
     public function getHomeURL(){
-        return "/";
+        return "./";
     }
 
     public function getAnimalURL($id){
-        return "/$id";
+        return "./$id";
     }
 
     public function getAnimalListURL(){
-        return "/list";
+        return "./list";
     }
 
     public function getAnimalCreationURL(){
-        return "/create";
+        return "./create";
     }
 
     public function getAnimalUpdateURL($id){
-        return "/$id/update";
+        return "./$id/update";
     }
 
     public function getAnimalDeletionURL($id){
-        return "/$id/delete";
+        return "./$id/delete";
     }
 }
 

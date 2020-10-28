@@ -6,10 +6,10 @@ require_once("model/AnimalStorage.php");
 require_once("model/AnimalBuilder.php");
 
 class Controller {
-    private View $view;
-    private AnimalStorage $storage;
+    private $view;
+    private $storage;
 
-    public function __construct(View $view, AnimalStorage $storage){
+    public function __construct($view, $storage){
         $this->view = $view;
         $this->storage = $storage;
     }
@@ -27,7 +27,7 @@ class Controller {
         $this->view->makeListPage($this->storage->readAll());
     }
 
-    public function saveNewAnimal(array $data){
+    public function saveNewAnimal($data){
         $builder = new AnimalBuilder($data);
         if($builder->isValid()){
             $animal = $builder->createAnimal();

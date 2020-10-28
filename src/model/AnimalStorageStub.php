@@ -3,7 +3,7 @@
 require_once("AnimalStorage.php");
 
 class AnimalStorageStub implements AnimalStorage {
-    private array $animalsTab;
+    private $animalsTab;
 
     public function __construct(){
         $this->animalsTab = array(
@@ -13,18 +13,18 @@ class AnimalStorageStub implements AnimalStorage {
         );
     }
 
-    public function read(string $id) {
+    public function read($id) {
         if(key_exists($id, $this->animalsTab)){
             return $this->animalsTab[$id];
         }
         return null;
     }
 
-    public function readAll() :array {
+    public function readAll() {
         return $this->animalsTab;
     }
 
-    public function create(Animal $a){
+    public function create($a){
         $id = uniqid();
         $this->animalsTab[$id] = $a;
         return $id;
@@ -34,13 +34,13 @@ class AnimalStorageStub implements AnimalStorage {
         return key_exists($id, $this->animalsTab);
     }
 
-    public function update(string $id, Animal $a){
+    public function update($id, $a){
         if($this->exists($id)){
             $this->animalsTab[$id] = $a;
         }
     }
 
-    public function delete(string $id){
+    public function delete($id){
         if($this->exists($id)){
             unset($id);
         }

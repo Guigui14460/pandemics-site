@@ -5,10 +5,10 @@ require_once("model/Animal.php");
 require_once("Router.php");
 
 class View {
-    private string $title, $content;
-    private Router $router;
+    private $title, $content;
+    private $router;
 
-    public function __construct(Router $router){
+    public function __construct($router){
         $this->router = $router;
     }
 
@@ -28,7 +28,7 @@ class View {
         $this->content = "<p style=\"color: green; font-weight: bold;\">Bienvenue sur notre site !</p>";
     }
 
-    public function makeAnimalPage(Animal $animal, string $id){
+    public function makeAnimalPage($animal, $id){
         $this->title = "Page sur {$animal->getName()}";
         $this->content = "<p>{$animal->getName()} est un animal de l'espèce {$animal->getSpecies()} âgé de {$animal->getAge()} ans.</p><a href=\"{$this->router->getAnimalUpdateURL($id)}\">Modifier animal</a>&nbsp;&nbsp;<a href=\"{$this->router->getAnimalDeletionURL($id)}\">Supprimer animal</a>";
     }
@@ -47,7 +47,7 @@ class View {
         $this->content = "<ul>$list</ul>";
     }
 
-    public function makeAnimalCreationPage(AnimalBuilder $builder){
+    public function makeAnimalCreationPage($builder){
         $this->title = "Ajouter votre animal";
         $s = '<form action="'.$this->router->getAnimalCreationURL().'" method="POST">'."\n";
 
@@ -79,14 +79,14 @@ class View {
         $this->content = $s;
     }
 
-    public function makeAnimalDeletionPage(Animal $animal, $id){
+    public function makeAnimalDeletionPage($animal, $id){
         $this->title = "Suppression de {$animal->getName()}";
         $this->content = "<p>Êtes-vous sûr de vouloir supprimer cet animal ?<br>
         <form action=\"{$this->router->getAnimalDeletionURL($id)}\" method=\"POST\"><input type=\"hidden\" name=\"animal_id\" value=\"$id\"  /><button>Oui</button></form>&nbsp<a href=\"{$this->router->getAnimalURL($id)}\">Annuler</a></p>";
     }
 
 
-    public function makeAnimalUpdatePage(AnimalBuilder $builder, $id){
+    public function makeAnimalUpdatePage($builder, $id){
         $this->title = "Modifier votre animal";
         $s = '<form action="'.$this->router->getAnimalUpdateURL($id).'" method="POST">'."\n";
 

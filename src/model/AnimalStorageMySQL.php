@@ -3,13 +3,13 @@
 require_once("AnimalStorage.php");
 
 class AnimalStorageMySQL implements AnimalStorage {
-    private PDO $database;
+    private $database;
 
-    public function __construct(PDO $pdo){
+    public function __construct($pdo){
         $this->database = $pdo;
     }
 
-    public function read(string $id) {
+    public function read($id) {
         $request = 'SELECT * FROM animals WHERE id='.$id;
         $stmt = $this->database->prepare($request);
         $stmt->execute();
@@ -20,7 +20,7 @@ class AnimalStorageMySQL implements AnimalStorage {
         return null;
     }
 
-    public function readAll() : array {
+    public function readAll() {
         $request = 'SELECT * FROM animals';
         $stmt = $this->database->prepare($request);
         $stmt->execute();
@@ -32,7 +32,7 @@ class AnimalStorageMySQL implements AnimalStorage {
         return $data;
     }
 
-    public function create(Animal $a){
+    public function create($a){
         $request = "INSERT INTO animals (name, species, age) VALUES (?,?,?)";
         $stmt = $this->database->prepare($request)->execute([$a->getName(), $a->getSpecies(), $a->getAge()]);
         return $this->database->lastInsertId();
@@ -45,12 +45,12 @@ class AnimalStorageMySQL implements AnimalStorage {
         return $fetched_data !== null;
     }
 
-    public function update(string $id, Animal $a){
+    public function update($id, $a){
         $request = "UPDATE animals SET name=?, species=?, age=? WHERE id=?";
         $stmt = $this->database->prepare($request)->execute([$a->getName(), $a->getSpecies(), $a->getAge(), $id]);
     }
 
-    public function delete(string $id){
+    public function delete($id){
         $request = "DELETE FROM animals WHERE id=?";
         $stmt = $this->database->prepare($request)->execute([$id]);
     }

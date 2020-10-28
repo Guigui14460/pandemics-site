@@ -3,7 +3,7 @@
 class AnimalBuilder {
     private $data;
     private $error;
-    private static string $NAME_REF = "name", $SPECIES_REF = "species", $AGE_REF = "age";
+    private static $NAME_REF = "name", $SPECIES_REF = "species", $AGE_REF = "age";
 
     public function __construct($data=null){
         if($data === null){
@@ -25,7 +25,7 @@ class AnimalBuilder {
 		return key_exists($ref, $this->error) ? $this->error[$ref] : null;
     }
     
-    public static function buildFromAnimal(Animal $animal){
+    public static function buildFromAnimal($animal){
         return new AnimalBuilder(array(
             self::$NAME_REF => $animal->getName(),
             self::$SPECIES_REF => $animal->getSpecies(),
@@ -42,7 +42,7 @@ class AnimalBuilder {
         return new Animal($this->data[$this->getNameRef()], $this->data[$this->getSpeciesRef()], intval($this->data[$this->getAgeRef()]));
     }
 
-    public function updateAnimal(Animal $animal){
+    public function updateAnimal($animal){
         if(key_exists($this->getNameRef(), $this->data)){
             $animal->setName($this->data[$this->getNameRef()]);
         }
