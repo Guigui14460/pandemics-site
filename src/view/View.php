@@ -34,6 +34,7 @@ class View {
 
     public function makePandemicPage($pandemic, $id){
         $this->title = "Page sur {$pandemic->getName()}";
+        $this->css = "./src/css/ListPage.css";
         $this->content = "<p>{$pandemic->getName()} est une maladie du type {$pandemic->getSpecies()} dont l'existence remonte à {$pandemic->getAge()} ans.</p><a href=\"{$this->router->getPandemicUpdateURL($id)}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getPandemicDeletionURL($id)}\">Supprimer Pandemic</a>";
     }
 
@@ -54,6 +55,7 @@ class View {
 
     public function makePandemicCreationPage($builder){
         $this->title = "Ajouter votre maladie";
+        $this->css = "./src/css/AjoutPage.css";
         $s = '<form action="'.$this->router->getPandemicCreationURL().'" method="POST">'."\n";
 
 		$s .= '<p><label>Nom de la maladie: <input type="text" name="'.$builder->getNameRef().'" value="';
@@ -86,12 +88,14 @@ class View {
 
     public function makePandemicDeletionPage($pandemic, $id){
         $this->title = "Suppression de {$pandemic->getName()}";
+        $this->css = "./src/css/ListPage.css";
         $this->content = "<p>Êtes-vous sûr de vouloir supprimer cette maladie ?<br>
         <form action=\"{$this->router->getPandemicDeletionURL($id)}\" method=\"POST\"><input type=\"hidden\" name=\"Pandemic_id\" value=\"$id\"  /><button>Oui</button></form>&nbsp<a href=\"{$this->router->getPandemicURL($id)}\">Annuler</a></p>";
     }
 
 
     public function makePandemicUpdatePage($builder, $id){
+        $this->css = "./src/css/ListPage.css";
         $this->title = "Modifier votre maladie";
         $this->css = "./src/css/HomePage.css";
         $s = '<form action="'.$this->router->getPandemicUpdateURL($id).'" method="POST">'."\n";
@@ -144,6 +148,7 @@ class View {
 
     public function makeUnexpectedErrorPage(){
         $this->title = "Erreur";
+        $this->css = "./src/css/ListPage.css";
         $this->content = "<p>Une erreur est survenue !</p>";
     }
 
