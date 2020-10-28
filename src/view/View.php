@@ -27,7 +27,7 @@ class View {
     }
 
     public function makeHomePage(){
-        $this->title = "Page d'accueil GROS C'EST LA VIOLENCEUH";
+        $this->title = "Page d'accueil niklecovid";
         $this->css = "./src/css/HomePage.css";
         $this->content = "<p>Bienvenue sur notre site dont le thème est les meilleures maladies, les plus drôle, préparez vous à vous fendre la poire hihi ! Alors confinez vous et cliquez !</p> <img src='src/img/covid.png'>";
     }
