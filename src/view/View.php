@@ -7,6 +7,8 @@ require_once("Router.php");
 class View {
     private $title, $content;
     private $router;
+    private $css;
+
 
     public function __construct($router){
         $this->router = $router;
@@ -15,6 +17,7 @@ class View {
     public function render(){
         $title = $this->title;
         $content = $this->content;
+        $css = $this->css;
         include("skull.php");
     }
 
@@ -25,6 +28,7 @@ class View {
 
     public function makeHomePage(){
         $this->title = "Page d'accueil";
+        $this->css = "./src/css/HomePage.css";
         $this->content = "<p style=\"color: green; font-weight: bold;\">Bienvenue sur notre site !</p>";
     }
 

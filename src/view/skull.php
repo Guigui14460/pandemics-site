@@ -3,6 +3,7 @@
 <head>
     <title><?php echo $title ?></title>
     <meta charset="UTF-8" />
+    <link href="<?php echo $css; ?>" rel="stylesheet">
 </head>
 <body>
 	<nav class="menu">
@@ -15,7 +16,7 @@ foreach ($this->getMenu() as $text => $link) {
 		</ul>
 	</nav>
     <main>
-        <h1><?php echo $title; ?></h1>
+        
         <?php echo $content; ?>
     </main>
 </body>
