@@ -29,7 +29,7 @@ class View {
     public function makeHomePage(){
         $this->title = "Page d'accueil GROS C'EST LA VIOLENCEUH";
         $this->css = "./src/css/HomePage.css";
-        $this->content = "<p style=\"color: green; font-weight: bold;\">Bienvenue sur notre site !</p>";
+        $this->content = "<p style=\"color: green; font-weight: bold;\">Bienvenue sur notre site dont le thème est les mailleurs maladies, les plus drôle, préparez vous à vous fendre la poire hihi ! Alors confinez vous et cliquez !</p>";
     }
 
     public function makePandemicPage($pandemic, $id){
