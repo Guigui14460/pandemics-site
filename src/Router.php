@@ -18,7 +18,11 @@ class Router {
                 $controller = new Controller($this->view, $db);
                 if($path_exploded[0] === "list"){
                     $controller->showList();
-                } else if($path_exploded[0] === "create"){
+                }
+                else if($path_exploded[0] === "description"){
+                    $this->view->makeDescriptionPage();
+                }
+                else if($path_exploded[0] === "create"){
                     if($_SERVER['REQUEST_METHOD'] === "POST"){
                         $controller->saveNewPandemic($_POST);
                     } else if($_SERVER['REQUEST_METHOD'] == "GET"){
@@ -78,6 +82,10 @@ class Router {
 
     public function getPandemicDeletionURL($id){
         return "/$id/delete";
+    }
+
+    public function getDescriptionURL(){
+        return "/description";
     }
 }
 
