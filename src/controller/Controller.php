@@ -1,9 +1,9 @@
 <?php
 
 require_once("view/View.php");
-require_once("model/Animal.php");
-require_once("model/AnimalStorage.php");
-require_once("model/AnimalBuilder.php");
+require_once("model/Pandemic.php");
+require_once("model/PandemicStorage.php");
+require_once("model/PandemicBuilder.php");
 
 class Controller {
     private $view;
@@ -15,11 +15,11 @@ class Controller {
     }
 
     public function showInformation($id) {
-        $animal = $this->storage->read($id);
-        if($animal !== null){
-            $this->view->makeAnimalPage($animal, $id);
+        $pandemic = $this->storage->read($id);
+        if($pandemic !== null){
+            $this->view->makePandemicPage($pandemic, $id);
         } else {
-			$this->view->makeUnknownAnimalPage();
+			$this->view->makeUnknownPandemicPage();
 		}
     }
 
@@ -27,70 +27,70 @@ class Controller {
         $this->view->makeListPage($this->storage->readAll());
     }
 
-    public function saveNewAnimal($data){
-        $builder = new AnimalBuilder($data);
+    public function saveNewPandemic($data){
+        $builder = new PandemicBuilder($data);
         if($builder->isValid()){
-            $animal = $builder->createAnimal();
-            $id = $this->storage->create($animal);
-            $this->view->makeAnimalPage($animal, $id);
+            $pandemic = $builder->createPandemic();
+            $id = $this->storage->create($pandemic);
+            $this->view->makePandemicPage($pandemic, $id);
             header("Location: ../$id");
         } else {
-            $this->view->makeAnimalCreationPage($builder);
+            $this->view->makePandemicCreationPage($builder);
         }
     }
 
-    public function updateAnimal($data){
-        if(isset($data['animal_id'])){
-            $id = $data['animal_id'];
-            $animal = $this->storage->read($id);
-            if($animal !== null){
-                $builder = new AnimalBuilder($data);
+    public function updatePandemic($data){
+        if(isset($data['pandemic_id'])){
+            $id = $data['pandemic_id'];
+            $pandemic = $this->storage->read($id);
+            if($pandemic !== null){
+                $builder = new PandemicBuilder($data);
                 if($builder->isValid()){
-                    $builder->updateAnimal($animal);
-                    $this->storage->update($id, $animal);
-                    $this->view->makeAnimalPage($animal, $id);
+                    $builder->updatePandemic($pandemic);
+                    $this->storage->update($id, $pandemic);
+                    $this->view->makePandemicPage($pandemic, $id);
                     header("Location: ../$id");
                 } else {
-                    $this->view->makeAnimalUpdatePage($builder, $id);
+                    $this->view->makePandemicUpdatePage($builder, $id);
                 }
             } else {
-                $this->view->makeUnknownAnimalPage();
+                $this->view->makeUnknownPandemicPage();
             }
         } else {
             $this->view->makeUnexpectedErrorPage();
         }
     }
 
-    public function askUpdateAnimal($id){
-        $animal = $this->storage->read($id);
-        if($animal !== null){
-            $this->view->makeAnimalUpdatePage(AnimalBuilder::buildFromAnimal($animal), $id);
+    public function askUpdatePandemic($id){
+        $pandemic = $this->storage->read($id);
+        if($pandemic !== null){
+            $this->view->makePandemicUpdatePage(PandemicBuilder::buildFromPandemic($pandemic), $id);
         } else {
-			$this->view->makeUnknownAnimalPage();
+			$this->view->makeUnknownPandemicPage();
 		}
     }
 
-    public function deleteAnimal($data){
-        if(isset($data['animal_id'])){
-            $id = $data['animal_id'];
-            $animal = $this->storage->read($id);
-            if($animal !== null){
+    public function deletePandemic($data){
+        if(isset($data['Pandemic_id'])){
+            $id = $data['Pandemic_id'];
+            $pandemic = $this->storage->read($id);
+            if($pandemic !== null){
                 $this->storage->delete($id);
                 $this->showList();
             } else {
-                $this->view->makeUnknownAnimalPage();
+                $this->view->makeUnknownPandemicPage();
             }
         } else {
             $this->view->makeUnexpectedErrorPage();
         }
     }
 
-    public function askDeletionAnimal($id){
-        $animal = $this->storage->read($id);
-        if($animal !== null){
-            $this->view->makeAnimalDeletionPage($animal, $id);
+    public function askDeletionPandemic($id){
+        $pandemic = $this->storage->read($id);
+        if($pandemic !== null){
+            $this->view->makePandemicDeletionPage($pandemic, $id);
         } else {
-			$this->view->makeUnknownAnimalPage();
+			$this->view->makeUnknownPandemicPage();
 		}
     }
 }

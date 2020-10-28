@@ -1,7 +1,7 @@
 <?php
 
-require_once("model/AnimalBuilder.php");
-require_once("model/Animal.php");
+require_once("model/PandemicBuilder.php");
+require_once("model/Pandemic.php");
 require_once("Router.php");
 
 class View {
@@ -28,30 +28,30 @@ class View {
         $this->content = "<p style=\"color: green; font-weight: bold;\">Bienvenue sur notre site !</p>";
     }
 
-    public function makeAnimalPage($animal, $id){
-        $this->title = "Page sur {$animal->getName()}";
-        $this->content = "<p>{$animal->getName()} est un animal de l'espèce {$animal->getSpecies()} âgé de {$animal->getAge()} ans.</p><a href=\"{$this->router->getAnimalUpdateURL($id)}\">Modifier animal</a>&nbsp;&nbsp;<a href=\"{$this->router->getAnimalDeletionURL($id)}\">Supprimer animal</a>";
+    public function makePandemicPage($pandemic, $id){
+        $this->title = "Page sur {$pandemic->getName()}";
+        $this->content = "<p>{$pandemic->getName()} est un Pandemic de l'espèce {$pandemic->getSpecies()} âgé de {$pandemic->getAge()} ans.</p><a href=\"{$this->router->getPandemicUpdateURL($id)}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getPandemicDeletionURL($id)}\">Supprimer Pandemic</a>";
     }
 
-    public function makeUnknownAnimalPage(){
-        $this->title = "Animal inconnu";
-        $this->content = "<p style=\"color: red; font-weight: bold;\">L'animal de la requête n'existe pas dans notre base de données !</p>";
+    public function makeUnknownPandemicPage(){
+        $this->title = "Pandemic inconnu";
+        $this->content = "<p style=\"color: red; font-weight: bold;\">L'Pandemic de la requête n'existe pas dans notre base de données !</p>";
     }
 
-    public function makeListPage($animals){
+    public function makeListPage($pandemics){
         $this->title = "Liste des animaux";
         $list = "";
-        foreach($animals as $key => $value){
-            $list .= "<li><a href=\"{$this->router->getAnimalURL($key)}\">{$value->getName()}</a></li>";
+        foreach($pandemics as $key => $value){
+            $list .= "<li><a href=\"{$this->router->getPandemicURL($key)}\">{$value->getName()}</a></li>";
         }
         $this->content = "<ul>$list</ul>";
     }
 
-    public function makeAnimalCreationPage($builder){
-        $this->title = "Ajouter votre animal";
-        $s = '<form action="'.$this->router->getAnimalCreationURL().'" method="POST">'."\n";
+    public function makePandemicCreationPage($builder){
+        $this->title = "Ajouter votre Pandemic";
+        $s = '<form action="'.$this->router->getPandemicCreationURL().'" method="POST">'."\n";
 
-		$s .= '<p><label>Nom de l\'animal: <input type="text" name="'.$builder->getNameRef().'" value="';
+		$s .= '<p><label>Nom de l\'Pandemic: <input type="text" name="'.$builder->getNameRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getNameRef());
@@ -59,7 +59,7 @@ class View {
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";
 
-		$s .= '<p><label>Espèce de l\'animal: <input type="text" name="'.$builder->getSpeciesRef().'" value="';
+		$s .= '<p><label>Espèce de l\'Pandemic: <input type="text" name="'.$builder->getSpeciesRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getSpeciesRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getSpeciesRef());
@@ -67,7 +67,7 @@ class View {
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";
 
-		$s .= '<p><label>Âge de l\'animal: <input type="number" name="'.$builder->getAgeRef().'" value="';
+		$s .= '<p><label>Âge de l\'Pandemic: <input type="number" name="'.$builder->getAgeRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getAgeRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getAgeRef());
@@ -79,19 +79,19 @@ class View {
         $this->content = $s;
     }
 
-    public function makeAnimalDeletionPage($animal, $id){
-        $this->title = "Suppression de {$animal->getName()}";
-        $this->content = "<p>Êtes-vous sûr de vouloir supprimer cet animal ?<br>
-        <form action=\"{$this->router->getAnimalDeletionURL($id)}\" method=\"POST\"><input type=\"hidden\" name=\"animal_id\" value=\"$id\"  /><button>Oui</button></form>&nbsp<a href=\"{$this->router->getAnimalURL($id)}\">Annuler</a></p>";
+    public function makePandemicDeletionPage($pandemic, $id){
+        $this->title = "Suppression de {$pandemic->getName()}";
+        $this->content = "<p>Êtes-vous sûr de vouloir supprimer cet Pandemic ?<br>
+        <form action=\"{$this->router->getPandemicDeletionURL($id)}\" method=\"POST\"><input type=\"hidden\" name=\"Pandemic_id\" value=\"$id\"  /><button>Oui</button></form>&nbsp<a href=\"{$this->router->getPandemicURL($id)}\">Annuler</a></p>";
     }
 
 
-    public function makeAnimalUpdatePage($builder, $id){
-        $this->title = "Modifier votre animal";
-        $s = '<form action="'.$this->router->getAnimalUpdateURL($id).'" method="POST">'."\n";
+    public function makePandemicUpdatePage($builder, $id){
+        $this->title = "Modifier votre Pandemic";
+        $s = '<form action="'.$this->router->getPandemicUpdateURL($id).'" method="POST">'."\n";
 
-        $s .= "<input type=\"hidden\" name=\"animal_id\" value=\"$id\"  />";
-		$s .= '<p><label>Nom de l\'animal: <input type="text" name="'.$builder->getNameRef().'" value="';
+        $s .= "<input type=\"hidden\" name=\"Pandemic_id\" value=\"$id\"  />";
+		$s .= '<p><label>Nom de l\'Pandemic: <input type="text" name="'.$builder->getNameRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getNameRef());
@@ -99,7 +99,7 @@ class View {
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";
 
-		$s .= '<p><label>Espèce de l\'animal: <input type="text" name="'.$builder->getSpeciesRef().'" value="';
+		$s .= '<p><label>Espèce de l\'Pandemic: <input type="text" name="'.$builder->getSpeciesRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getSpeciesRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getSpeciesRef());
@@ -107,7 +107,7 @@ class View {
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";
 
-		$s .= '<p><label>Âge de l\'animal: <input type="number" name="'.$builder->getAgeRef().'" value="';
+		$s .= '<p><label>Âge de l\'Pandemic: <input type="number" name="'.$builder->getAgeRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getAgeRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getAgeRef());
@@ -137,8 +137,8 @@ class View {
     protected function getMenu() {
 		return array(
 			"Accueil" => $this->router->getHomeURL(),
-			"Animaux" => $this->router->getAnimalListURL(),
-			"Nouvel animal" => $this->router->getAnimalCreationURL(),
+			"Animaux" => $this->router->getPandemicListURL(),
+			"Nouvel Pandemic" => $this->router->getPandemicCreationURL(),
 		);
     }
     
