@@ -44,6 +44,7 @@ class View {
 
     public function makeListPage($pandemics){
         $this->title = "Liste des maladies";
+        $this->css = "./src/css/ListPage.css";
         $list = "";
         foreach($pandemics as $key => $value){
             $list .= "<li><a href=\"{$this->router->getPandemicURL($key)}\">{$value->getName()}</a></li>";
