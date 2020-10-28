@@ -50,7 +50,8 @@ class View {
         foreach($pandemics as $key => $value){
             $list .= "<li><a href=\"{$this->router->getPandemicURL($key)}\">{$value->getName()}</a></li>";
         }
-        $this->content = "<ul>$list</ul>";
+        $this->content = "<section><h1>  List de pandemie </h1>
+        <ul>$list</ul></section>";
     }
 
     public function makePandemicCreationPage($builder){

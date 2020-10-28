@@ -5,9 +5,12 @@
     <meta charset="UTF-8" />
     <link href="<?php echo $css; ?>" rel="stylesheet">
 </head>
-<body>
-	<nav class="menu">
+
+<header>
+
+<nav class="menu">
 		<ul>
+            <li id="name">Pandémonium</li>
 <?php
 foreach ($this->getMenu() as $text => $link) {
 	echo "<li><a href=\"$link\">$text</a></li>";
@@ -15,6 +18,9 @@ foreach ($this->getMenu() as $text => $link) {
 ?>
 		</ul>
 	</nav>
+
+</header>
+
     <main>
         
         <?php echo $content; ?>
