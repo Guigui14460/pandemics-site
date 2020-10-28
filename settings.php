@@ -8,6 +8,8 @@ require_once("model/PandemicStorageFile.php");
 require_once("model/PandemicStorageMySQL.php");
 require_once("mysql_config.php");
 
+$PROD_OR_DEV = 'dev';
+
 // $db = new PandemicStorageStub();
 
 $db = new PandemicStorageFile("data/storage.txt");
