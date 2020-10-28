@@ -128,6 +128,22 @@ class View {
         $this->content = $s;
     }
 
+    public function makeDescriptionPage(){
+        $this->title = "à propos";
+        $this->content = "<p><h1>Le projet</h1></p>";
+        $this->content .= "<p>21804030 Guillaume LETELLIER</p>";
+        $this->content .= "<p>21803752 Corentin PIERRE</p>";
+        $this->content .= "<p>21806332 Arthur BOCAGE</p>";
+        $this->content .= "<p>21701890 Alexandre PIGNARD</p>";
+        
+        $this->content .= "<p><h1>Remarque</h1></p>";
+        $this->content .= "<p> L'utilisation de L'url ne marche pas sous l'hébergement de la fac (marche sur toutes nos machines)</p>";
+
+
+    
+    
+    }
+
     public function makeUnexpectedErrorPage(){
         $this->title = "Erreur";
         $this->css = "./src/css/ListPage.css";
@@ -149,7 +165,8 @@ class View {
 			"Accueil" => $this->router->getHomeURL(),
 			"Maladies" => $this->router->getPandemicListURL(),
 			"Nouvelle maladie" => $this->router->getPandemicCreationURL(),
-		);
+            "à propos" => $this->router->getDescriptionURL(),
+        );
     }
     
     public static function htmlesc($str) {
