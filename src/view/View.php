@@ -30,16 +30,16 @@ class View {
 
     public function makePandemicPage($pandemic, $id){
         $this->title = "Page sur {$pandemic->getName()}";
-        $this->content = "<p>{$pandemic->getName()} est un Pandemic de l'espèce {$pandemic->getSpecies()} âgé de {$pandemic->getAge()} ans.</p><a href=\"{$this->router->getPandemicUpdateURL($id)}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getPandemicDeletionURL($id)}\">Supprimer Pandemic</a>";
+        $this->content = "<p>{$pandemic->getName()} est une maladie du type {$pandemic->getSpecies()} dont l'existence remonte à {$pandemic->getAge()} ans.</p><a href=\"{$this->router->getPandemicUpdateURL($id)}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getPandemicDeletionURL($id)}\">Supprimer Pandemic</a>";
     }
 
     public function makeUnknownPandemicPage(){
-        $this->title = "Pandemic inconnu";
-        $this->content = "<p style=\"color: red; font-weight: bold;\">L'Pandemic de la requête n'existe pas dans notre base de données !</p>";
+        $this->title = "Maladie inconnue";
+        $this->content = "<p style=\"color: red; font-weight: bold;\">La maladie de la requête n'existe pas dans notre base de données !</p>";
     }
 
     public function makeListPage($pandemics){
-        $this->title = "Liste des animaux";
+        $this->title = "Liste des maladies";
         $list = "";
         foreach($pandemics as $key => $value){
             $list .= "<li><a href=\"{$this->router->getPandemicURL($key)}\">{$value->getName()}</a></li>";
@@ -48,10 +48,10 @@ class View {
     }
 
     public function makePandemicCreationPage($builder){
-        $this->title = "Ajouter votre Pandemic";
+        $this->title = "Ajouter votre maladie";
         $s = '<form action="'.$this->router->getPandemicCreationURL().'" method="POST">'."\n";
 
-		$s .= '<p><label>Nom de l\'Pandemic: <input type="text" name="'.$builder->getNameRef().'" value="';
+		$s .= '<p><label>Nom de la maladie: <input type="text" name="'.$builder->getNameRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getNameRef());
@@ -59,7 +59,7 @@ class View {
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";
 
-		$s .= '<p><label>Espèce de l\'Pandemic: <input type="text" name="'.$builder->getSpeciesRef().'" value="';
+		$s .= '<p><label>Type de la maladie: <input type="text" name="'.$builder->getSpeciesRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getSpeciesRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getSpeciesRef());
@@ -67,7 +67,7 @@ class View {
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";
 
-		$s .= '<p><label>Âge de l\'Pandemic: <input type="number" name="'.$builder->getAgeRef().'" value="';
+		$s .= '<p><label>Date de la maladie: <input type="number" name="'.$builder->getAgeRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getAgeRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getAgeRef());
@@ -81,13 +81,13 @@ class View {
 
     public function makePandemicDeletionPage($pandemic, $id){
         $this->title = "Suppression de {$pandemic->getName()}";
-        $this->content = "<p>Êtes-vous sûr de vouloir supprimer cet Pandemic ?<br>
+        $this->content = "<p>Êtes-vous sûr de vouloir supprimer cette maladie ?<br>
         <form action=\"{$this->router->getPandemicDeletionURL($id)}\" method=\"POST\"><input type=\"hidden\" name=\"Pandemic_id\" value=\"$id\"  /><button>Oui</button></form>&nbsp<a href=\"{$this->router->getPandemicURL($id)}\">Annuler</a></p>";
     }
 
 
     public function makePandemicUpdatePage($builder, $id){
-        $this->title = "Modifier votre Pandemic";
+        $this->title = "Modifier votre maladie";
         $s = '<form action="'.$this->router->getPandemicUpdateURL($id).'" method="POST">'."\n";
 
         $s .= "<input type=\"hidden\" name=\"Pandemic_id\" value=\"$id\"  />";
@@ -99,7 +99,7 @@ class View {
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";
 
-		$s .= '<p><label>Espèce de l\'Pandemic: <input type="text" name="'.$builder->getSpeciesRef().'" value="';
+		$s .= '<p><label>Type de la maladie: <input type="text" name="'.$builder->getSpeciesRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getSpeciesRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getSpeciesRef());
@@ -107,7 +107,7 @@ class View {
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";
 
-		$s .= '<p><label>Âge de l\'Pandemic: <input type="number" name="'.$builder->getAgeRef().'" value="';
+		$s .= '<p><label>Âge de la maladie: <input type="number" name="'.$builder->getAgeRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getAgeRef()));
 		$s .= "\" />";
 		$err = $builder->getErrors($builder->getAgeRef());
