@@ -1,0 +1,2 @@
+TODO: faire un système d'affichage de message (connexion/déconnexion réussies)
+TODO: faire redirections en passant l'URL suivant dans le GET
