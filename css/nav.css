@@ -1,0 +1,31 @@
+nav ul  {
+    display: grid;
+    width: 100%;
+    list-style: none;
+    background-color: red;
+    grid-template-columns: 48% 10% 10% 10% 10% 10%;
+    margin: 0;
+    padding: 1% 0 1% 0;
+}
+
+li{
+    text-align: right;
+}
+
+#name{
+    margin-left: 1%;
+    color: white;
+    text-align: left;
+    margin-right: 200%;
+}
+
+a {
+    text-decoration: none;
+    color : white;
+    font-weight: bolder;
+}
+ 
+a:hover {
+    text-decoration: none;
+    color: blue;
+}
