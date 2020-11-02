@@ -1,24 +1,9 @@
 @import 'nav.css';
-html {
-    margin: auto 40% auto 40%;
-    background-color: black;
-    color: white;
-}
+@import 'blackBody.css';
 
 p {
-    color: red;
-    font-weight: bold;
-}
+    color: white;
 
-a {
-    text-decoration: none;
-    color : white;
-    font-weight: bolder;
-}
- 
-a:hover {
-    text-decoration: underline;
-    color: red;
 }
 
 img {

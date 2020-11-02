@@ -1,14 +1,7 @@
 @import 'nav.css';
+@import 'blackBody.css';
 
-main{
-    margin: 0 25% 0 25%;
-}
 
-body {
-    margin: 0 0 0 0 ;
-    padding: 10 20 02 10;
-    background-color: black;
-}
 
 
 
@@ -16,11 +9,7 @@ p {
     color: white;
 }
 
-h1{
-    color: white;
-    text-align: center;
-    
-}
+
 
 img {
     display: block;
@@ -30,13 +19,3 @@ img {
     height: 20%;
 }
 
-a {
-    text-decoration: none;
-    color : white;
-    font-weight: bolder;
-}
- 
-a:hover {
-    
-    color: blue;
-}

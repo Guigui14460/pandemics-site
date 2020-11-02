@@ -19,7 +19,7 @@
         </nav>
     </header>
     <main>
-        <h1><?php echo $title; ?></h1>
+       
         <?php echo $content; ?>
     </main>
 </body>
