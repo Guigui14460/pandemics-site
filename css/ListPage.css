@@ -1,15 +1,20 @@
+@import 'nav.css';
 body {
     margin: 0 25% 0 25%;
+    
+}
+body {
+    margin: 0 0 0 0 ;
+    padding: 10 20 02 10;
     background-color: black;
 }
-
-nav ul  {
+/* nav ul  {
     list-style: none;
 	padding: 0;
 	display: flex;
 	justify-content: space-around;
     
-}
+} */
 
 
 p {
@@ -42,6 +47,6 @@ a {
  
 a:hover {
     text-decoration: underline;
-    color: red;
+    color: blue;
 }
 

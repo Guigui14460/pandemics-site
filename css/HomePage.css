@@ -1,3 +1,5 @@
+@import 'nav.css';
+
 main{
     margin: 0 25% 0 25%;
 }
@@ -8,26 +10,6 @@ body {
     background-color: black;
 }
 
-nav ul  {
-    display: grid;
-    width: 100%;
-    list-style: none;
-    background-color: red;
-    grid-template-columns: 55% 10% 10% 10% 10%;
-    margin: 0;
-    padding: 1%;
-}
-
-li{
-    text-align: right;
-}
-
-#name{
-    margin-left: 1%;
-    color: white;
-    text-align: left;
-    margin-right: 200%;
-}
 
 
 p {
@@ -46,4 +28,15 @@ img {
     margin-right: auto;
     width: 20%;
     height: 20%;
+}
+
+a {
+    text-decoration: none;
+    color : white;
+    font-weight: bolder;
+}
+ 
+a:hover {
+    
+    color: blue;
 }
