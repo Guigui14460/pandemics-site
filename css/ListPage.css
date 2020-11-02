@@ -1,27 +1,13 @@
-body {
-    margin: 0 25% 0 25%;
-    background-color: black;
-}
+@import 'nav.css';
+@import 'blackBody.css';
 
-nav ul  {
-    list-style: none;
-	padding: 0;
-	display: flex;
-	justify-content: space-around;
-    
-}
 
 
 p {
     color: white;
 }
 
-h1{
-    margin-top: 5%;
-    color: white;
-    text-align: center;
-    
-}
+
 
 section ul{
     border: 1px solid whitesmoke ;
@@ -34,14 +20,5 @@ img {
     width: 20%;
     height: 20%;
 }
-a {
-    text-decoration: none;
-    color : white;
-    font-weight: bolder;
-}
- 
-a:hover {
-    text-decoration: underline;
-    color: red;
-}
+
 

@@ -1,3 +1,4 @@
+@import 'nav.css';
 html {
 	overflow-y: scroll;
 }
@@ -7,12 +8,12 @@ body {
 	margin: auto;
 }
 
-.menu ul {
+/* .menu ul {
 	list-style: none;
 	padding: 0;
 	display: flex;
 	justify-content: space-around;
-}
+} */
 
 input::invalid {
 	border: 1px solid red;

@@ -4,6 +4,7 @@
     <title><?php echo $title ?></title>
     <meta charset="UTF-8" />
     <link href="<?php echo $css; ?>" rel="stylesheet">
+    <link rel="icon" href="images/covid.png" />
 </head>
     <header>
         <nav class="menu">
@@ -18,7 +19,7 @@
         </nav>
     </header>
     <main>
-        <h1><?php echo $title; ?></h1>
+       
         <?php echo $content; ?>
     </main>
 </body>

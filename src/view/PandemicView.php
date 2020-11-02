@@ -20,7 +20,7 @@ class PandemicView extends AbstractView {
         foreach($pandemics as $key => $value){
             $list .= "<li><a href=\"{$this->router->getConfigurableURL("pandemic_detail", array("id" => $key))}\">{$value->getName()}</a></li>";
         }
-        $this->content = "<ul>$list</ul>";
+        $this->content = "<h1>Liste des maladies</h1><ul>$list</ul>";
     }
 
     public function makePandemicPage($pandemic, $id){
@@ -37,7 +37,8 @@ class PandemicView extends AbstractView {
     public function makePandemicCreationPage($builder){
         $this->title = "Ajouter votre maladie";
         $this->css = "./../css/AjoutPage.css";
-        $s = '<form action="'.$this->router->getSimpleURL("pandemic_create").'" method="POST">'."\n";
+        $s = '<h1>Ajouter des maladies</h1>
+        <form action="'.$this->router->getSimpleURL("pandemic_create").'" method="POST">'."\n";
 
 		$s .= '<p><label>Nom de la maladie: <input type="text" name="'.$builder->getNameRef().'" value="';
 		$s .= self::htmlesc($builder->getData($builder->getNameRef()));
