@@ -4,11 +4,13 @@ class Pandemic {
     private $name;
     private $species;
     private $age;
+    private $text;
 
-    public function __construct($name, $species, $age){
+    public function __construct($name, $species, $age, $text){
         $this->setName($name);
         $this->setSpecies($species);
         $this->setAge($age);
+        $this->setText($text);
     }
 
     public function getName(){
@@ -22,6 +24,11 @@ class Pandemic {
     public function getAge(){
         return $this->age;
     }
+
+    public function getText(){
+        return $this->text;
+    }
+
 
     public function setName($name){
         if(!self::isNameValid($name)){
@@ -44,6 +51,13 @@ class Pandemic {
         $this->age = $age;
     }
 
+    public function setText($text){
+        if(!self::isNameValid($text)){
+            throw new Exception("Invalid name");
+        }
+        $this->text = $text;
+    }
+
     public static function isNameValid($name){
         return $name !== "";
     }
@@ -54,6 +68,10 @@ class Pandemic {
 
     public static function isAgeValid($age){
         return $age >= 0;
+    }
+
+    public static function isTextValid($text){
+        return $text !== "";
     }
 }
 

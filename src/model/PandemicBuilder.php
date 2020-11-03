@@ -3,7 +3,7 @@
 require_once("model/AbstractObjectBuilder.php");
 
 class PandemicBuilder extends AbstractObjectBuilder {
-    private static $NAME_REF = "name", $SPECIES_REF = "species", $AGE_REF = "age";
+    private static $NAME_REF = "name", $SPECIES_REF = "species", $AGE_REF = "age", $TEXT_REF = "text";
 
     public function __construct($data=null){
         if($data === null){
@@ -11,6 +11,7 @@ class PandemicBuilder extends AbstractObjectBuilder {
                 $this->getNameRef() => "",
                 $this->getSpeciesRef() => "",
                 $this->getAgeRef() => -1,
+                $this->getTextRef() => "",
             );
         }
         parent::__construct($data);
@@ -21,16 +22,17 @@ class PandemicBuilder extends AbstractObjectBuilder {
             self::$NAME_REF => $Pandemic->getName(),
             self::$SPECIES_REF => $Pandemic->getSpecies(),
             self::$AGE_REF => $Pandemic->getAge(),
+            self::$TEXT_REF => $Pandemic->getText(),
         ));
     }
 
     public function createPandemic(){
-        if(!key_exists($this->getNameRef(), $this->data) || !key_exists($this->getSpeciesRef(), $this->data) || !key_exists($this->getAgeRef(), $this->data))
+        if(!key_exists($this->getNameRef(), $this->data) || !key_exists($this->getSpeciesRef(), $this->data) || !key_exists($this->getAgeRef(), $this->data) || !key_exists($this->getTextRef(), $this->data))
             throw new Exception("Missing fields for Pandemic creation");
         if(!$this->isValid()){
             throw new Exception("Some fields are invalid for Pandemic creation");
         }
-        return new Pandemic($this->data[$this->getNameRef()], $this->data[$this->getSpeciesRef()], intval($this->data[$this->getAgeRef()]));
+        return new Pandemic($this->data[$this->getNameRef()], $this->data[$this->getSpeciesRef()], intval($this->data[$this->getAgeRef()]), $this->data[$this->getTextRef()]);
     }
 
     public function updatePandemic($Pandemic){
@@ -43,6 +45,9 @@ class PandemicBuilder extends AbstractObjectBuilder {
         if(key_exists($this->getAgeRef(), $this->data)){
             $Pandemic->setAge($this->data[$this->getAgeRef()]);
         }
+        if(key_exists($this->getTextRef(), $this->data)){
+            $Pandemic->setText($this->data[$this->getTextRef()]);
+        }
     }
 
     public function isValid(){
@@ -53,6 +58,8 @@ class PandemicBuilder extends AbstractObjectBuilder {
             $this->error[$this->getSpeciesRef()] = "Vous devez entrer une espèce";
         if(!key_exists($this->getAgeRef(), $this->data) || $this->data[$this->getAgeRef()] === null || $this->data[$this->getAgeRef()] < 0)
             $this->error[$this->getAgeRef()] = "Vous devez entrer un âge positif";
+        if(!key_exists($this->getTextRef(), $this->data) || $this->data[$this->getTextRef()] === null || $this->data[$this->getTextRef()] === "")
+            $this->error[$this->getTextRef()] = "Vous devez entrer du texte";
 		return count($this->error) === 0;
     }
 
@@ -66,6 +73,10 @@ class PandemicBuilder extends AbstractObjectBuilder {
 
 	public function getAgeRef() {
 		return self::$AGE_REF;
+    }
+    
+    public function getTextRef() {
+		return self::$TEXT_REF;
 	}
 }
 
