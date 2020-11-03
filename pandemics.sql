@@ -5,6 +5,6 @@ CREATE TABLE `pandemics` (
     `name` VARCHAR(255) NOT NULL,
     `species` VARCHAR(255) NOT NULL,
     `age` int(11) NOT NULL,
-    `text` TEXT(255) NOT NULL,
+    `text` TEXT NOT NULL,
     PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;

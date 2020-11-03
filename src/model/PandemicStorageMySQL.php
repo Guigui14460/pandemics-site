@@ -34,7 +34,7 @@ class PandemicStorageMySQL implements Storage {
 
     public function create($object){
         $request = "INSERT INTO pandemics (name, species, age, text) VALUES (?,?,?,?)";
-        $this->database->prepare($request)->execute([$object->getName(), $object->getSpecies(), $object->getAge(), $objet->getText()]);
+        $this->database->prepare($request)->execute([$object->getName(), $object->getSpecies(), $object->getAge(), $object->getText()]);
         return $this->database->lastInsertId();
     }
 

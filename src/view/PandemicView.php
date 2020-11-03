@@ -64,9 +64,9 @@ class PandemicView extends AbstractView {
 			$s .= ' <span class="error">'.$err.'</span>';
         $s .="</label></p>\n";
         
-        $s .= '<p><label>Un petit paragraphe pour nous en dire plus ? <input type="text" name="'.$builder->getTextRef().'" value="';
+        $s .= '<p><label>Un petit paragraphe pour nous en dire plus ? <textarea name="'.$builder->getTextRef().'">';
 		$s .= self::htmlesc($builder->getData($builder->getTextRef()));
-		$s .= "\" />";
+		$s .= "</textarea>";
 		$err = $builder->getError($builder->getTextRef());
 		if ($err !== null)
 			$s .= ' <span class="error">'.$err.'</span>';
@@ -107,9 +107,9 @@ class PandemicView extends AbstractView {
 			$s .= ' <span class="error">'.$err.'</span>';
         $s .="</label></p>\n";
         
-        $s .= '<p><label>Un petit paragraphe ? <input type="text" name="'.$builder->getTextRef().'" value="';
+        $s .= '<p><label>Un petit paragraphe ? <textarea name="'.$builder->getTextRef().'">';
 		$s .= self::htmlesc($builder->getData($builder->getTextRef()));
-		$s .= "\" />";
+		$s .= "</textarea>";
 		$err = $builder->getError($builder->getTextRef());
 		if ($err !== null)
 			$s .= ' <span class="error">'.$err.'</span>';
