@@ -11,6 +11,26 @@ abstract class AbstractRouter {
         $this->createURLs();
     }
 
+    public abstract function createURLs();
+
+    public abstract function main($db, $path_exploded, $auth_manager);
+
+    public function getFeedback(){
+        $feedback = key_exists('feedback', $_SESSION) ? $_SESSION['feedback'] : '';
+        $_SESSION['feedback'] = '';
+        return $feedback;
+    }
+
+    public function setFeeback($feedback){
+        $_SESSION['feedback'] = $feedback;
+    }
+
+    public function POSTredirect($url, $feedback){
+        $this->setFeeback($feedback);
+        header("Location: ".htmlspecialchars_decode($url), true, 303);
+        die;
+    }
+
     private function getURLParameters($url){
         $matches = array();
         preg_match_all("/<([A-Za-z0-9]+)>/", $url, $matches, PREG_OFFSET_CAPTURE);
@@ -26,10 +46,6 @@ abstract class AbstractRouter {
         return $parameters;
     }
 
-    public abstract function createURLs();
-
-    public abstract function main($db, $path_exploded);
-
     public function getConfigurableURL($name, $parameters){
         $url = $this->urls[$name];
         $url_parameters = $this->getURLParameters($url);
@@ -39,11 +55,11 @@ abstract class AbstractRouter {
             }
             $url = substr_replace($url, $parameters[$key], $url_parameters[$key]["start"], $url_parameters[$key]["length"]);
         }
-        return $url;
+        return $_SERVER['SCRIPT_NAME'].$url;
     }
 
     public function getSimpleURL($name){
-        return $this->urls[$name];
+        return $_SERVER['SCRIPT_NAME'].$this->urls[$name];
     }
 
     public function getAppName(){
@@ -59,7 +75,7 @@ abstract class AbstractRouter {
     }
 
     public function getMainRouter(){
-        return $this->main_router;
+        return ($this->main_router === null ? $this : $this->main_router);
     }
 }
 

@@ -16,47 +16,49 @@ class AuthenticationRouter extends AbstractRouter {
         $this->urls["{$this->app_name}_signup"] = "/{$this->app_name}/signup";
     }
 
-    public function main($db, $path_exploded){
+    public function main($db, $path_exploded, $auth_manager){
+        $next_url = (isset($_GET["next"]) ? $_GET["next"] : null);
         try {
             $controller = new AuthenticationController($this->view, $db->getStorage('users'), $this->main_router);
-            $manager = $controller->getManager();
             if(count($path_exploded) == 1){
                 if($path_exploded[0] == "login"){
-                    if(!$manager->isUserConnected()){
+                    if(!$auth_manager->isUserConnected()){
                         if($_SERVER["REQUEST_METHOD"] == "POST"){
-                            $controller->saveLoginPage($_POST);
+                            $controller->loginUser($_POST, $next_url);
                         } else if($_SERVER["REQUEST_METHOD"] == "GET"){
-                            $this->view->makeLoginPage(new UserBuilder(null, true));
+                            $this->view->makeLoginPage(new UserBuilder(null, true), $next_url);
                         } else {
                             $this->view->show405();
                         }
                     } else {
-                        header("Location: {$_SERVER['HTTP_REFERER']}");
+                        $this->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'].$next_url : $this->getSimpleURL('home')), "Vous êtes déjà connecté !");
                     }
                 } else if($path_exploded[0] == "logout"){
-                    if($manager->isUserConnected()){
+                    if($auth_manager->isUserConnected()){
                         if($_SERVER["REQUEST_METHOD"] == "POST"){
-                            $controller->saveLogoutPage();
+                            $controller->logoutUser();
                         } else if($_SERVER["REQUEST_METHOD"] == "GET"){
-                            $this->view->makeLogoutPage($manager->getUser());
+                            $this->view->makeLogoutPage($auth_manager->getUser());
                         } else {
                             $this->view->show405();
                         }
                     } else {
-                        header("Location: /");
+                        $this->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'].$next_url : $this->getSimpleURL('home')), "Vous êtes déjà déconnecté !");
                     }
                 } else if($path_exploded[0] == "signup"){
-                    if(!$manager->isUserConnected()){
+                    if(!$auth_manager->isUserConnected()){
                         if($_SERVER["REQUEST_METHOD"] == "POST"){
-                            $controller->saveRegisterPage($_POST);
+                            $controller->registerUser($_POST, $next_url);
                         } else if($_SERVER["REQUEST_METHOD"] == "GET"){
-                            $this->view->makeRegisterPage(new UserBuilder());
+                            $this->view->makeRegisterPage(new UserBuilder(), $next_url);
                         } else {
                             $this->view->show405();
                         }
                     } else {
-                        header("Location: {$_SERVER['HTTP_REFERER']}");
+                        $this->POSTredirect($_SERVER['HTTP_REFERER'], "Vous êtes déjà connecté !");
                     }
+                } else {
+                    $this->view->show404();
                 }
             } else {
                 $this->view->show404();

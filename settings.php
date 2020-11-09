@@ -4,8 +4,12 @@ session_name("twProject");
 session_start();
 
 // settings and config
-require_once("mysql_config.php");
-require_once("private_settings.php");
+$PROD_OR_DEV = 'dev';
+if($PROD_OR_DEV === "dev"){
+    require_once("mysql_config.php");
+} else {
+    require_once("../../private/mysql_config_prod.php");
+}
 
 // database related object
 require_once("model/Database.php");

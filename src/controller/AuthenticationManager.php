@@ -1,14 +1,14 @@
 <?php
 
 class AuthenticationManager {
-    private $accounts;
     public static $SESSION_KEY = "user";
+    private $accounts;
 
     public function __construct($accounts){
         $this->accounts = $accounts;
     }
 
-    public function login($username, $password){
+    public function connectUser($username, $password){
         if($username !== "" || $password !== ""){
             $user = $this->exists($username);
             if($user !== null && password_verify($password, $user->getPassword())){
@@ -43,7 +43,7 @@ class AuthenticationManager {
         return null;
     }
 
-    public function logout(){
+    public function disconnectUser(){
         $_SESSION[self::$SESSION_KEY] = null;
     }
 }

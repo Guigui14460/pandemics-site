@@ -15,5 +15,5 @@ require_once("settings.php");
  * et de lancer son main.
  */
 $router = new Router();
-$router->main($db, array());
+$router->main($db);
 ?>

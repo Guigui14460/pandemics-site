@@ -12,45 +12,37 @@ class AuthenticationController {
         $this->manager = new AuthenticationManager($storage->readAll());
     }
 
-    public function getManager(){
-        return $this->manager;
-    }
-
     public function authenticate($login, $password){
         if(!$this->storage->existsByUsername($login)){
             return false;
         }
-        return $this->manager->login($login, $password);
+        return $this->manager->connectUser($login, $password);
     }
 
-    public function saveLoginPage($data){
+    public function loginUser($data, $next_url){
         $builder = new UserBuilder($data, true, $this->manager);
         if($builder->isValid() && $this->authenticate($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()))){
-            header("Location: /");
+            $this->view->displayLoginSuccess($next_url);
         } else {
-            $this->view->makeLoginPage($builder);
+            $this->view->makeLoginPage($builder, $next_url);
         }
     }
 
-    public function saveRegisterPage($data){
+    public function registerUser($data, $next_url){
         $builder = new UserBuilder($data, false, $this->manager);
         if($builder->isValid()){
             $user = $builder->createUser();
-            $id = $this->storage->create($user);
-            if($id != "0"){
-                $this->manager->login($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()));
-                header("Location: /");
-            } else {
-                $this->view->makeRegisterPage($builder);
-            }
+            $this->storage->create($user);
+            $this->manager->connectUser($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()));
+            $this->view->displayRegisterSuccess($next_url);
         } else {
-            $this->view->makeRegisterPage($builder);
+            $this->view->makeRegisterPage($builder, $next_url);
         }
     }
 
-    public function saveLogoutPage(){
-        $this->manager->logout();
-        header("Location: /");
+    public function logoutUser(){
+        $this->manager->disconnectUser();
+        $this->view->displayLogoutSuccess();
     }
 }
 

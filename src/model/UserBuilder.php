@@ -10,8 +10,8 @@ class UserBuilder extends AbstractObjectBuilder {
     public function __construct($data=null, $login=false, $manager=null){
         if($data === null){
             $data = array(
-                $USERNAME_REF => "",
-                $PASSWORD_REF => "",
+                self::$USERNAME_REF => "",
+                self::$PASSWORD_REF => "",
             );
         }
         parent::__construct($data);
@@ -21,8 +21,8 @@ class UserBuilder extends AbstractObjectBuilder {
 
     public static function buildFromUser($user){
         return new UserBuilder(array(
-            $USERNAME_REF => $user.getUsername(),
-            $PASSWORD_REF => $user.getPassword(),
+            self::$USERNAME_REF => $user.getUsername(),
+            self::$PASSWORD_REF => $user.getPassword(),
         ));
     }
 

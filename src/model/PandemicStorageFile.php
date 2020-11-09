@@ -23,9 +23,9 @@ class PandemicStorageFile implements Storage {
     }
 
     public function reinit(){
-        $this->db->insert(new Pandemic('Médor', 'chien', 4));
-        $this->db->insert(new Pandemic('Félix', 'chat', 8));
-        $this->db->insert(new Pandemic('Denver', 'dinosaure', 300));
+        $this->db->insert(new Pandemic('Médor', 'chien', 4, ""));
+        $this->db->insert(new Pandemic('Félix', 'chat', 8, ""));
+        $this->db->insert(new Pandemic('Denver', 'dinosaure', 300, ""));
     }
 
     public function exists($id){

@@ -1,9 +1,7 @@
 <?php
 
 class User {
-    private $username;
-    private $password;
-    private $admin;
+    private $username, $password, $admin;
     
     public function __construct($username, $password, $admin=false){
         $this->setUsername($username);
@@ -38,7 +36,7 @@ class User {
     }
 
     public static function isUsernameValid($username){
-        return true;
+        return is_string($username) && $username !== "";
     }
 
     public static function isAdminValid($admin){

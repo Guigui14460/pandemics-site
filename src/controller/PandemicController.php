@@ -19,7 +19,7 @@ class PandemicController {
         if($pandemic !== null){
             $this->view->makePandemicPage($pandemic, $id);
         } else {
-			$this->view->makeUnknownPandemicPage();
+            $this->view->displayUnknownPandemic();
 		}
     }
 
@@ -33,7 +33,7 @@ class PandemicController {
             $pandemic = $builder->createPandemic();
             $id = $this->storage->create($pandemic);
             $this->view->makePandemicPage($pandemic, $id);
-            header("Location: {$this->router->getConfigurableURL("pandemic_detail", array('id' => $id))}");
+            $this->router->getMainRouter()->getConfigurableURL("pandemics_detail", array('id' => $id));
         } else {
             $this->view->makePandemicCreationPage($builder);
         }
@@ -49,15 +49,15 @@ class PandemicController {
                     $builder->updatePandemic($pandemic);
                     $this->storage->update($id, $pandemic);
                     $this->view->makePandemicPage($pandemic, $id);
-                    header("Location: {$this->router->getConfigurableURL("pandemic_detail", array('id' => $id))}");
+                    $this->router->getMainRouter()->getConfigurableURL("pandemics_detail", array('id' => $id));
                 } else {
                     $this->view->makePandemicUpdatePage($builder, $id);
                 }
             } else {
-                $this->view->makeUnknownPandemicPage();
+                $this->view->displayUnknownPandemic();
             }
         } else {
-            $this->view->makeUnexpectedErrorPage();
+            $this->view->show500();
         }
     }
 
@@ -66,7 +66,7 @@ class PandemicController {
         if($pandemic !== null){
             $this->view->makePandemicUpdatePage(PandemicBuilder::buildFromPandemic($pandemic), $id);
         } else {
-			$this->view->makeUnknownPandemicPage();
+            $this->view->displayUnknownPandemic();
 		}
     }
 
@@ -77,12 +77,12 @@ class PandemicController {
             if($pandemic !== null){
                 $this->storage->delete($id);
                 $this->showList();
-                header("Location: {$this->router->getSimpleURL("pandemic_list")}");
+                $this->router->getMainRouter()->getSimpleURL("pandemic_list");
             } else {
-                $this->view->makeUnknownPandemicPage();
+                $this->view->displayUnknownPandemic();
             }
         } else {
-            $this->view->makeUnexpectedErrorPage();
+            $this->view->show500();
         }
     }
 
@@ -91,7 +91,7 @@ class PandemicController {
         if($pandemic !== null){
             $this->view->makePandemicDeletionPage($pandemic, $id);
         } else {
-			$this->view->makeUnknownPandemicPage();
+            $this->view->displayUnknownPandemic();
 		}
     }
 }

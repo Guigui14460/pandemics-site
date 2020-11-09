@@ -1,34 +1,30 @@
 <?php
 
 class Pandemic {
-    private $name;
-    private $species;
-    private $age;
-    private $text;
+    private $name, $type, $discoveryYear, $description;
 
-    public function __construct($name, $species, $age, $text){
+    public function __construct($name, $type, $discoveryYear, $description){
         $this->setName($name);
-        $this->setSpecies($species);
-        $this->setAge($age);
-        $this->setText($text);
+        $this->setType($type);
+        $this->setDiscoveryYear($discoveryYear);
+        $this->setDescription($description);
     }
 
     public function getName(){
         return $this->name;
     }
 
-    public function getSpecies(){
-        return $this->species;
+    public function getType(){
+        return $this->type;
     }
 
-    public function getAge(){
-        return $this->age;
+    public function getDiscoveryYear(){
+        return $this->discoveryYear;
     }
 
-    public function getText(){
-        return $this->text;
+    public function getDescription(){
+        return $this->description;
     }
-
 
     public function setName($name){
         if(!self::isNameValid($name)){
@@ -37,41 +33,41 @@ class Pandemic {
         $this->name = $name;
     }
 
-    public function setSpecies($species){
-        if(!self::isSpeciesValid($species)){
-            throw new Exception("Invalid species");
+    public function setType($type){
+        if(!self::isTypeValid($type)){
+            throw new Exception("Invalid type");
         }
-        $this->species = $species;
+        $this->type = $type;
     }
 
-    public function setAge($age){
-        if(!self::isAgeValid($age)){
-            throw new Exception("Invalid age");
+    public function setDiscoveryYear($discoveryYear){
+        if(!self::isDiscoveryYearValid($discoveryYear)){
+            throw new Exception("Invalid discovery year");
         }
-        $this->age = $age;
+        $this->discoveryYear = $discoveryYear;
     }
 
-    public function setText($text){
-        if(!self::isNameValid($text)){
-            throw new Exception("Invalid name");
+    public function setDescription($description){
+        if(!self::isDescriptionValid($description)){
+            throw new Exception("Invalid description");
         }
-        $this->text = $text;
+        $this->description = $description;
     }
 
     public static function isNameValid($name){
-        return $name !== "";
+        return is_string($name) && $name !== "";
     }
 
-    public static function isSpeciesValid($species){
-        return $species !== "";
+    public static function isTypeValid($type){
+        return is_string($type) && $type !== "";
     }
 
-    public static function isAgeValid($age){
-        return $age >= 0;
+    public static function isDiscoveryYearValid($discoveryYear){
+        return is_integer($discoveryYear);
     }
 
-    public static function isTextValid($text){
-        return $text !== "";
+    public static function isDescriptionValid($description){
+        return is_string($description) && $description !== "";
     }
 }
 
