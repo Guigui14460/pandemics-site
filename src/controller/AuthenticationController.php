@@ -24,7 +24,7 @@ class AuthenticationController {
         if($builder->isValid() && $this->authenticate($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()))){
             $this->view->displayLoginSuccess($next_url);
         } else {
-            $this->view->makeLoginPage($builder, $next_url);
+            $this->view->makeLoginPage($builder, $next_url); // à modifier plus tard avec l'utilisation des sessions
         }
     }
 
@@ -36,7 +36,7 @@ class AuthenticationController {
             $this->manager->connectUser($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()));
             $this->view->displayRegisterSuccess($next_url);
         } else {
-            $this->view->makeRegisterPage($builder, $next_url);
+            $this->view->makeRegisterPage($builder, $next_url); // à modifier plus tard avec l'utilisation des sessions
         }
     }
 

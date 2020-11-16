@@ -32,10 +32,9 @@ class PandemicController {
         if($builder->isValid()){
             $pandemic = $builder->createPandemic();
             $id = $this->storage->create($pandemic);
-            $this->view->makePandemicPage($pandemic, $id);
-            $this->router->getMainRouter()->getConfigurableURL("pandemics_detail", array('id' => $id));
+            $this->view->displayCreationPandemicSuccess($id);
         } else {
-            $this->view->makePandemicCreationPage($builder);
+            $this->view->makePandemicCreationPage($builder); // à modifier plus tard avec l'utilisation des sessions
         }
     }
 
@@ -48,10 +47,9 @@ class PandemicController {
                 if($builder->isValid()){
                     $builder->updatePandemic($pandemic);
                     $this->storage->update($id, $pandemic);
-                    $this->router->getMainRouter()->POSTredirect($this->router->getMainRouter()->getConfigurableURL('pandemics_detail', array('id' => $id)),
-                    "La pandémie a été modifiée avec succès.");
+                    $this->view->displayUpdatePandemicSuccess($id);
                 } else {
-                    $this->view->makePandemicUpdatePage($builder, $id);
+                    $this->view->makePandemicUpdatePage($builder, $id); // à modifier plus tard avec l'utilisation des sessions
                 }
             } else {
                 $this->view->displayUnknownPandemic();
@@ -77,8 +75,7 @@ class PandemicController {
             if($pandemic !== null){
                 $this->storage->delete($id);
                 $this->showList();
-                $this->router->getMainRouter()->POSTredirect($this->router->getMainRouter()->getSimpleURL('pandemics_list'),
-                    "La pandémie a été supprimée avec succès.");
+                $this->view->displayDeletionPandemicSuccess();
             } else {
                 $this->view->displayUnknownPandemic();
             }

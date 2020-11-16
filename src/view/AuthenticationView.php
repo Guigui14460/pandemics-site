@@ -35,6 +35,10 @@ class AuthenticationView extends AbstractView {
         $this->router->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'].$next_url : $this->router->getSimpleURL("home")), "Connexion réussie !");
     }
 
+    public function displayLoginFailure($next_url){
+        $this->router->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'].$next_url : $this->router->getSimpleURL("accounts_login")), "Vous n'avez pas pu vous connecté !");
+    }
+
     public function makeRegisterPage($builder, $next_url){
         $this->title = "Inscription";
         $this->css = "./../../css/screen.css";
@@ -58,7 +62,11 @@ class AuthenticationView extends AbstractView {
     }
 
     public function displayRegisterSuccess($next_url){
-        $this->router->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'].$next_url : $this->router->getSimpleURL("home")), "Connexion réussie !");
+        $this->router->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'].$next_url : $this->router->getSimpleURL("home")), "Inscription réussie !");
+    }
+
+    public function displayRegisterFailure($next_url){
+        $this->router->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'].$next_url : $this->router->getSimpleURL("accounts_signup")), "Vous n'avez pas pu vous inscrire !");
     }
 
     public function makeLogoutPage($user){

@@ -76,6 +76,14 @@ class PandemicView extends AbstractView {
         $s .= "<button type=\"submit\">Soumettre le formulaire</button>\n</form>\n";
         $this->content = $s;
     }
+
+    public function displayCreationPandemicSuccess($id){
+		$this->router->POSTredirect($this->router->getConfigurableURL("pandemics_detail", array('id' => $id)), "La pandémie a été ajoutée avec succès !");
+	}
+
+    public function displayCreationPandemicFailure(){
+		$this->router->POSTredirect($this->router->getSimpleURL("pandemics_create"), "La pandémie n'a pas être ajoutée !");
+	}
     
     public function makePandemicUpdatePage($builder, $id){
         $this->title = "Modifier votre maladie";
@@ -120,11 +128,27 @@ class PandemicView extends AbstractView {
         $this->content = $s;
     }
 
+    public function displayUpdatePandemicSuccess($id){
+		$this->router->POSTredirect($this->router->getConfigurableURL("pandemics_detail", array('id' => $id)), "La pandémie a été modifiée avec succès !");
+	}
+
+    public function displayUpdatePandemicFailure($id){
+		$this->router->POSTredirect($this->router->getConfigurableURL("pandemics_update", array('id' => $id)), "La pandémie n'a pas être modifiée !");
+	}
+
     public function makePandemicDeletionPage($pandemic, $id){
         $this->title = "Suppression de {$pandemic->getName()}";
         $this->css = "./../../../css/screen.css";
         $this->content = "<h1>{$this->title}</h1><p>Êtes-vous sûr de vouloir supprimer cette maladie ?<br>
         <form action=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" => $id))}\" method=\"POST\"><input type=\"hidden\" name=\"pandemic_id\" value=\"$id\"  /><button>Oui</button></form>&nbsp<a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" => $id))}\">Annuler</a></p>";
+	}
+
+    public function displayDeletionPandemicSuccess(){
+		$this->router->POSTredirect($this->router->getSimpleURL("pandemics_list"), "La pandémie a été supprimée avec succès !");
+	}
+
+    public function displayDeletionPandemicFailure($id){
+		$this->router->POSTredirect($this->router->getConfigurableURL("pandemics_delete", array('id' => $id)), "La pandémie n'a pas être supprimée !");
 	}
 }
 
