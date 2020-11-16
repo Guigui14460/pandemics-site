@@ -1,2 +1,7 @@
-TODO: faire un système d'affichage de message (connexion/déconnexion réussies)
-TODO: faire redirections en passant l'URL suivant dans le GET
+Développement :
+TODO: ajouter un propriétaire aux pandémies
+TODO: régler CSS
+TODO: trouver moyen que le CSS (et favicon, images, etc) trouve l'URL automatiquement
+
+Production :
+TODO: régler problème MySQL sur le serveur
