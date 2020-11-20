@@ -1,13 +1,14 @@
 <?php
 
 class Pandemic {
-    private $name, $type, $discoveryYear, $description;
+    private $name, $type, $discoveryYear, $description ,$creator;
 
-    public function __construct($name, $type, $discoveryYear, $description){
+    public function __construct($name, $type, $discoveryYear, $description ,$creator){
         $this->setName($name);
         $this->setType($type);
         $this->setDiscoveryYear($discoveryYear);
         $this->setDescription($description);
+        $this->setCreator($creator);
     }
 
     public function getName(){
@@ -52,6 +53,14 @@ class Pandemic {
             throw new Exception("Invalid description");
         }
         $this->description = $description;
+    }
+
+    public function setCreator($creator){
+        $this->creator = $creator;
+    }
+
+    public function getCreator(){
+        return $this->creator;
     }
 
     public static function isNameValid($name){

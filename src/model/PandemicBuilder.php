@@ -3,8 +3,7 @@
 require_once("model/AbstractObjectBuilder.php");
 
 class PandemicBuilder extends AbstractObjectBuilder {
-    private static $NAME_REF = "name", $TYPE_REF = "type", $DISCOVERY_YEAR_REF = "discoveryYear", $DESCRIPTION_REF = "description";
-
+    private static $NAME_REF = "name", $TYPE_REF = "type", $DISCOVERY_YEAR_REF = "discoveryYear", $DESCRIPTION_REF = "description",$CREATOR_REF = "creator";
     public function __construct($data=null){
         if($data === null){
             $data = array(
@@ -12,6 +11,7 @@ class PandemicBuilder extends AbstractObjectBuilder {
                 self::$TYPE_REF => "",
                 self::$DISCOVERY_YEAR_REF => -1,
                 self::$DESCRIPTION_REF => "",
+                self::$CREATOR_REF => "",
             );
         }
         $data[self::$DISCOVERY_YEAR_REF] = intval($data[self::$DISCOVERY_YEAR_REF]);
@@ -24,16 +24,17 @@ class PandemicBuilder extends AbstractObjectBuilder {
             self::$TYPE_REF => $pandemic->getType(),
             self::$DISCOVERY_YEAR_REF => $pandemic->getDiscoveryYear(),
             self::$DESCRIPTION_REF => $pandemic->getDescription(),
+            self::$CREATOR_REF => $pandemic->getCreator(),
         ));
     }
 
     public function createPandemic(){
-        if(!key_exists($this->getNameRef(), $this->data) || !key_exists($this->getTypeRef(), $this->data) || !key_exists($this->getDiscoveryYearRef(), $this->data) || !key_exists($this->getDescriptionRef(), $this->data))
+        if(!key_exists($this->getNameRef(), $this->data) || !key_exists($this->getTypeRef(), $this->data) || !key_exists($this->getDiscoveryYearRef(), $this->data) || !key_exists($this->getDescriptionRef(), $this->data) || !key_exists($this->getCreatorRef(), $this->data))
             throw new Exception("Missing fields for Pandemic creation");
         if(!$this->isValid()){
             throw new Exception("Some fields are invalid for Pandemic creation");
         }
-        return new Pandemic($this->data[$this->getNameRef()], $this->data[$this->getTypeRef()], intval($this->data[$this->getDiscoveryYearRef()]), $this->data[$this->getDescriptionRef()]);
+        return new Pandemic($this->data[$this->getNameRef()], $this->data[$this->getTypeRef()], intval($this->data[$this->getDiscoveryYearRef()]), $this->data[$this->getDescriptionRef()] , $this->data[$this->getCreatorRef()] );
     }
 
     public function updatePandemic($pandemic){
@@ -78,6 +79,10 @@ class PandemicBuilder extends AbstractObjectBuilder {
     
     public function getDescriptionRef() {
 		return self::$DESCRIPTION_REF;
+    }
+    
+    public function getCreatorRef() {
+		return self::$CREATOR_REF;
 	}
 }
 

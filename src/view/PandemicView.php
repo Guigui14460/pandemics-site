@@ -35,7 +35,7 @@ class PandemicView extends AbstractView {
         $this->content = "<p style=\"color: red; font-weight: bold;\">La maladie de la requête n'existe pas dans notre base de données !</p>";
     }
 
-    public function makePandemicCreationPage($builder){
+    public function makePandemicCreationPage($builder,$user){
         $this->title = "Ajouter votre maladie";
         $this->css = "./../../css/screen.css";
         $s = '<h1>Ajouter des maladies</h1>
@@ -69,6 +69,16 @@ class PandemicView extends AbstractView {
 		$s .= self::htmlesc($builder->getData($builder->getDescriptionRef()));
 		$s .= "</textarea>";
 		$err = $builder->getError($builder->getDescriptionRef());
+		if ($err !== null)
+			$s .= ' <span class="error">'.$err.'</span>';
+		$s .="</label></p>\n";
+
+		$s .= '<p><label>Creator :<br><textarea name="'.$builder->getCreatorRef().'">';
+		$s .= self::htmlesc($builder->getData($builder->getCreatorRef()));
+		$s .= $user->getUsername();
+		$s .= "</textarea>";
+	
+		$err = $builder->getError($builder->getCreatorRef());
 		if ($err !== null)
 			$s .= ' <span class="error">'.$err.'</span>';
 		$s .="</label></p>\n";

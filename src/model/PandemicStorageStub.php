@@ -7,9 +7,9 @@ class PandemicStorageStub implements Storage {
 
     public function __construct(){
         $this->pandemicsTab = array(
-            'medor' => new Pandemic('Médor', 'chien', 4, ""),
-            'felix' => new Pandemic('Félix', 'chat', 8, ""),
-            'denver' => new Pandemic('Denver', 'dinosaure', 300, ""),
+            'medor' => new Pandemic('Médor', 'chien', 4, "",""),
+            'felix' => new Pandemic('Félix', 'chat', 8, "",""),
+            'denver' => new Pandemic('Denver', 'dinosaure', 300, "",""),
         );
     }
 

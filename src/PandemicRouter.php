@@ -29,7 +29,7 @@ class PandemicRouter extends AbstractRouter {
                         if($_SERVER['REQUEST_METHOD'] === "POST"){
                             $controller->saveNewPandemic($_POST);
                         } else if($_SERVER['REQUEST_METHOD'] == "GET"){
-                            $this->view->makePandemicCreationPage(new PandemicBuilder(array()));
+                            $this->view->makePandemicCreationPage(new PandemicBuilder(array()),$auth_manager->getUser());
                         } else {
                             $this->view->show405();
                         }

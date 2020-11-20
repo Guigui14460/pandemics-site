@@ -15,7 +15,7 @@ class PandemicStorageMySQL implements Storage {
         $stmt->execute();
         $fetched_data = $stmt->fetch();
         if($fetched_data){
-            return new Pandemic($fetched_data['name'], $fetched_data['type'], intval($fetched_data['discoveryYear']), $fetched_data['description']);
+            return new Pandemic($fetched_data['name'], $fetched_data['type'], intval($fetched_data['discoveryYear']), $fetched_data['description'] , $fetched_data['creator']);
         }
         return null;
     }
@@ -27,14 +27,14 @@ class PandemicStorageMySQL implements Storage {
         $fetched_data = $stmt->fetchAll();
         $data = array();
         foreach ($fetched_data as $key => $value) {
-            $data[$value['id']] = new Pandemic($value['name'], $value['type'], intval($value['discoveryYear']), $value['description']);
+            $data[$value['id']] = new Pandemic($value['name'], $value['type'], intval($value['discoveryYear']), $value['description'],$value['creator']);
         }
         return $data;
     }
 
     public function create($object){
-        $request = "INSERT INTO pandemics (name, type, discoveryYear, description) VALUES (?,?,?,?)";
-        $this->database->prepare($request)->execute([$object->getName(), $object->getType(), $object->getDiscoveryYear(), $object->getDescription()]);
+        $request = "INSERT INTO pandemics (name, type, discoveryYear, description , creator ) VALUES (?,?,?,?,?)";
+        $this->database->prepare($request)->execute([$object->getName(), $object->getType(), $object->getDiscoveryYear(), $object->getDescription(),$object->getCreator()  ]);
         return $this->database->lastInsertId();
     }
 
@@ -46,8 +46,8 @@ class PandemicStorageMySQL implements Storage {
     }
 
     public function update($object_id, $object){
-        $request = "UPDATE pandemics SET name=?, type=?, discoveryYear=?, description=? WHERE id=?";
-        $this->database->prepare($request)->execute([$object->getName(), $object->getType(), $object->getDiscoveryYear(), $object->getDescription(), $object_id]);
+        $request = "UPDATE pandemics SET name=?, type=?, discoveryYear=?, description=? , creator=? WHERE id=?";
+        $this->database->prepare($request)->execute([$object->getName(), $object->getType(), $object->getDiscoveryYear(), $object->getDescription(),$object->getCreator(), $object_id]);
     }
 
     public function delete($object_id){
