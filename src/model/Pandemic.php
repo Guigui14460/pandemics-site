@@ -27,6 +27,10 @@ class Pandemic {
         return $this->description;
     }
 
+    public function getCreator(){
+        return $this->creator;
+    }
+
     public function setName($name){
         if(!self::isNameValid($name)){
             throw new Exception("Invalid name");
@@ -56,12 +60,12 @@ class Pandemic {
     }
 
     public function setCreator($creator){
+        if(!self::isTypeValid($creator)){
+            throw new Exception("Invalid creator");
+        }
         $this->creator = $creator;
     }
 
-    public function getCreator(){
-        return $this->creator;
-    }
 
     public static function isNameValid($name){
         return is_string($name) && $name !== "";
