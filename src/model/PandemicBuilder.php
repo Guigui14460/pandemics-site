@@ -50,6 +50,10 @@ class PandemicBuilder extends AbstractObjectBuilder {
         if(key_exists($this->getDescriptionRef(), $this->data)){
             $pandemic->setDescription($this->data[$this->getDescriptionRef()]);
         }
+        if(key_exists($this->getCreatorRef(), $this->data)){
+            $pandemic->setCreator($this->data[$this->getCreatorRef()]);
+        }
+    
     }
 
     public function isValid(){
@@ -62,6 +66,8 @@ class PandemicBuilder extends AbstractObjectBuilder {
             $this->error[$this->getDiscoveryYearRef()] = "Vous devez entrer une date d'apparution";
         if(!key_exists($this->getDescriptionRef(), $this->data) || $this->data[$this->getDescriptionRef()] === null || $this->data[$this->getDescriptionRef()] === "")
             $this->error[$this->getDescriptionRef()] = "Vous devez entrer une description";
+        if(!key_exists($this->getCreatorRef(), $this->data) || $this->data[$this->getCreatorRef()] === null || $this->data[$this->getCreatorRef()] === "")
+            $this->error[$this->getCreatorRef()] = "Vous devez entrer un créateur";
 		return count($this->error) === 0;
     }
 
