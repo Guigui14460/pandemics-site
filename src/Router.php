@@ -6,31 +6,35 @@ require_once("PandemicRouter.php");
 require_once("controller/AuthenticationManager.php");
 require_once("view/GeneralView.php");
 
-class Router extends AbstractRouter {
+class Router extends AbstractRouter
+{
     private $subrouters;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->subrouters = array(new PandemicRouter($this), new AuthenticationRouter($this));
         parent::__construct("", new GeneralView($this));
     }
 
-    public function createURLs(){
+    public function createURLs()
+    {
         $this->urls["home"] = "";
         $this->urls["about"] = "/about";
         $this->urls = array_merge($this->urls, $this->getSubRouter("pandemics")->getURLs());
         $this->urls = array_merge($this->urls, $this->getSubRouter("accounts")->getURLs());
     }
 
-    public function main($db, $path_exploded="", $auth_manager=null){
-        if(isset($_SERVER['PATH_INFO'])){
+    public function main($db, $path_exploded = "", $auth_manager = null)
+    {
+        if (isset($_SERVER['PATH_INFO'])) {
             $path_exploded = array_slice(explode('/', $_SERVER['PATH_INFO']), 1);
         }
-        $auth_manager = new AuthenticationManager($db->getStorage("users")->readAll());
-        
+        $auth_manager = new AuthenticationManager($db->getStorage("users"));
+
         try {
-            if($path_exploded === "" || (count($path_exploded) == 1 && $path_exploded[0] === "")){
+            if ($path_exploded === "" || (count($path_exploded) == 1 && $path_exploded[0] === "")) {
                 $this->view->homePage();
-            } else if(count($path_exploded) == 1 && $path_exploded[0] === "about") {
+            } else if (count($path_exploded) == 1 && $path_exploded[0] === "about") {
                 $this->view->aboutPage();
             } else {
                 switch ($path_exploded[0]) {
@@ -49,10 +53,10 @@ class Router extends AbstractRouter {
                         break;
                 }
             }
-        } catch(Exception $e){
+        } catch (Exception $e) {
             $this->view->show500();
         }
-        if($auth_manager->isUserConnected()){
+        if ($auth_manager->isUserConnected()) {
             $this->view->removeNavLink("Connexion");
             $this->view->removeNavLink("S'inscrire");
         } else {
@@ -63,16 +67,13 @@ class Router extends AbstractRouter {
         $this->view->render();
     }
 
-    public function getSubRouter($app_name){
+    public function getSubRouter($app_name)
+    {
         foreach ($this->subrouters as $key) {
-            if($key->getAppName() === $app_name){
+            if ($key->getAppName() === $app_name) {
                 return $key;
             }
         }
         return null;
     }
-
-   
 }
-
-?>

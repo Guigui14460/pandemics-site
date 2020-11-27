@@ -1,8 +1,3 @@
 Développement :
-TODO: faire comme dans la partie "Persistance des données de formulaire" du TP 16
-TODO: ajouter un propriétaire aux pandémies
-TODO: régler CSS
-TODO: trouver moyen que le CSS (et favicon, images, etc) trouve l'URL automatiquement -> a vérifier abstractRouter ,skull et toute les vue modif
-
-Production :
-TODO: régler problème MySQL sur le serveur
+TODO: Améliorer CSS
+TODO: Voir quoi choisir pour les 3 compléments à faire

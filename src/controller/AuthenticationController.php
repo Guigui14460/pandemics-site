@@ -3,47 +3,50 @@
 require_once("controller/AuthenticationManager.php");
 require_once("model/UserBuilder.php");
 
-class AuthenticationController {
-    private $view, $storage, $manager;
+class AuthenticationController
+{
+    private $view, $manager, $router;
 
-    public function __construct($view, $storage){
+    public function __construct($view, $router, $manager)
+    {
         $this->view = $view;
-        $this->storage = $storage;
-        $this->manager = new AuthenticationManager($storage->readAll());
+        $this->router = $router;
+        $this->manager = $manager;
     }
 
-    public function authenticate($login, $password){
-        if(!$this->storage->existsByUsername($login)){
-            return false;
-        }
+    public function authenticate($login, $password)
+    {
         return $this->manager->connectUser($login, $password);
     }
 
-    public function loginUser($data, $next_url){
+    public function loginUser($data, $next_url)
+    {
         $builder = new UserBuilder($data, true, $this->manager);
-        if($builder->isValid() && $this->authenticate($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()))){
+        if ($builder->isValid() && $this->authenticate($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()))) {
             $this->view->displayLoginSuccess($next_url);
         } else {
-            $this->view->makeLoginPage($builder, $next_url); // à modifier plus tard avec l'utilisation des sessions
+            $this->view->makeLoginPage($builder, $next_url);
         }
     }
 
-    public function registerUser($data, $next_url){
+    public function registerUser($data, $next_url)
+    {
         $builder = new UserBuilder($data, false, $this->manager);
-        if($builder->isValid()){
+        if ($builder->isValid()) {
             $user = $builder->createUser();
-            $this->storage->create($user);
-            $this->manager->connectUser($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()));
-            $this->view->displayRegisterSuccess($next_url);
+            if ($this->manager->registerUser($user) && $this->authenticate($builder->getData($builder->getUsernameRef()), $builder->getData($builder->getPasswordRef()))) {
+                $this->view->displayRegisterSuccess($next_url);
+            } else {
+                $this->view->displayRegisterFailure($next_url);
+            }
         } else {
-            $this->view->makeRegisterPage($builder, $next_url); // à modifier plus tard avec l'utilisation des sessions
+            $this->view->makeRegisterPage($builder, $next_url);
         }
     }
 
-    public function logoutUser(){
+    public function logoutUser()
+    {
         $this->manager->disconnectUser();
         $this->view->displayLogoutSuccess();
     }
 }
-
-?>

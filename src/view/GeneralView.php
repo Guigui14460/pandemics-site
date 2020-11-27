@@ -11,9 +11,6 @@ class GeneralView extends AbstractView {
         $this->title = "";
        
         $this->content = "<h1>Bienvenue sur notre site Pandémonium !</h1><img src='./images/covid.png'/>";
-     
-        
-       
     }
 
     public function aboutPage(){
@@ -28,8 +25,5 @@ class GeneralView extends AbstractView {
 
         $this->content .= "<h2>Remarque</h2>";
         $this->content .= "<p>L'utilisation de l'URL ne marche pas sous l'hébergement de la fac (marche sur toutes nos machines)</p>";
-      
     }
 }
-
-?>

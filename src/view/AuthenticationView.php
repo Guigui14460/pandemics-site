@@ -80,5 +80,3 @@ class AuthenticationView extends AbstractView {
         $this->router->POSTredirect($this->router->getSimpleURL("home"), "Déconnexion réussie !");
     }
 }
-
-?>

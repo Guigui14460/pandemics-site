@@ -1,9 +1,9 @@
 <?php
 
 class Pandemic {
-    private $name, $type, $discoveryYear, $description ,$creator;
+    private $name, $type, $discoveryYear, $description, $creator;
 
-    public function __construct($name, $type, $discoveryYear, $description ,$creator){
+    public function __construct($name, $type, $discoveryYear, $description, $creator){
         $this->setName($name);
         $this->setType($type);
         $this->setDiscoveryYear($discoveryYear);
@@ -60,7 +60,7 @@ class Pandemic {
     }
 
     public function setCreator($creator){
-        if(!self::isTypeValid($creator)){
+        if(!self::isCreatorValid($creator)){
             throw new Exception("Invalid creator");
         }
         $this->creator = $creator;
@@ -82,6 +82,8 @@ class Pandemic {
     public static function isDescriptionValid($description){
         return is_string($description) && $description !== "";
     }
-}
 
-?>
+    public static function isCreatorValid($creator){
+        return is_string($creator) && $creator !== "";
+    }
+}

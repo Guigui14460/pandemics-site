@@ -1,47 +1,59 @@
 <?php
 
-class User {
-    private $username, $password, $admin;
-    
-    public function __construct($username, $password, $admin=false){
+class User
+{
+    private $username, $password, $status;
+
+    public function __construct($username, $password, $status)
+    {
         $this->setUsername($username);
         $this->password = $password;
-        $this->setAdmin($admin);
+        $this->setStatus($status);
     }
 
-    public function getUsername(){
+    public function getUsername()
+    {
         return $this->username;
     }
 
-    public function setUsername($username){
-        if(!self::isUsernameValid($username)){
+    public function setUsername($username)
+    {
+        if (!self::isUsernameValid($username)) {
             throw new Exception("invalid username");
         }
         $this->username = $username;
     }
 
-    public function getPassword(){
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    public function isAdmin(){
-        return $this->admin;
+    public function getStatus()
+    {
+        return $this->status;
     }
 
-    private function setAdmin($admin){
-        if(!self::isAdminValid($admin)){
-            throw new Exception("invalid type used for admin attribute");
+    public function setStatus($status)
+    {
+        if (!self::isStatusValid($status)) {
+            throw new Exception("invalid status");
         }
-        $this->admin = $admin;
+        $this->status = $status;
     }
 
-    public static function isUsernameValid($username){
+    public function isAdmin()
+    {
+        return $this->status === "admin";
+    }
+
+    public static function isUsernameValid($username)
+    {
         return is_string($username) && $username !== "";
     }
 
-    public static function isAdminValid($admin){
-        return is_bool($admin);
+    public static function isStatusValid($status)
+    {
+        return is_string($status) && $status !== "" && ($status === "user" || $status === "admin");
     }
 }
-
-?>
