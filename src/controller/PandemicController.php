@@ -21,6 +21,7 @@ class PandemicController
         $this->modifiedPandemicBuilder = key_exists('modifiedPandemicBuilder', $_SESSION) ? $_SESSION['modifiedPandemicBuilder'] : array();
     }
 
+<<<<<<< HEAD
     public function __destruct()
     {
         $_SESSION['currentPandemicBuilder'] = $this->currentPandemicBuilder;
@@ -33,6 +34,12 @@ class PandemicController
         $pandemic = $this->storage->read($id);
         if ($pandemic !== null) {
             $this->view->makePandemicPage($pandemic, $id);
+=======
+    public function showInformation($id,$user) {
+        $pandemic = $this->storage->read($id);
+        if($pandemic !== null){
+            $this->view->makePandemicPage($pandemic, $id, $user);
+>>>>>>> 0e02742091d02b7252d39b0e8ae5e3c2bdf33471
         } else {
             $this->view->displayUnknownPandemic();
         }

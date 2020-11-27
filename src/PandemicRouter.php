@@ -45,9 +45,15 @@ class PandemicRouter extends AbstractRouter
                         $next .= $this->main_router->getSimpleURL('pandemics_create');
                         $this->POSTredirect($this->main_router->getSimpleURL('accounts_login') . "?next=$next", "Vous devez être connecté pour créer une pandémie.");
                     }
+<<<<<<< HEAD
                 } else if (count($path_exploded) == 1) {
                     if ($is_user_connected) {
                         $controller->showInformation($path_exploded[0]);
+=======
+                } else if(count($path_exploded) == 1) {
+                    if($is_user_connected){
+                        $controller->showInformation($path_exploded[0],$auth_manager->getUser());
+>>>>>>> 0e02742091d02b7252d39b0e8ae5e3c2bdf33471
                     } else {
                         $next .= $this->main_router->getConfigurableURL('pandemics_detail', array('id' => $path_exploded[0]));
                         $this->POSTredirect(
