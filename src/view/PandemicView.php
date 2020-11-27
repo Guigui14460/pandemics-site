@@ -6,35 +6,6 @@ require_once("model/Pandemic.php");
 require_once("model/PandemicBuilder.php");
 require_once("view/AbstractView.php");
 
-<<<<<<< HEAD
-class PandemicView extends AbstractView
-{
-	public function __construct($router)
-	{
-		parent::__construct($router, "skull.php");
-	}
-
-	public function makeListPage($pandemics)
-	{
-		$this->title = "Liste des maladies";
-
-		$list = "";
-		foreach ($pandemics as $key => $value) {
-			$list .= "<a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" =>$key))}\"><li>{$value->getName()}</li></a>";
-		}
-		$this->content = "<h1>Liste des maladies</h1><ul class=\"list\">$list</ul>";
-	}
-
-	public function makePandemicPage($pandemic, $id)
-	{
-		$this->title = "Page sur {$pandemic->getName()}";
-
-		$this->content = "<p>" . Utils::htmlesc($pandemic->getName()) . " est une maladie du type " . Utils::htmlesc($pandemic->getType()) . " qui a été découvert en l'an {$pandemic->getDiscoveryYear()}.<br>Plus d'information ? En voici : " . Utils::htmlesc($pandemic->getDescription()) . "</p><a href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" =>$id))}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" =>$id))}\">Supprimer Pandemic</a>";
-	}
-
-	public function displayUnknownPandemic()
-	{
-=======
 class PandemicView extends AbstractView {
     public function __construct($router){
         parent::__construct($router, "skull.php");
@@ -45,9 +16,9 @@ class PandemicView extends AbstractView {
         $this->css = "./../css/screen.css";
         $list = "";
         foreach($pandemics as $key => $value){
-            $list .= "<li><a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" => $key))}\">{$value->getName()}</a></li>";
+            $list .= "<a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" => $key))}\"><li>{$value->getName()}</li></a>";
         }
-        $this->content = "<h1>Liste des maladies</h1><ul>$list</ul>";
+        $this->content = "<h1>Liste des maladies</h1><ul class=\"list\">$list</ul>";
     }
 
     public function makePandemicPage($pandemic, $id, $user){
@@ -60,7 +31,6 @@ class PandemicView extends AbstractView {
 	}
 
     public function displayUnknownPandemic(){
->>>>>>> 0e02742091d02b7252d39b0e8ae5e3c2bdf33471
 		$this->router->POSTredirect($this->router->getSimpleURL("pandemics_list"), "La maladie de la requête n'existe pas dans notre base de données !");
 	}
 
@@ -77,7 +47,7 @@ class PandemicView extends AbstractView {
 		$s = '<h1>Ajouter des maladies</h1>
         <form action="' . $this->router->getSimpleURL("pandemics_create") . '" method="POST">' . "\n";
 
-		$s .= '<p><label>Nom de la maladie : <input type="text" name="' . $builder->getNameRef() . '" value="';
+		$s .= '<p><label>Nom de la maladie : <input class="" type="text" name="' . $builder->getNameRef() . '" value="';
 		$s .= Utils::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getNameRef());

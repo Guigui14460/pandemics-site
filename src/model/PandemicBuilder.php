@@ -72,13 +72,9 @@ class PandemicBuilder extends AbstractObjectBuilder
             $this->error[$this->getDiscoveryYearRef()] = "Vous devez entrer une date d'apparution";
         if (!key_exists($this->getDescriptionRef(), $this->data) || $this->data[$this->getDescriptionRef()] === null || $this->data[$this->getDescriptionRef()] === "")
             $this->error[$this->getDescriptionRef()] = "Vous devez entrer une description";
-<<<<<<< HEAD
-        return count($this->error) === 0;
-=======
         if(!key_exists($this->getCreatorRef(), $this->data) || $this->data[$this->getCreatorRef()] === null || $this->data[$this->getCreatorRef()] === "")
             $this->error[$this->getCreatorRef()] = "Vous devez entrer un créateur";
 		return count($this->error) === 0;
->>>>>>> 0e02742091d02b7252d39b0e8ae5e3c2bdf33471
     }
 
     public function getNameRef()
