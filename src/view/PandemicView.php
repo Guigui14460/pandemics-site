@@ -19,9 +19,9 @@ class PandemicView extends AbstractView
 
 		$list = "";
 		foreach ($pandemics as $key => $value) {
-			$list .= "<li><a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" =>$key))}\">{$value->getName()}</a></li>";
+			$list .= "<a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" =>$key))}\"><li>{$value->getName()}</li></a>";
 		}
-		$this->content = "<h1>Liste des maladies</h1><ul>$list</ul>";
+		$this->content = "<h1>Liste des maladies</h1><ul class=\"list\">$list</ul>";
 	}
 
 	public function makePandemicPage($pandemic, $id)

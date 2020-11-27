@@ -17,6 +17,7 @@ main {
 h1 {
   margin-top: 1%;
   text-align: center;
+  font-size:300%;
 }
 
 input::invalid {
@@ -52,3 +53,47 @@ a {
 a:hover {
   color: blue;
 }
+
+
+
+
+
+/* css list */
+
+main .list {
+ 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+  border : 1px solid white;
+  border-radius: 5%;
+  padding: 0 2% 0 2%;
+
+}
+
+main .list li{
+  
+  background-color: rgb(255, 23, 23);
+  padding: 3% 30% 3% 30%;
+  margin: 1% 1% 1% 1%;
+
+}
+
+main .list a{
+  text-decoration:none;
+  color: inherit;
+}
+
+
+main .list li:hover{
+  /* color: black; */
+  background-color: rgb(253, 69, 69);
+  text-decoration:none;
+}
+
+
+
