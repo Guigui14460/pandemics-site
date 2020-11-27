@@ -20,11 +20,14 @@ class PandemicView extends AbstractView {
         $this->content = "<h1>Liste des maladies</h1><ul>$list</ul>";
     }
 
-    public function makePandemicPage($pandemic, $id){
+    public function makePandemicPage($pandemic, $id, $user){
         $this->title = "Page sur {$pandemic->getName()}";
         $this->css = "./../../css/screen.css";
-        $this->content = "<p>{$pandemic->getName()} est une maladie du type {$pandemic->getType()} dont l'existence remonte à {$pandemic->getDiscoveryYear()} ans. Plus d'information ? En voici : {$pandemic->getDescription()}</p><a href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" => $id))}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" => $id))}\">Supprimer Pandemic</a>";
-    }
+		$this->content = "<p>{$pandemic->getName()} est une maladie du type {$pandemic->getType()} dont l'existence remonte à {$pandemic->getDiscoveryYear()} ans. Plus d'information ? En voici : {$pandemic->getDescription()} ,  elle fut ajoutée à la base de données par {$pandemic->getCreator()} "  ;
+		if($pandemic->getCreator() === $user->getUsername()){
+		$this->content .= "</p><a href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" => $id))}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" => $id))}\">Supprimer Pandemic</a>";
+		}
+	}
 
     public function displayUnknownPandemic(){
 		$this->router->POSTredirect($this->router->getSimpleURL("pandemics_list"), "La maladie de la requête n'existe pas dans notre base de données !");

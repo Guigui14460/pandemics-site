@@ -38,7 +38,7 @@ class PandemicRouter extends AbstractRouter {
                     }
                 } else if(count($path_exploded) == 1) {
                     if($is_user_connected){
-                        $controller->showInformation($path_exploded[0]);
+                        $controller->showInformation($path_exploded[0],$auth_manager->getUser());
                     } else {
                         $next = "/..".$this->main_router->getConfigurableURL('pandemics_detail', array('id' => $path_exploded[0]));
                         $this->POSTredirect(

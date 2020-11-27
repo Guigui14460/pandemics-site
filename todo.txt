@@ -1,6 +1,6 @@
 Développement :
 TODO: faire comme dans la partie "Persistance des données de formulaire" du TP 16
-TODO: ajouter un propriétaire aux pandémies
+TODO: ajouter un propriétaire aux pandémies *demande de validation
 TODO: régler CSS
 TODO: trouver moyen que le CSS (et favicon, images, etc) trouve l'URL automatiquement
 

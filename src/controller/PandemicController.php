@@ -14,10 +14,10 @@ class PandemicController {
         $this->router = $router;
     }
 
-    public function showInformation($id) {
+    public function showInformation($id,$user) {
         $pandemic = $this->storage->read($id);
         if($pandemic !== null){
-            $this->view->makePandemicPage($pandemic, $id);
+            $this->view->makePandemicPage($pandemic, $id, $user);
         } else {
             $this->view->displayUnknownPandemic();
 		}
