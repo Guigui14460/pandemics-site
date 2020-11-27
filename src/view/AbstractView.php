@@ -59,32 +59,9 @@ abstract class AbstractView
         $this->content = "<pre>" . htmlspecialchars(var_export($variable, true)) . "</pre>";
     }
 
-    /**
-     * Substitue les characters HTML en d'autres caractères.
-     */
-    public static function htmlesc($str)
-    {
-        // return htmlspecialchars($str,
-        // 	/* on échappe guillemets _et_ apostrophes : */
-        // 	ENT_QUOTES
-        // 	/* les séquences UTF-8 invalides sont
-        // 	* remplacées par le caractère �
-        // 	* au lieu de renvoyer la chaîne vide…) */
-        // 	| ENT_SUBSTITUTE
-        // 	/* on utilise les entités HTML5 (en particulier &apos;) */
-        // 	| ENT_HTML5,
-        // 	'UTF-8');
-        return htmlspecialchars($str);
-    }
-
-    /**
-     * Récupère le menu principal et supprimer les éléments inutiles ajoutés dans
-     * la variable `$navLinksToRemove`.
-     */
     public function getMenu()
     {
         $menu = array(
-            // "Accueil" => $this->router->getSimpleURL("home"),
             "Nouvelle maladie" => $this->router->getSimpleURL("pandemics_create"),
             "Maladies" => $this->router->getSimpleURL("pandemics_list"),
             "A propos" => $this->router->getSimpleURL("about"),
@@ -100,9 +77,6 @@ abstract class AbstractView
         return $menu;
     }
 
-    /**
-     * Supprime un lien du menu principal.
-     */
     public function removeNavLink($key)
     {
         array_push($this->navLinksToRemove, $key);

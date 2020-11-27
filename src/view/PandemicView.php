@@ -1,6 +1,7 @@
 <?php
 
 require_once("PandemicRouter.php");
+require_once("Utils.php");
 require_once("model/Pandemic.php");
 require_once("model/PandemicBuilder.php");
 require_once("view/AbstractView.php");
@@ -27,7 +28,7 @@ class PandemicView extends AbstractView
 	{
 		$this->title = "Page sur {$pandemic->getName()}";
 
-		$this->content = "<p>{$pandemic->getName()} est une maladie du type {$pandemic->getType()} qui a été découvert en l'an {$pandemic->getDiscoveryYear()}.<br>Plus d'information ? En voici : {$pandemic->getDescription()}</p><a href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" =>$id))}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" =>$id))}\">Supprimer Pandemic</a>";
+		$this->content = "<p>" . Utils::htmlesc($pandemic->getName()) . " est une maladie du type " . Utils::htmlesc($pandemic->getType()) . " qui a été découvert en l'an {$pandemic->getDiscoveryYear()}.<br>Plus d'information ? En voici : " . Utils::htmlesc($pandemic->getDescription()) . "</p><a href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" =>$id))}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" =>$id))}\">Supprimer Pandemic</a>";
 	}
 
 	public function displayUnknownPandemic()
@@ -49,7 +50,7 @@ class PandemicView extends AbstractView
         <form action="' . $this->router->getSimpleURL("pandemics_create") . '" method="POST">' . "\n";
 
 		$s .= '<p><label>Nom de la maladie : <input type="text" name="' . $builder->getNameRef() . '" value="';
-		$s .= self::htmlesc($builder->getData($builder->getNameRef()));
+		$s .= Utils::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getNameRef());
 		if ($err !== null)
@@ -57,7 +58,7 @@ class PandemicView extends AbstractView
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Type de la maladie : <input type="text" name="' . $builder->getTypeRef() . '" value="';
-		$s .= self::htmlesc($builder->getData($builder->getTypeRef()));
+		$s .= Utils::htmlesc($builder->getData($builder->getTypeRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getTypeRef());
 		if ($err !== null)
@@ -65,7 +66,7 @@ class PandemicView extends AbstractView
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Date d\'apparution de la maladie : <input type="number" name="' . $builder->getDiscoveryYearRef() . '" value="';
-		$s .= self::htmlesc($builder->getData($builder->getDiscoveryYearRef()));
+		$s .= $builder->getData($builder->getDiscoveryYearRef());
 		$s .= "\" />";
 		$err = $builder->getError($builder->getDiscoveryYearRef());
 		if ($err !== null)
@@ -73,7 +74,7 @@ class PandemicView extends AbstractView
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Description :<br><textarea name="' . $builder->getDescriptionRef() . '">';
-		$s .= self::htmlesc($builder->getData($builder->getDescriptionRef()));
+		$s .= Utils::htmlesc($builder->getData($builder->getDescriptionRef()));
 		$s .= "</textarea>";
 		$err = $builder->getError($builder->getDescriptionRef());
 		if ($err !== null)
@@ -102,7 +103,7 @@ class PandemicView extends AbstractView
 
 		$s .= "<input type=\"hidden\" name=\"pandemic_id\" value=\"$id\"  />";
 		$s .= '<p><label>Nom de la maladie : <input type="text" name="' . $builder->getNameRef() . '" value="';
-		$s .= self::htmlesc($builder->getData($builder->getNameRef()));
+		$s .= Utils::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getNameRef());
 		if ($err !== null)
@@ -111,7 +112,7 @@ class PandemicView extends AbstractView
 
 
 		$s .= '<p><label>Type de la maladie : <input type="text" name="' . $builder->getTypeRef() . '" value="';
-		$s .= self::htmlesc($builder->getData($builder->getTypeRef()));
+		$s .= Utils::htmlesc($builder->getData($builder->getTypeRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getTypeRef());
 		if ($err !== null)
@@ -119,7 +120,7 @@ class PandemicView extends AbstractView
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Date d\'apparution de la maladie : <input type="number" name="' . $builder->getDiscoveryYearRef() . '" value="';
-		$s .= self::htmlesc($builder->getData($builder->getDiscoveryYearRef()));
+		$s .= $builder->getData($builder->getDiscoveryYearRef());
 		$s .= "\" />";
 		$err = $builder->getError($builder->getDiscoveryYearRef());
 		if ($err !== null)
@@ -127,7 +128,7 @@ class PandemicView extends AbstractView
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Description :<br><textarea name="' . $builder->getDescriptionRef() . '">';
-		$s .= self::htmlesc($builder->getData($builder->getDescriptionRef()));
+		$s .= Utils::htmlesc($builder->getData($builder->getDescriptionRef()));
 		$s .= "</textarea>";
 		$err = $builder->getError($builder->getDescriptionRef());
 		if ($err !== null)

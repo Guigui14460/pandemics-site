@@ -16,6 +16,7 @@ require_once("model/PandemicStorageMySQL.php");
 require_once("model/UserStorageMySQL.php");
 
 $pdo = new PDO("mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DB . ";charset=utf8", MYSQL_USER, MYSQL_PASSWORD);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db = new Database();
 $db->addStorage("pandemics", new PandemicStorageMySQL($pdo));
 $db->addStorage("users", new UserStorageMySQL($pdo));

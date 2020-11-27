@@ -15,7 +15,7 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
     <link rel="icon" href="<?php echo $SERVER_MAIN_URL . "/images/covid.png"; ?>" />
     <link href="<?php echo $SERVER_MAIN_URL . "/css/screen.css"; ?>" rel="stylesheet" />
     <?php if ($css !== null) : ?>
-        <link href="<?php echo $css; ?>" rel="stylesheet" />
+        <link href="<?php echo $SERVER_MAIN_URL . $css; ?>" rel="stylesheet" />
     <?php endif; ?>
 </head>
 
