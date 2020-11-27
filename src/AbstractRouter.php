@@ -77,6 +77,33 @@ abstract class AbstractRouter {
     public function getMainRouter(){
         return ($this->main_router === null ? $this : $this->main_router);
     }
+
+    public function getCss(){
+        
+        $path_exploded = array_slice(explode('/', $_SERVER['PATH_INFO']), 1);
+        
+        if(sizeof($path_exploded) !== 0){
+            
+            return "./../../css/" . $path_exploded[0] .".css" ;
+        }
+
+        //index
+        return "./css/screen.css";
+    }
+
+    public function getIcon()
+    {
+        $path_exploded = array_slice(explode('/', $_SERVER['PATH_INFO']), 1);
+        
+        if(sizeof($path_exploded) !== 0){
+            
+            return "./../../images/covid.png" ;
+        }
+
+        //index
+        return "images/covid.png";
+    }
+
 }
 
 ?>

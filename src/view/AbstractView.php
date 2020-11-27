@@ -3,13 +3,15 @@
 abstract class AbstractView {
     protected $title, $content, $menu, $css,
               $router, $include_file_name, $feedback, 
-              $navLinksToRemove;
+              $navLinksToRemove,$icon;
 
     public function __construct($router, $include_file_name, $feedback=""){
         $this->router = $router;
         $this->include_file_name = $include_file_name;
         $this->feedback = $feedback;
         $this->navLinksToRemove = array();
+        $this->css = $this->router->getCss();
+        $this->icon = $this->router->getIcon();
     }
 
     public function render(){
@@ -18,6 +20,7 @@ abstract class AbstractView {
         $css = $this->css;
         $feedback = $this->feedback;
         $menu = $this->getMenu();
+        $icon = $this->icon;
         include($this->include_file_name);
     }
 

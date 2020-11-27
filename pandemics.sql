@@ -6,6 +6,6 @@ CREATE TABLE `pandemics` (
     `type` VARCHAR(255) NOT NULL,
     `discoveryYear` int(11) NOT NULL,
     `description` TEXT NOT NULL,
-    'creator' VARCHAR(255) NOT NULL,
+    `creator` VARCHAR(255) NOT NULL,
     PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;

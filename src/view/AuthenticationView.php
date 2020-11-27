@@ -11,7 +11,7 @@ class AuthenticationView extends AbstractView {
 
     public function makeLoginPage($builder, $next_url){
         $this->title = "Connexion";
-        $this->css = "./../../css/screen.css";
+        
         $this->content = '<h1>Connectez-vous !</h1><form action="'.$this->router->getSimpleURL("accounts_login").($next_url !== null ? '?next='.$next_url : "").'" method="POST">'."\n";
         $this->content .= "<p><label>Nom d'utilisateur : <input type=\"text\" name=\"{$builder->getUsernameRef()}\" value=\"";
         $this->content .= self::htmlesc($builder->getData($builder->getUsernameRef()));
@@ -41,7 +41,7 @@ class AuthenticationView extends AbstractView {
 
     public function makeRegisterPage($builder, $next_url){
         $this->title = "Inscription";
-        $this->css = "./../../css/screen.css";
+       
         $this->content = '<h1>Créer son compte !</h1><form action="'.$this->router->getSimpleURL("accounts_signup").($next_url !== null ? '?next='.$next_url : "").'" method="POST">'."\n";
         $this->content .= "<p><label>Nom d'utilisateur : <input type=\"text\" name=\"{$builder->getUsernameRef()}\" value=\"";
         $this->content .= self::htmlesc($builder->getData($builder->getUsernameRef()));
@@ -71,7 +71,7 @@ class AuthenticationView extends AbstractView {
 
     public function makeLogoutPage($user){
         $this->title = "Déconnexion";
-        $this->css = "./../../css/screen.css";
+    
         $this->content = "<h1>{$this->title}</h1><p>{$user->getUsername()}, êtes-vous sûr de vouloir vous déconnecter ?<p>";
         $this->content .= "<form action=\"{$this->router->getSimpleURL("accounts_logout")}\" method=\"POST\"><button>Oui</button>&nbsp;<a href=\"{$_SERVER['HTTP_REFERER']}\">Annuler</a></form>";
     }

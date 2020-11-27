@@ -12,17 +12,18 @@ class PandemicView extends AbstractView {
 
     public function makeListPage($pandemics){
         $this->title = "Liste des maladies";
-        $this->css = "./../css/screen.css";
+       
         $list = "";
         foreach($pandemics as $key => $value){
             $list .= "<li><a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" => $key))}\">{$value->getName()}</a></li>";
         }
-        $this->content = "<h1>Liste des maladies</h1><ul>$list</ul>";
+		$this->content = "<h1>Liste des maladies</h1><ul>$list</ul>";
+		
     }
 
     public function makePandemicPage($pandemic, $id){
         $this->title = "Page sur {$pandemic->getName()}";
-        $this->css = "./../../css/screen.css";
+     
         $this->content = "<p>{$pandemic->getName()} est une maladie du type {$pandemic->getType()} dont l'existence remonte à {$pandemic->getDiscoveryYear()} ans. Plus d'information ? En voici : {$pandemic->getDescription()}</p><a href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" => $id))}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" => $id))}\">Supprimer Pandemic</a>";
     }
 
@@ -37,7 +38,7 @@ class PandemicView extends AbstractView {
 
     public function makePandemicCreationPage($builder,$user){
         $this->title = "Ajouter votre maladie";
-        $this->css = "./../../css/screen.css";
+     
         $s = '<h1>Ajouter des maladies</h1>
         <form action="'.$this->router->getSimpleURL("pandemics_create").'" method="POST">'."\n";
 
@@ -97,7 +98,7 @@ class PandemicView extends AbstractView {
     
     public function makePandemicUpdatePage($builder, $id){
         $this->title = "Modifier votre maladie";
-        $this->css = "./../../../css/screen.css";
+      
         $s = '<form action="'.$this->router->getConfigurableURL("pandemics_update", array("id" => $id)).'" method="POST">'."\n";
 
         $s .= "<input type=\"hidden\" name=\"pandemic_id\" value=\"$id\"  />";
@@ -148,7 +149,7 @@ class PandemicView extends AbstractView {
 
     public function makePandemicDeletionPage($pandemic, $id){
         $this->title = "Suppression de {$pandemic->getName()}";
-        $this->css = "./../../../css/screen.css";
+      
         $this->content = "<h1>{$this->title}</h1><p>Êtes-vous sûr de vouloir supprimer cette maladie ?<br>
         <form action=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" => $id))}\" method=\"POST\"><input type=\"hidden\" name=\"pandemic_id\" value=\"$id\"  /><button>Oui</button></form>&nbsp<a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" => $id))}\">Annuler</a></p>";
 	}

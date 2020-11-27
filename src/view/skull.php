@@ -4,7 +4,8 @@
     <title><?php echo ($title === "" ? "Pandémonium" : "$title - Pandémonium") ?></title>
     <meta charset="UTF-8" />
     <link href="<?php echo $css; ?>" rel="stylesheet">
-    <link rel="icon" href="images/covid.png" />
+    <!-- <link rel="icon" href="images/covid.png" /> -->
+    <link rel="icon" href="<?php echo $icon; ?>"/>
 </head>
 <body>
     <header>
