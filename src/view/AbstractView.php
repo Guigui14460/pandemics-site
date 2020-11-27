@@ -6,7 +6,7 @@ abstract class AbstractView
         $router, $include_file_name, $feedback,
         $navLinksToRemove;
 
-    public function __construct($router, $include_file_name, $feedback = "")
+    public function __construct($router, $include_file_name, $feedback = array())
     {
         $this->router = $router;
         $this->include_file_name = $include_file_name;

@@ -20,18 +20,21 @@ abstract class AbstractRouter
     public function getFeedback()
     {
         $feedback = key_exists('feedback', $_SESSION) ? $_SESSION['feedback'] : '';
+        $feedback_type = key_exists('feedback', $_SESSION) ? $_SESSION['feedback'] : '';
         $_SESSION['feedback'] = '';
-        return $feedback;
+        $_SESSION['feedback_type'] = '';
+        return array("msg" => $feedback, "type" => $feedback_type);
     }
 
-    public function setFeeback($feedback)
+    public function setFeeback($feedback, $feedback_type)
     {
-        $_SESSION['feedback'] = $feedback;
+        $_SESSION['msg'] = $feedback;
+        $_SESSION['type'] = $feedback_type;
     }
 
-    public function POSTredirect($url, $feedback)
+    public function POSTredirect($url, $feedback, $feedback_type = "error")
     {
-        $this->setFeeback($feedback);
+        $this->setFeeback($feedback, $feedback_type);
         header("Location: " . htmlspecialchars_decode($url), true, 303);
         die;
     }

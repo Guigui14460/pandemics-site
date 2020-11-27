@@ -23,6 +23,10 @@ class PandemicRouter extends AbstractRouter
     public function main($db, $path_exploded = "", $auth_manager = null)
     {
         $is_user_connected = $auth_manager->isUserConnected();
+        $next = ".";
+        for ($i = 0; $i < count(array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 1)); $i++) {
+            $next .= "/..";
+        }
         try {
             $controller = new PandemicController($this->view, $db->getStorage('pandemics'), $this->main_router, $auth_manager);
             if (count($path_exploded) <= 0 || $path_exploded[0] === '' || $path_exploded[0] === "list") {
@@ -38,13 +42,14 @@ class PandemicRouter extends AbstractRouter
                             $this->view->show405();
                         }
                     } else {
-                        $this->POSTredirect($this->main_router->getSimpleURL('accounts_login') . "?next=/..{$this->main_router->getSimpleURL('pandemics_create')}", "Vous devez être connecté pour créer une pandémie.");
+                        $next .= $this->main_router->getSimpleURL('pandemics_create');
+                        $this->POSTredirect($this->main_router->getSimpleURL('accounts_login') . "?next=$next", "Vous devez être connecté pour créer une pandémie.");
                     }
                 } else if (count($path_exploded) == 1) {
                     if ($is_user_connected) {
                         $controller->showInformation($path_exploded[0]);
                     } else {
-                        $next = "/.." . $this->main_router->getConfigurableURL('pandemics_detail', array('id' => $path_exploded[0]));
+                        $next .= $this->main_router->getConfigurableURL('pandemics_detail', array('id' => $path_exploded[0]));
                         $this->POSTredirect(
                             $this->main_router->getSimpleURL('accounts_login') . "?next=$next",
                             "Vous devez être connecté pour voir les détails d'une pandémie."
@@ -61,7 +66,7 @@ class PandemicRouter extends AbstractRouter
                                 $this->view->show405();
                             }
                         } else {
-                            $next = "/.." . $this->main_router->getConfigurableURL('pandemics_update', array('id' => $path_exploded[0]));
+                            $next .= $this->main_router->getConfigurableURL('pandemics_update', array('id' => $path_exploded[0]));
                             $this->POSTredirect(
                                 $this->main_router->getSimpleURL('accounts_login') . "?next=$next",
                                 "Vous devez être connecté pour modifier une pandémie."
@@ -77,7 +82,7 @@ class PandemicRouter extends AbstractRouter
                                 $this->view->show405();
                             }
                         } else {
-                            $next = "/.." . $this->main_router->getConfigurableURL('pandemics_delete', array('id' => $path_exploded[0]));
+                            $next .= $this->main_router->getConfigurableURL('pandemics_delete', array('id' => $path_exploded[0]));
                             $this->POSTredirect(
                                 $this->main_router->getSimpleURL('accounts_login') . "?next=$next",
                                 "Vous devez être connecté pour supprimer une pandémie."

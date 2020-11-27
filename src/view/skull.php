@@ -33,8 +33,8 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
         </nav>
     </header>
     <main>
-        <?php if ($feedback !== null && $feedback !== "") { ?>
-            <div class="feeback"><?php echo $feedback; ?></div>
+        <?php if (isset($feedback['msg']) && $feedback['msg'] !== "") { ?>
+            <div class="feedback <?php echo $feedback['type'] ?>"><?php echo $feedback['msg']; ?></div>
         <?php } ?>
         <?php echo $content; ?>
     </main>
