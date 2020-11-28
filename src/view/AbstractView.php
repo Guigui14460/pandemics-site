@@ -19,7 +19,7 @@ abstract class AbstractView
     {
         $title = $this->title;
         $content = $this->content;
-        $css = $this->css;
+      
         $feedback = $this->feedback;
         $menu = $this->getMenu();
         include($this->include_file_name);

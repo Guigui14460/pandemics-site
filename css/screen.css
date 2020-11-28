@@ -97,3 +97,22 @@ main .list li:hover{
 
 
 /* nouvelle maladie */
+
+.new {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+  border : 1px solid white;
+
+}
+
+.new button {
+  margin: 0% 20% 1% 20%;
+}
+
+

@@ -45,9 +45,9 @@ class PandemicView extends AbstractView {
 		$this->title = "Ajouter votre maladie";
 
 		$s = '<h1>Ajouter des maladies</h1>
-        <form action="' . $this->router->getSimpleURL("pandemics_create") . '" method="POST">' . "\n";
+        <form class="new" action="' . $this->router->getSimpleURL("pandemics_create") . '" method="POST">' . "\n";
 
-		$s .= '<p><label>Nom de la maladie : <input class="" type="text" name="' . $builder->getNameRef() . '" value="';
+		$s .= '<p><label>Nom de la maladie : <input  type="text" name="' . $builder->getNameRef() . '" value="';
 		$s .= Utils::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getNameRef());
@@ -96,8 +96,8 @@ class PandemicView extends AbstractView {
 	public function makePandemicUpdatePage($builder, $id)
 	{
 		$this->title = "Modifier votre maladie";
-
-		$s = '<form action="' . $this->router->getConfigurableURL("pandemics_update", array("id" => $id)) . '" method="POST">' . "\n";
+		
+		$s = '<form class="new" action="' . $this->router->getConfigurableURL("pandemics_update", array("id" => $id)) . '" method="POST">' . "\n";
 
 		$s .= "<input type=\"hidden\" name=\"pandemic_id\" value=\"$id\"  />";
 		$s .= '<p><label>Nom de la maladie : <input type="text" name="' . $builder->getNameRef() . '" value="';

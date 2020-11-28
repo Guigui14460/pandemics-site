@@ -34,6 +34,7 @@ class PandemicRouter extends AbstractRouter
             } else {
                 if ($path_exploded[0] === "create") {
                     if ($is_user_connected) {
+                    
                         if ($_SERVER['REQUEST_METHOD'] === "POST") {
                             $controller->saveNewPandemic($_POST);
                         } else if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -58,9 +59,13 @@ class PandemicRouter extends AbstractRouter
                 } else if (count($path_exploded) == 2) {
                     if ($path_exploded[1] === 'update') {
                         if ($is_user_connected) {
+                           var_export($_POST);
+                           
                             if ($_SERVER['REQUEST_METHOD'] === "POST") {
+                              
                                 $controller->updatePandemic($_POST);
                             } else if ($_SERVER['REQUEST_METHOD'] == "GET") {
+                               
                                 $controller->askUpdatePandemic($path_exploded[0]);
                             } else {
                                 $this->view->show405();

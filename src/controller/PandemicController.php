@@ -69,6 +69,7 @@ class PandemicController
 
     public function updatePandemic($data)
     {
+        echo "a";
         if (isset($data['pandemic_id'])) {
             $id = $data['pandemic_id'];
             $pandemic = $this->storage->read($id);

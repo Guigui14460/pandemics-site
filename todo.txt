@@ -1,8 +1,4 @@
 Développement :
-<<<<<<< HEAD
-TODO: Améliorer CSS
-TODO: Voir quoi choisir pour les 3 compléments à faire
-=======
 TODO: faire comme dans la partie "Persistance des données de formulaire" du TP 16
 TODO: ajouter un propriétaire aux pandémies *demande de validation
 TODO: régler CSS
@@ -10,4 +6,3 @@ TODO: trouver moyen que le CSS (et favicon, images, etc) trouve l'URL automatiqu
 
 Production :
 TODO: régler problème MySQL sur le serveur
->>>>>>> 0e02742091d02b7252d39b0e8ae5e3c2bdf33471
