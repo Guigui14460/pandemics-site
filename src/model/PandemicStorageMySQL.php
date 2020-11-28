@@ -1,7 +1,7 @@
 <?php
 
 require_once("model/Storage.php");
-
+#require_once("Storage.php");
 class PandemicStorageMySQL implements Storage
 {
     private $database;

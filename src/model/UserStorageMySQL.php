@@ -3,6 +3,8 @@
 require_once("model/Storage.php");
 require_once("model/User.php");
 
+#require_once("Storage.php");
+#require_once("User.php");
 class UserStorageMySQL implements Storage
 {
     private $database;
