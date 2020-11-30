@@ -51,32 +51,37 @@ class PandemicView extends AbstractView {
 		$s .= Utils::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getNameRef());
-		if ($err !== null)
-			$s .= ' <span class="error">' . $err . '</span>';
+		
+		if ($err !== null ){  
+			$this->content .= ' <span class="error">' . $err . '</span>';
+		}   
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Type de la maladie : <input type="text" name="' . $builder->getTypeRef() . '" value="';
 		$s .= Utils::htmlesc($builder->getData($builder->getTypeRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getTypeRef());
-		if ($err !== null)
-			$s .= ' <span class="error">' . $err . '</span>';
+		if ($err !== null ){  
+			$this->content .= ' <span class="error">' . $err . '</span>';
+		}   
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Date d\'apparution de la maladie : <input type="number" name="' . $builder->getDiscoveryYearRef() . '" value="';
 		$s .= $builder->getData($builder->getDiscoveryYearRef());
 		$s .= "\" />";
 		$err = $builder->getError($builder->getDiscoveryYearRef());
-		if ($err !== null)
-			$s .= ' <span class="error">' . $err . '</span>';
+		if ($err !== null ){  
+			$this->content .= ' <span class="error">' . $err . '</span>';
+		}   
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Description :<br><textarea name="' . $builder->getDescriptionRef() . '">';
 		$s .= Utils::htmlesc($builder->getData($builder->getDescriptionRef()));
 		$s .= "</textarea>";
 		$err = $builder->getError($builder->getDescriptionRef());
-		if ($err !== null)
-			$s .= ' <span class="error">' . $err . '</span>';
+		if ($err !== null ){  
+			$this->content .= ' <span class="error">' . $err . '</span>';
+		}   
 		$s .= "</label></p>\n";
 
 		$s .= "<button type=\"submit\">Soumettre le formulaire</button>\n</form>\n";
@@ -104,8 +109,9 @@ class PandemicView extends AbstractView {
 		$s .= Utils::htmlesc($builder->getData($builder->getNameRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getNameRef());
-		if ($err !== null)
-			$s .= ' <span class="error">' . $err . '</span>';
+		if ($err !== null ){  
+			$this->content .= ' <span class="error">' . $err . '</span>';
+		}   
 		$s .= "</label></p>\n";
 
 
@@ -113,24 +119,27 @@ class PandemicView extends AbstractView {
 		$s .= Utils::htmlesc($builder->getData($builder->getTypeRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getTypeRef());
-		if ($err !== null)
-			$s .= ' <span class="error">' . $err . '</span>';
+		if ($err !== null ){  
+			$this->content .= ' <span class="error">' . $err . '</span>';
+		}   
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Date d\'apparution de la maladie : <input type="number" name="' . $builder->getDiscoveryYearRef() . '" value="';
 		$s .= $builder->getData($builder->getDiscoveryYearRef());
 		$s .= "\" />";
 		$err = $builder->getError($builder->getDiscoveryYearRef());
-		if ($err !== null)
-			$s .= ' <span class="error">' . $err . '</span>';
+		if ($err !== null ){  
+			$this->content .= ' <span class="error">' . $err . '</span>';
+		}   
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Description :<br><textarea name="' . $builder->getDescriptionRef() . '">';
 		$s .= Utils::htmlesc($builder->getData($builder->getDescriptionRef()));
 		$s .= "</textarea>";
 		$err = $builder->getError($builder->getDescriptionRef());
-		if ($err !== null)
-			$s .= ' <span class="error">' . $err . '</span>';
+		if ($err !== null ){  
+			$this->content .= ' <span class="error">' . $err . '</span>';
+		}   
 		$s .= "</label></p>\n";
 
 		$s .= "<button type=\"submit\">Soumettre le formulaire</button>\n</form>\n";

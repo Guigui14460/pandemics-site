@@ -15,20 +15,22 @@ class AuthenticationView extends AbstractView
     {
         $this->title = "Connexion";
 
-        $this->content = '<h1>Connectez-vous !</h1><form action="' . $this->router->getSimpleURL("accounts_login") . ($next_url !== null ? '?next=' . $next_url : "") . '" method="POST">' . "\n";
+        $this->content = '<h1>Connectez-vous !</h1><form class="new" action="' . $this->router->getSimpleURL("accounts_login") . ($next_url !== null ? '?next=' . $next_url : "") . '" method="POST">' . "\n";
         $this->content .= "<p><label>Nom d'utilisateur : <input type=\"text\" name=\"{$builder->getUsernameRef()}\" value=\"";
         $this->content .= $builder->getData($builder->getUsernameRef());
         $this->content .= "\" autofocus />";
         $err = $builder->getError($builder->getUsernameRef());
-        if ($err !== null)
-            $this->content .= ' <span class="error">' . $err . '</span>';
+            if ($err !== null ){  
+                $this->content .= ' <span class="error">' . $err . '</span>';
+            }   
         $this->content .= "</label></p>";
-        $this->content .= "<p><label>Mot de passe : <input type=\"password\" name=\"{$builder->getPasswordRef()}\" value=\"";
+        $this->content .= "<p><label>Mot de passe : <input id=\"pass\" type=\"password\" name=\"{$builder->getPasswordRef()}\" value=\"";
         $this->content .= $builder->getData($builder->getPasswordRef());
         $this->content .= "\" />";
         $err = $builder->getError($builder->getPasswordRef());
-        if ($err !== null)
+        if ($err !== null ){  
             $this->content .= ' <span class="error">' . $err . '</span>';
+        }   
         $this->content .= "</label></p>";
         $this->content .= "<button>Se connecter</button>";
         $this->content .= "</form>";
@@ -48,20 +50,22 @@ class AuthenticationView extends AbstractView
     {
         $this->title = "Inscription";
 
-        $this->content = '<h1>Créer son compte !</h1><form action="' . $this->router->getSimpleURL("accounts_signup") . ($next_url !== null ? '?next=' . $next_url : "") . '" method="POST">' . "\n";
+        $this->content = '<h1>Créer son compte !</h1><form class="new" action="' . $this->router->getSimpleURL("accounts_signup") . ($next_url !== null ? '?next=' . $next_url : "") . '" method="POST">' . "\n";
         $this->content .= "<p><label>Nom d'utilisateur : <input type=\"text\" name=\"{$builder->getUsernameRef()}\" value=\"";
         $this->content .= $builder->getData($builder->getUsernameRef());
         $this->content .= "\" autofocus />";
         $err = $builder->getError($builder->getUsernameRef());
-        if ($err !== null)
+        if ($err !== null ){  
             $this->content .= ' <span class="error">' . $err . '</span>';
+        }   
         $this->content .= "</label></p>";
-        $this->content .= "<p><label>Mot de passe : <input type=\"password\" name=\"{$builder->getPasswordRef()}\" value=\"";
+        $this->content .= "<p><label>Mot de passe : <input id=\"pass\" type=\"password\" name=\"{$builder->getPasswordRef()}\" value=\"";
         $this->content .= $builder->getData($builder->getPasswordRef());
         $this->content .= "\" />";
         $err = $builder->getError($builder->getPasswordRef());
-        if ($err !== null)
+        if ($err !== null ){  
             $this->content .= ' <span class="error">' . $err . '</span>';
+        }   
         $this->content .= "</label></p>";
         $this->content .= "<button>S'enregistrer</button>";
         $this->content .= "</form>";

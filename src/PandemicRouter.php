@@ -59,8 +59,9 @@ class PandemicRouter extends AbstractRouter
                 } else if (count($path_exploded) == 2) {
                     if ($path_exploded[1] === 'update') {
                         if ($is_user_connected) {
-                           var_export($_POST);
                            
+                           echo $_SERVER['REQUEST_METHOD'];
+                           print_r($_GET);
                             if ($_SERVER['REQUEST_METHOD'] === "POST") {
                               
                                 $controller->updatePandemic($_POST);

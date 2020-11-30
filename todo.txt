@@ -4,5 +4,3 @@ TODO: ajouter un propriétaire aux pandémies *demande de validation
 TODO: régler CSS
 TODO: trouver moyen que le CSS (et favicon, images, etc) trouve l'URL automatiquement
 
-Production :
-TODO: régler problème MySQL sur le serveur

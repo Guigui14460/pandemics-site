@@ -105,14 +105,30 @@ main .list li:hover{
   justify-content: center;
   list-style-type: none;
   text-align: center;
+  margin-top: 12%;
   margin-left: 30%;
   margin-right: 30%;
   border : 1px solid white;
+  padding: 2% 0 2% 0;
 
 }
 
 .new button {
-  margin: 0% 20% 1% 20%;
+  margin: 1% 20% 1% 20%;
+}
+
+.new input{
+  width: 50%;
+  margin-left: 8% ;
+  
+}
+.new #pass  {
+  margin-left: 12% ;
+}
+
+.new span{
+  margin-left: 30% ;
+  margin-right: 10%
 }
 
 

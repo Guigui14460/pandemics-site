@@ -2,7 +2,7 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background-color: red;
+  background-color: rgba(2, 219, 111, 0.712);
   padding: 0 15px;
 }
 
@@ -28,6 +28,10 @@ header .logo,
   margin: 0;
 }
 
+.nav-links:hover {
+  color: rgb(46, 46, 46);
+}
+
 .nav-links li {
   display: inline-block;
 }
@@ -39,6 +43,7 @@ header .logo,
   line-height: 50px;
 }
 
-.nav-links li a:hover {
+header .nav-links li a:hover {
   background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(46, 46, 46);
 }
