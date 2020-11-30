@@ -17,6 +17,9 @@ class GeneralView extends AbstractView {
         $this->title = "A propos";
        
         $this->content = "<h1>{$this->title}</h1><h2>Le projet</h2>";
+        $this->content .= "<p>Le but de ce site est de gérer des objets en php (ici des épidemies) et de créer un site respectant le modèle MVCR.<br> Nous avons intégré les fonctionnalités suivantes :</p>";
+        $this->content .= "<ul><li>Architecture MVCR</li><li>Manipulation de données</li><li>Système d'authentification</li><li>Manipulation de bases de données</li></ul>";
+        $this->content .= "<h2>Le groupe</h2>";
         $this->content .= "<p>21804030 Guillaume LETELLIER<br>";
         $this->content .= "21803752 Corentin PIERRE<br>";
         $this->content .= "21806332 Arthur BOCAGE<br>";
@@ -24,6 +27,6 @@ class GeneralView extends AbstractView {
         
 
         $this->content .= "<h2>Remarque</h2>";
-        $this->content .= "<p>L'utilisation de l'URL ne marche pas sous l'hébergement de la fac (marche sur toutes nos machines)</p>";
+        $this->content .= "<p>L'utilisation de l'URL ne marche pas sous l'hébergement de la fac (marche sur toutes nos machines en localhost).</p>";
     }
 }
