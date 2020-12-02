@@ -24,9 +24,9 @@ class PandemicView extends AbstractView {
     public function makePandemicPage($pandemic, $id, $user){
         $this->title = "Page sur {$pandemic->getName()}";
         $this->css = "./../../css/screen.css";
-		$this->content = "<p>{$pandemic->getName()} est une maladie du type {$pandemic->getType()} dont l'existence remonte à {$pandemic->getDiscoveryYear()} ans. Plus d'information ? En voici : {$pandemic->getDescription()} ,  elle fut ajoutée à la base de données par {$pandemic->getCreator()} "  ;
+		$this->content = "<h1>{$pandemic->getName()}</h1><article><p>{$pandemic->getName()} est une maladie du type {$pandemic->getType()}</p><p>Les premiers signes de sont apparition sont vers {$pandemic->getDiscoveryYear()}.</p><p>Information sur la maladie :</p><p> {$pandemic->getDescription()}</p><p> Information rentrée par : {$pandemic->getCreator()} </p></article>"  ;
 		if($pandemic->getCreator() === $user->getUsername()){
-		$this->content .= "</p><a href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" => $id))}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" => $id))}\">Supprimer Pandemic</a>";
+		$this->content .= "<article id=\"modsup\"></p><a href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" => $id))}\">Modifier Pandemic</a>&nbsp;&nbsp;<a href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" => $id))}\">Supprimer Pandemic</a></article>";
 		}
 	}
 
@@ -42,6 +42,8 @@ class PandemicView extends AbstractView {
 
 	public function makePandemicCreationPage($builder)
 	{
+
+
 		$this->title = "Ajouter votre maladie";
 
 		$s = '<h1>Ajouter des maladies</h1>
@@ -75,7 +77,7 @@ class PandemicView extends AbstractView {
 		}   
 		$s .= "</label></p>\n";
 
-		$s .= '<p><label>Description :<br><textarea name="' . $builder->getDescriptionRef() . '">';
+		$s .= '<p><label>Description :<br><textarea id="text" name="' . $builder->getDescriptionRef() . '">';
 		$s .= Utils::htmlesc($builder->getData($builder->getDescriptionRef()));
 		$s .= "</textarea>";
 		$err = $builder->getError($builder->getDescriptionRef());
@@ -84,7 +86,7 @@ class PandemicView extends AbstractView {
 		}   
 		$s .= "</label></p>\n";
 
-		$s .= "<button type=\"submit\">Soumettre le formulaire</button>\n</form>\n";
+		$s .= "<button type=\"submit\" onclick=\"divide()\">Soumettre le formulaire</button>\n</form>\n";
 		$this->content = $s;
 	}
 

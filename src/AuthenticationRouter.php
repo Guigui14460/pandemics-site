@@ -39,8 +39,9 @@ class AuthenticationRouter extends AbstractRouter
                     }
                 } else if ($path_exploded[0] == "logout") {
                     if ($auth_manager->isUserConnected()) {
-                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            $controller->logoutUser();
+                        
+                        if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+                           $controller->logoutUser();
                         } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             $this->view->makeLogoutPage($auth_manager->getUser());
                         } else {

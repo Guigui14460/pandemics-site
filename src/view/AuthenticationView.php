@@ -86,7 +86,12 @@ class AuthenticationView extends AbstractView
         $this->title = "Déconnexion";
 
         $this->content = "<h1>{$this->title}</h1><p>{$user->getUsername()}, êtes-vous sûr de vouloir vous déconnecter ?<p>";
-        $this->content .= "<form action=\"{$this->router->getSimpleURL("accounts_logout")}\" method=\"POST\"><button>Oui</button>&nbsp;<a href=\"{$_SERVER['HTTP_REFERER']}\">Annuler</a></form>";
+        $this->content .= "<form action=\"{$this->router->getSimpleURL("accounts_logout")}\" method=\"POST\"><input type=\"hidden\" name=\"oui\" value=\"oui\"><button>Oui</button>&nbsp";
+       
+
+        $this->content .= "<a class =\"button\"href=\"{$_SERVER['HTTP_REFERER']}\">Non</a></form>";
+        // $this->content .= "<form action=\"".parse_url($_SERVER['HTTP_REFERER'])."\" method=\"POST\"><input type=\"hidden\" name=\"non\" value=\"non\"><button>Non</button>&nbsp";
+        
     }
 
     public function displayLogoutSuccess()
