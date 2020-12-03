@@ -2,10 +2,10 @@
 
 session_name("twProject");
 session_start();
-require_once("mysql_config.php");
+
 // settings and config
 if ($_SERVER['SERVER_NAME'] === "localhost") {
-   require_once("mysql_config.php");
+    require_once("mysql_config.php");
 } else {
     require_once("../../private/mysql_config_prod.php");
 }
@@ -14,10 +14,6 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
 require_once("model/Database.php");
 require_once("model/PandemicStorageMySQL.php");
 require_once("model/UserStorageMySQL.php");
-
-//require_once("src/model/Database.php");
-//require_once("src/model/PandemicStorageMySQL.php");
-//require_once("src/model/UserStorageMySQL.php");
 
 $pdo = new PDO("mysql:host=" . MYSQL_HOST . ";port=" . MYSQL_PORT . ";dbname=" . MYSQL_DB . ";charset=utf8", MYSQL_USER, MYSQL_PASSWORD);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

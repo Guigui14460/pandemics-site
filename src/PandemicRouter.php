@@ -2,6 +2,7 @@
 
 require_once("AbstractRouter.php");
 require_once("controller/PandemicController.php");
+require_once("model/PandemicBuilder.php");
 require_once("view/PandemicView.php");
 
 class PandemicRouter extends AbstractRouter
@@ -34,42 +35,34 @@ class PandemicRouter extends AbstractRouter
             } else {
                 if ($path_exploded[0] === "create") {
                     if ($is_user_connected) {
-                    
                         if ($_SERVER['REQUEST_METHOD'] === "POST") {
-                            
                             $controller->saveNewPandemic($_POST);
                         } else if ($_SERVER['REQUEST_METHOD'] == "GET") {
-                            
-                            $this->view->makePandemicCreationPage(new PandemicBuilder(null));
+                            $controller->newPendemic();
                         } else {
-                        
                             $this->view->show405();
                         }
                     } else {
                         $next .= $this->main_router->getSimpleURL('pandemics_create');
-                        $this->POSTredirect($this->main_router->getSimpleURL('accounts_login') . "?next=$next", "Vous devez être connecté pour créer une pandémie.");
+                        $this->POSTredirect($this->main_router->getSimpleURL('accounts_login') . "?next=$next", "Vous devez être connecté pour créer une pandémie.", "info");
                     }
-                } else if(count($path_exploded) == 1) {
-                    if($is_user_connected){
-                        $controller->showInformation($path_exploded[0],$auth_manager->getUser());
+                } else if (count($path_exploded) == 1) {
+                    if ($is_user_connected) {
+                        $controller->showInformation($path_exploded[0], $auth_manager->getUser());
                     } else {
                         $next .= $this->main_router->getConfigurableURL('pandemics_detail', array('id' => $path_exploded[0]));
                         $this->POSTredirect(
                             $this->main_router->getSimpleURL('accounts_login') . "?next=$next",
-                            "Vous devez être connecté pour voir les détails d'une pandémie."
+                            "Vous devez être connecté pour voir les détails d'une pandémie.",
+                            "info"
                         );
                     }
                 } else if (count($path_exploded) == 2) {
                     if ($path_exploded[1] === 'update') {
                         if ($is_user_connected) {
-                           
-                           echo $_SERVER['REQUEST_METHOD'];
-                           print_r($_GET);
                             if ($_SERVER['REQUEST_METHOD'] === "POST") {
-                              
                                 $controller->updatePandemic($_POST);
                             } else if ($_SERVER['REQUEST_METHOD'] == "GET") {
-                               
                                 $controller->askUpdatePandemic($path_exploded[0]);
                             } else {
                                 $this->view->show405();
@@ -78,7 +71,8 @@ class PandemicRouter extends AbstractRouter
                             $next .= $this->main_router->getConfigurableURL('pandemics_update', array('id' => $path_exploded[0]));
                             $this->POSTredirect(
                                 $this->main_router->getSimpleURL('accounts_login') . "?next=$next",
-                                "Vous devez être connecté pour modifier une pandémie."
+                                "Vous devez être connecté pour modifier une pandémie.",
+                                "info"
                             );
                         }
                     } else if ($path_exploded[1] === "delete") {

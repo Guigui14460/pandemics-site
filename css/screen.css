@@ -1,166 +1,243 @@
 @import "nav.css";
-@import "blackBody.css";
 
+/* General part */
 * {
   box-sizing: border-box;
+}
+
+body,
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
+  background-color: rgb(35, 35, 35);
+  color: white;
 }
 
 main {
-  padding: 10px 15px;
+  padding: 10px 30%;
 }
 
 h1 {
-  margin-top: 1%;
+  margin-top: 1rem;
   text-align: center;
-  font-size:300%;
+  font-size: 3em;
 }
 
-input::invalid {
-  border: 1px solid red;
-}
-
-.error {
-  color: red;
-  font-weight: bold;
-}
-
-.feedback {
-  text-align: center;
-  font-weight: bold;
-  background: crimson;
-  border-radius: 1em;
-  margin: 1em auto;
-  max-width: 90%;
-  padding: 0.5em;
-}
-
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 20%;
-  height: auto;
+h2 {
+  margin-top: 2em;
 }
 
 a {
   color: white;
 }
 a:hover {
-  color: blue;
+  color: rgb(81, 176, 240);
 }
 
-/* css list */
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  height: auto;
+}
+/* End general part */
 
-main .list {
+/* Feedback part */
+.feedback {
+  text-align: center;
+  font-weight: bold;
+  background: rgb(240, 234, 235);
+  border-radius: 25px;
+  margin: 1em auto;
+  max-width: 90%;
+  padding: 0.5em;
+}
+.feedback.error {
+  background-color: rgb(189, 54, 54);
+  color: white;
+}
+.feedback.success {
+  background-color: rgb(73, 212, 73);
+}
+.feedback.info {
+  background-color: rgb(46, 135, 236);
+}
+/* End feedback part */
+
+/* Lists part */
+.list {
   display: flex;
   flex-direction: column;
   justify-content: center;
   list-style-type: none;
   text-align: center;
-  margin-left: 30%;
-  margin-right: 30%;
-  border : 1px solid white;
-  border-radius: 5%;
-  padding: 0 2% 0 2%;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  border: 1px solid white;
+  border-radius: 25px;
+  padding: 0;
 }
 
-main .list li{
-  background-color:  rgba(2, 219, 111, 0.315);
-  padding: 3% 30% 3% 30%;
-  margin: 1% 1% 1% 1%;
-}
-
-main .list a{
-  text-decoration:none;
+.list li a {
+  text-decoration: none;
+  word-wrap: break-word;
   color: inherit;
+  display: block;
+  padding: 12px 1rem 12px 1rem;
+  background-color: rgba(2, 219, 111, 0.315);
 }
-
-
-main .list li:hover{
+.list li a:hover {
   background-color: rgba(7, 177, 92, 0.712);
-  text-decoration:none;
+  text-decoration: none;
 }
+.list li:first-child a,
+.list li:first-child a:hover {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+.list li:last-child a,
+.list li:last-child a:hover {
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+/* End lists part */
 
-
-/* nouvelle maladie */
-
-.new {
+/* Forms part */
+form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  list-style-type: none;
-  text-align: center;
-  margin-top: 12%;
-  margin-left: 30%;
-  margin-right: 30%;
-  border : 1px solid white;
+  margin-top: 2rem;
+  border: 1px solid white;
   padding: 2% 0 2% 0;
 }
-
-.new button {
+form.no-border {
+  border: none;
+}
+form p {
+  margin: 10px 2rem;
+}
+form input {
+  width: 100%;
+  display: block;
+  padding: 0.4rem;
+  border: none;
+  margin: 0.2rem 0;
+  border-radius: 8px;
+}
+form textarea {
+  resize: none;
+  width: 100%;
+  height: 150px;
+}
+form input:invalid,
+form textarea:invalid {
+  border: 1px solid red;
+}
+form span.error {
+  color: red;
+  font-weight: bold;
+}
+form button,
+form .button {
   margin: 1% 20% 1% 20%;
 }
+/* End forms part */
 
-.new input{
-  width: 50%;
-  margin-left: 8% ;
-  
-}
-.new #pass  {
-  margin-left: 12% ;
-}
-
-.new span{
-  margin-left: 30% ;
-  margin-right: 10%
-}
-
-
-
-.button {
-  display: inline-bock;
-  padding: 0.15rem 0.4rem;
-  /* padding: 20.747px 15.200px; */
-  font-weight: 700;
+.button,
+button {
+  display: inline-block;
+  font-size: 1rem;
+  padding: 0.35rem 1rem;
+  font-weight: bold;
   text-align: center;
   vertical-align: middle;
   line-height: 1;
-  color:black;
-  font-style: none;
-  list-style-type: none;
+  color: black;
   background-color: rgba(245, 245, 245, 0.932);
   border: none;
-  font-weight:normal;
-  border-radius: 1px;
-  outline: none;
+  border-radius: 8px;
   cursor: pointer;
-  text-decoration:none;
+  text-decoration: none;
+  transition: all 0.175s ease-in-out;
 }
 
-.button:hover{
-  color:black;
-  background-color:rgba(245, 245, 245, 0.918);
-}
-
-
-
-article {
-  margin-top: 8%;
-  justify-content: center;
-  list-style-type: none;
+/* Other elements */
+.buttons {
+  width: 100%;
   text-align: center;
 }
-article p {
-  max-width: 25;
+.button:hover,
+button:hover {
+  color: black;
+  background: rgba(245, 245, 245, 0.75);
+}
+.button.danger,
+button.danger {
+  background-color: rgb(189, 54, 54);
+  color: white;
+}
+.button.danger:hover,
+button.danger:hover {
+  background-color: rgba(189, 54, 54, 0.75);
+}
+.button.success,
+button.success {
+  background-color: rgb(73, 212, 73);
+}
+.button.success:hover,
+button.success:hover {
+  background-color: rgba(73, 212, 73, 0.75);
+  color: white;
+}
+.button.info,
+button.info {
+  background-color: rgb(46, 135, 236);
+  color: white;
+}
+.button.info:hover,
+button.info:hover {
+  background-color: rgba(46, 135, 236, 0.75);
+}
+/* End other elements */
+
+/* Media queries */
+@media (max-width: 1200px) {
+  main {
+    padding: 10px 15%;
+  }
 }
 
-
-#modsup {
-  position: absolute;
-  bottom: 0;
+@media (max-width: 600px) {
+  main {
+    padding: 10px 10px;
+  }
+  h1 {
+    font-size: 2.5em;
+  }
+  .list {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+  }
 }
+
+@media (max-width: 500px) {
+  img {
+    width: 80%;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 2em;
+  }
+  .list {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+/* End media queries */

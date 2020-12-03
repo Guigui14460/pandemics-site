@@ -6,9 +6,9 @@ require_once("model/User.php");
 class UserBuilder extends AbstractObjectBuilder
 {
     private static $USERNAME_REF = "username", $PASSWORD_REF = "password", $STATUS_REF = "status";
-    private $login, $manager;
+    private $login;
 
-    public function __construct($data = null, $login = false, $manager = null)
+    public function __construct($data = null, $login = false)
     {
         if ($data === null) {
             $data = array(
@@ -23,7 +23,6 @@ class UserBuilder extends AbstractObjectBuilder
         }
         parent::__construct($data);
         $this->login = $login;
-        $this->manager = $manager;
     }
 
     public static function buildFromUser($user)
@@ -35,20 +34,20 @@ class UserBuilder extends AbstractObjectBuilder
         ));
     }
 
-    public function createUser()
+    public function createUser($manager)
     {
         if (!key_exists($this->getUsernameRef(), $this->data) || !key_exists($this->getPasswordRef(), $this->data) || !key_exists($this->getStatusRef(), $this->data))
             throw new Exception("Missing fields for user creation");
-        if (!$this->isValid()) {
+        if (!$this->isValid($manager)) {
             throw new Exception("Some fields are invalid for user creation");
         }
         return new User($this->data[$this->getUsernameRef()], password_hash($this->data[$this->getPasswordRef()], PASSWORD_BCRYPT), $this->data[$this->getStatusRef()]);
     }
 
-    public function isValid()
+    public function isValid($manager)
     {
         $this->error = array();
-        $user = $this->manager->exists($this->data[$this->getUsernameRef()]);
+        $user = $manager->exists($this->data[$this->getUsernameRef()]);
         if (!key_exists($this->getUsernameRef(), $this->data) || $this->data[$this->getUsernameRef()] === null || $this->data[$this->getUsernameRef()] === "") {
             $this->error[$this->getUsernameRef()] = "Vous devez entrer un nom d'utilisateur.";
         } else if (!$this->login && $user !== null) { // on vérifie que personne a déjà ce nom d'utilisateur lors de l'inscription
@@ -58,8 +57,10 @@ class UserBuilder extends AbstractObjectBuilder
         }
         if (!key_exists($this->getPasswordRef(), $this->data) || $this->data[$this->getPasswordRef()] === null || $this->data[$this->getPasswordRef()] === "") {
             $this->error[$this->getPasswordRef()] = "Vous devez entrer un mot de passe.";
+            $this->data[$this->getPasswordRef()] = "";
         } else if ($this->login && $user !== null && !password_verify($this->data[$this->getPasswordRef()], $user->getPassword())) { // on vérifie que la personne a le bon mot de passe lors de la connexion
             $this->error[$this->getPasswordRef()] = "Votre mot de passe est erroné.";
+            $this->data[$this->getPasswordRef()] = "";
         }
         return count($this->error) === 0;
     }

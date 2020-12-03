@@ -1,6 +1,7 @@
 <?php
 
 require_once("model/AbstractObjectBuilder.php");
+require_once("model/Pandemic.php");
 
 class PandemicBuilder extends AbstractObjectBuilder
 {
@@ -31,11 +32,11 @@ class PandemicBuilder extends AbstractObjectBuilder
         ));
     }
 
-    public function createPandemic()
+    public function createPandemic($manager)
     {
         if (!key_exists($this->getNameRef(), $this->data) || !key_exists($this->getTypeRef(), $this->data) || !key_exists($this->getDiscoveryYearRef(), $this->data) || !key_exists($this->getDescriptionRef(), $this->data) || !key_exists($this->getCreatorRef(), $this->data))
             throw new Exception("Missing fields for Pandemic creation");
-        if (!$this->isValid()) {
+        if (!$this->isValid($manager)) {
             throw new Exception("Some fields are invalid for Pandemic creation");
         }
         return new Pandemic($this->data[$this->getNameRef()], $this->data[$this->getTypeRef()], intval($this->data[$this->getDiscoveryYearRef()]), $this->data[$this->getDescriptionRef()], $this->data[$this->getCreatorRef()]);
@@ -55,13 +56,9 @@ class PandemicBuilder extends AbstractObjectBuilder
         if (key_exists($this->getDescriptionRef(), $this->data)) {
             $pandemic->setDescription($this->data[$this->getDescriptionRef()]);
         }
-        if(key_exists($this->getCreatorRef(), $this->data)){
-            $pandemic->setCreator($this->data[$this->getCreatorRef()]);
-        }
-    
     }
 
-    public function isValid()
+    public function isValid($manager)
     {
         $this->error = array();
         if (!key_exists($this->getNameRef(), $this->data) || $this->data[$this->getNameRef()] === null || $this->data[$this->getNameRef()] === "")
@@ -72,9 +69,7 @@ class PandemicBuilder extends AbstractObjectBuilder
             $this->error[$this->getDiscoveryYearRef()] = "Vous devez entrer une date d'apparution";
         if (!key_exists($this->getDescriptionRef(), $this->data) || $this->data[$this->getDescriptionRef()] === null || $this->data[$this->getDescriptionRef()] === "")
             $this->error[$this->getDescriptionRef()] = "Vous devez entrer une description";
-        if(!key_exists($this->getCreatorRef(), $this->data) || $this->data[$this->getCreatorRef()] === null || $this->data[$this->getCreatorRef()] === "")
-            $this->error[$this->getCreatorRef()] = "Vous devez entrer un créateur";
-		return count($this->error) === 0;
+        return count($this->error) === 0;
     }
 
     public function getNameRef()

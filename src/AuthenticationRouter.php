@@ -30,37 +30,36 @@ class AuthenticationRouter extends AbstractRouter
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $controller->loginUser($_POST, $next_url);
                         } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                            $this->view->makeLoginPage(new UserBuilder(null, true), $next_url);
+                            $controller->askLoginUser($next_url);
                         } else {
                             $this->view->show405();
                         }
                     } else {
-                        $this->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'] . $next_url : $this->getSimpleURL('home')), "Vous êtes déjà connecté !");
+                        $this->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'] . $next_url : $this->getSimpleURL('home')), "Vous êtes déjà connecté !", "info");
                     }
                 } else if ($path_exploded[0] == "logout") {
                     if ($auth_manager->isUserConnected()) {
-                        
-                        if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
-                           $controller->logoutUser();
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            $controller->logoutUser();
                         } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             $this->view->makeLogoutPage($auth_manager->getUser());
                         } else {
                             $this->view->show405();
                         }
                     } else {
-                        $this->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'] . $next_url : $this->getSimpleURL('home')), "Vous êtes déjà déconnecté !");
+                        $this->POSTredirect(($next_url !== null ? $_SERVER['SCRIPT_NAME'] . $next_url : $this->getSimpleURL('home')), "Vous êtes déjà déconnecté !", "info");
                     }
                 } else if ($path_exploded[0] == "signup") {
                     if (!$auth_manager->isUserConnected()) {
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $controller->registerUser($_POST, $next_url);
                         } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                            $this->view->makeRegisterPage(new UserBuilder(), $next_url);
+                            $controller->askRegisterUser($next_url);
                         } else {
                             $this->view->show405();
                         }
                     } else {
-                        $this->POSTredirect($_SERVER['HTTP_REFERER'], "Vous êtes déjà connecté !");
+                        $this->POSTredirect($_SERVER['HTTP_REFERER'], "Vous êtes déjà connecté !", "info");
                     }
                 } else {
                     $this->view->show404();

@@ -8,7 +8,6 @@ require_once("view/GeneralView.php");
 
 class Router extends AbstractRouter
 {
-    
     private $subrouters;
 
     public function __construct()
@@ -27,7 +26,6 @@ class Router extends AbstractRouter
 
     public function main($db, $path_exploded = "", $auth_manager = null)
     {
-       
         if (isset($_SERVER['PATH_INFO'])) {
             $path_exploded = array_slice(explode('/', $_SERVER['PATH_INFO']), 1);
         }

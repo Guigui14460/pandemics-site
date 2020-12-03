@@ -8,7 +8,7 @@ abstract class AbstractObjectBuilder {
         $this->error = array();
     }
 
-    public abstract function isValid();
+    public abstract function isValid($manager);
 
     public function getData($ref){
         return key_exists($ref, $this->data) ? $this->data[$ref] : null;
@@ -18,5 +18,3 @@ abstract class AbstractObjectBuilder {
         return key_exists($ref, $this->error) ? $this->error[$ref] : null;
     }
 }
-
-?>

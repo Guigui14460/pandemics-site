@@ -14,6 +14,7 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
     <meta charset="UTF-8" />
     <link rel="icon" href="<?php echo $SERVER_MAIN_URL . "/images/covid.png"; ?>" />
     <link href="<?php echo $SERVER_MAIN_URL . "/css/screen.css"; ?>" rel="stylesheet" />
+    <link href="<?php echo $SERVER_MAIN_URL . "/css/fontawesome.css"; ?>" rel="stylesheet" />
     <?php if ($css !== null) : ?>
         <link href="<?php echo $SERVER_MAIN_URL . $css; ?>" rel="stylesheet" />
     <?php endif; ?>
@@ -31,10 +32,11 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
                 ?>
             </ul>
         </nav>
+        <div id="burger"><i class="fas fa-bars"></i></div>
     </header>
     <main>
-        <?php if (isset($feedback['msg']) && $feedback['msg'] !== "") { ?>
-            <div class="feedback <?php echo $feedback['type'] ?>"><?php echo $feedback['msg']; ?></div>
+        <?php if (isset($feedback['feedback']) && $feedback['feedback_type'] !== "") { ?>
+            <div class="feedback <?php echo $feedback['feedback_type'] ?>"><?php echo $feedback['feedback']; ?></div>
         <?php } ?>
         <?php echo $content; ?>
     </main>

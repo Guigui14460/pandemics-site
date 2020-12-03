@@ -1,14 +1,11 @@
 <?php
 
-require_once("model/Pandemic.php");
 require_once("model/PandemicBuilder.php");
-require_once("model/Storage.php");
-require_once("view/PandemicView.php");
 
 class PandemicController
 {
     private $view, $storage, $router, $manager;
-    protected $currentPandemicBuilder, $modifiedPandemicBuilder, $user;
+    protected $currentPandemicBuilder, $modifiedPandemicBuilder;
 
     public function __construct($view, $storage, $router, $manager)
     {
@@ -16,15 +13,21 @@ class PandemicController
         $this->storage = $storage;
         $this->router = $router;
         $this->manager = $manager;
-        $this->user = $manager->getUser();
         $this->currentPandemicBuilder = key_exists('currentPandemicBuilder', $_SESSION) ? $_SESSION['currentPandemicBuilder'] : null;
         $this->modifiedPandemicBuilder = key_exists('modifiedPandemicBuilder', $_SESSION) ? $_SESSION['modifiedPandemicBuilder'] : array();
     }
 
-    public function showInformation($id,$user) {
+    public function __destruct()
+    {
+        $_SESSION['currentPandemicBuilder'] = $this->currentPandemicBuilder;
+        $_SESSION['modifiedPandemicBuilder'] = $this->modifiedPandemicBuilder;
+    }
+
+    public function showInformation($id)
+    {
         $pandemic = $this->storage->read($id);
-        if($pandemic !== null){
-            $this->view->makePandemicPage($pandemic, $id, $user);
+        if ($pandemic !== null) {
+            $this->view->makePandemicPage($pandemic, $id, $this->permission($pandemic));
         } else {
             $this->view->displayUnknownPandemic();
         }
@@ -35,12 +38,20 @@ class PandemicController
         $this->view->makeListPage($this->storage->readAll());
     }
 
+    public function newPendemic()
+    {
+        if ($this->currentPandemicBuilder === null) {
+            $this->currentPandemicBuilder = new PandemicBuilder(null);
+        }
+        $this->view->makePandemicCreationPage($this->currentPandemicBuilder);
+    }
+
     public function saveNewPandemic($data)
     {
         $data['creator'] = $this->manager->getUser()->getUsername();
-        $builder = new PandemicBuilder($data);
-        if ($builder->isValid()) {
-            $pandemic = $builder->createPandemic();
+        $this->currentPandemicBuilder = new PandemicBuilder($data);
+        if ($this->currentPandemicBuilder->isValid($this->manager)) {
+            $pandemic = $this->currentPandemicBuilder->createPandemic($this->manager);
             $id = $this->storage->create($pandemic);
             $this->currentPandemicBuilder = null;
             $this->view->displayCreationPandemicSuccess($id);
@@ -69,14 +80,13 @@ class PandemicController
 
     public function updatePandemic($data)
     {
-        
         if (isset($data['pandemic_id'])) {
             $id = $data['pandemic_id'];
             $pandemic = $this->storage->read($id);
             if ($pandemic !== null) {
                 if ($this->permission($pandemic)) {
                     $builder = new PandemicBuilder($data);
-                    if ($builder->isValid()) {
+                    if ($builder->isValid($this->manager)) {
                         $builder->updatePandemic($pandemic);
                         if (!$this->storage->update($id, $pandemic)) {
                             throw new Exception("Une erreur est survenue lors de la mise à jour de la pandémie");
@@ -137,6 +147,6 @@ class PandemicController
 
     private function permission($pandemic)
     {
-        return $this->manager->getUser()->getUsername() === $pandemic->getCreator() || $this->manager->isAdminConnected();
+        return $this->manager->getUser() !== null && ($this->manager->getUser()->getUsername() === $pandemic->getCreator() || $this->manager->isAdminConnected());
     }
 }
