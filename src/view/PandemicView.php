@@ -94,7 +94,7 @@ class PandemicView extends AbstractView
 	public function makePandemicUpdatePage($builder, $id)
 	{
 		$this->title = "Modifier votre maladie";
-		$s = '<form action="' . $this->router->getConfigurableURL("pandemics_update", array("id" => $id)) . '" method="POST">' . "\n";
+		$s = '<h1>Modifier votre maladie</h1><form action="' . $this->router->getConfigurableURL("pandemics_update", array("id" => $id)) . '" method="POST">' . "\n";
 
 		$s .= "<input type=\"hidden\" name=\"pandemic_id\" value=\"$id\"  />";
 		$s .= '<p><label>Nom de la maladie : <input type="text" name="' . $builder->getNameRef() . '" value="';
@@ -133,7 +133,7 @@ class PandemicView extends AbstractView
 		}
 		$s .= "</label></p>\n";
 
-		$s .= "<button class=\"button success\" type=\"submit\">Soumettre le formulaire</button>\n</form>\n";
+		$s .= "<button class=\"button success\" type=\"submit\">Soumettre le formulaire</button><a class=\"button\" href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" =>$id))}\">Annuler</a>\n</form>\n";
 		$this->content = $s;
 	}
 
