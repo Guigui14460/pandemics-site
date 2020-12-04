@@ -1,6 +1,7 @@
 <?php
 
 require_once("AbstractRouter.php");
+require_once("AdminRouter.php");
 require_once("AuthenticationRouter.php");
 require_once("PandemicRouter.php");
 require_once("controller/AuthenticationManager.php");
@@ -12,7 +13,7 @@ class Router extends AbstractRouter
 
     public function __construct()
     {
-        $this->subrouters = array(new PandemicRouter($this), new AuthenticationRouter($this));
+        $this->subrouters = array(new PandemicRouter($this), new AuthenticationRouter($this), new AdminRouter($this));
         parent::__construct("", new GeneralView($this));
     }
 
@@ -22,6 +23,7 @@ class Router extends AbstractRouter
         $this->urls["about"] = "/about";
         $this->urls = array_merge($this->urls, $this->getSubRouter("pandemics")->getURLs());
         $this->urls = array_merge($this->urls, $this->getSubRouter("accounts")->getURLs());
+        $this->urls = array_merge($this->urls, $this->getSubRouter("admin")->getURLs());
     }
 
     public function main($db, $path_exploded = "", $auth_manager = null)
@@ -48,6 +50,23 @@ class Router extends AbstractRouter
                         $sub_router->main($db, array_slice($path_exploded, 1), $auth_manager);
                         $this->view = $sub_router->getView();
                         break;
+                    case 'admin':
+                        if (!$auth_manager->isUserConnected()) {
+                            $next = ".";
+                            for ($i = 0; $i < count(array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 1)); $i++) {
+                                $next .= "/..";
+                            }
+                            $this->POSTredirect($this->getSimpleURL("accounts_login") . "?next=$next" . $_SERVER["PATH_INFO"], null, null);
+                        } else {
+                            if (!$auth_manager->isAdminConnected()) {
+                                $this->view->show403("Vous devez être administrateur pour accéder à cette page");
+                            } else {
+                                $sub_router = $this->getSubRouter("admin");
+                                $sub_router->main($db, array_slice($path_exploded, 1), $auth_manager);
+                                $this->view = $sub_router->getView();
+                            }
+                        }
+                        break;
                     default:
                         $this->view->show404();
                         break;
@@ -62,6 +81,9 @@ class Router extends AbstractRouter
         } else {
             $this->view->removeNavLink("Nouvelle maladie");
             $this->view->removeNavLink("Déconnexion");
+        }
+        if (!$auth_manager->isAdminConnected()) {
+            $this->view->removeNavLink("Admin");
         }
         $this->view->setFeedback($this->getFeedback()); // on met le feedback pour n'importe quelle vue (General, Pandemic ou Authentication)
         $this->view->render();

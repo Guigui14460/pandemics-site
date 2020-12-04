@@ -1,4 +1,3 @@
 Développement :
 TODO: Faire le site responsive (menu avec une icône hamburger, aller voir fontawesome, le CSS déjà mis)
 TODO: Recherche d'objets
-TODO: Gestion des utilisateurs par un admin

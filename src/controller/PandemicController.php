@@ -38,7 +38,7 @@ class PandemicController
         $this->view->makeListPage($this->storage->readAll());
     }
 
-    public function newPendemic()
+    public function newPandemic()
     {
         if ($this->currentPandemicBuilder === null) {
             $this->currentPandemicBuilder = new PandemicBuilder(null);

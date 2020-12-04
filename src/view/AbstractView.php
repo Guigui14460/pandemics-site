@@ -65,6 +65,7 @@ abstract class AbstractView
             "Nouvelle maladie" => $this->router->getSimpleURL("pandemics_create"),
             "Maladies" => $this->router->getSimpleURL("pandemics_list"),
             "A propos" => $this->router->getSimpleURL("about"),
+            "Admin" => $this->router->getSimpleURL("admin_index"),
             "Connexion" => $this->router->getSimpleURL("accounts_login"),
             "S'inscrire" => $this->router->getSimpleURL("accounts_signup"),
             "Déconnexion" => $this->router->getSimpleURL("accounts_logout"),

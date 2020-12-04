@@ -30,6 +30,19 @@ class UserStorageMySQL implements Storage
         return null;
     }
 
+    public function readById($object_id)
+    {
+        $request = "SELECT * FROM users WHERE id=:id";
+        $stmt = $this->database->prepare($request);
+        $stmt->bindValue(":id", $object_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $fetched_data = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($fetched_data) {
+            return new User($fetched_data['username'], $fetched_data['password'], $fetched_data['status']);
+        }
+        return null;
+    }
+
     public function readAll()
     {
         $request = 'SELECT * FROM users';
@@ -77,19 +90,26 @@ class UserStorageMySQL implements Storage
     public function update($object_id, $object)
     {
         $request = "UPDATE users SET username=:username, password=:password, status=:status WHERE id=:id";
+        $request2 = "UPDATE pandemics SET creator=:username WHERE creator=:old_username";
         $stmt = $this->database->prepare($request);
+        $stmt2 = $this->database->prepare($request2);
         $stmt->bindValue(":username", $object->getUsername(), PDO::PARAM_STR);
         $stmt->bindValue(":password", $object->getPassword(), PDO::PARAM_STR);
         $stmt->bindValue(":status", $object->getStatus(), PDO::PARAM_STR);
         $stmt->bindValue(":id", $object_id, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt2->bindValue(":username", $object->getUsername(), PDO::PARAM_STR);
+        $stmt2->bindValue(":old_username", $object->getOldUsername(), PDO::PARAM_STR);
+        return $stmt->execute() && $stmt2->execute();
     }
 
     public function delete($object_id)
     {
         $request = "DELETE FROM users WHERE id=:id";
+        $request2 = "DELETE FROM pandemics WHERE creator=:username";
         $stmt = $this->database->prepare($request);
+        $stmt2 = $this->database->prepare($request2);
         $stmt->bindValue(":id", $object_id, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt2->bindValue(":username", $this->readById($object_id)->getUsername(), PDO::PARAM_STR);
+        return $stmt->execute() && $stmt2->execute();
     }
 }

@@ -30,14 +30,14 @@ class AuthenticationController
     public function askLoginUser($next_url)
     {
         if ($this->loginUserBuilder === null) {
-            $this->loginUserBuilder = new UserBuilder(null, true, $this->manager);
+            $this->loginUserBuilder = new UserBuilder(null, true, false);
         }
         $this->view->makeLoginPage($this->loginUserBuilder, $next_url);
     }
 
     public function loginUser($data, $next_url)
     {
-        $this->loginUserBuilder = new UserBuilder($data, true, $this->manager);
+        $this->loginUserBuilder = new UserBuilder($data, true, false);
         if ($this->loginUserBuilder->isValid($this->manager) && $this->authenticate($this->loginUserBuilder->getData($this->loginUserBuilder->getUsernameRef()), $this->loginUserBuilder->getData($this->loginUserBuilder->getPasswordRef()))) {
             $this->loginUserBuilder = null;
             $this->view->displayLoginSuccess($next_url);
@@ -49,14 +49,14 @@ class AuthenticationController
     public function askRegisterUser($next_url)
     {
         if ($this->registerUserBuilder === null) {
-            $this->registerUserBuilder = new UserBuilder(null, false, $this->manager);
+            $this->registerUserBuilder = new UserBuilder(null, false, false);
         }
         $this->view->makeRegisterPage($this->registerUserBuilder, $next_url);
     }
 
     public function registerUser($data, $next_url)
     {
-        $this->registerUserBuilder = new UserBuilder($data, false, $this->manager);
+        $this->registerUserBuilder = new UserBuilder($data, false, false);
         if ($this->registerUserBuilder->isValid($this->manager)) {
             $user = $this->registerUserBuilder->createUser($this->manager);
             if ($this->manager->registerUser($user) && $this->authenticate($this->registerUserBuilder->getData($this->registerUserBuilder->getUsernameRef()), $this->registerUserBuilder->getData($this->registerUserBuilder->getPasswordRef()))) {

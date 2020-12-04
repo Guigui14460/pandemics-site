@@ -2,13 +2,14 @@
 
 class User
 {
-    private $username, $password, $status;
+    private $username, $password, $status, $oldUsername;
 
     public function __construct($username, $password, $status)
     {
         $this->setUsername($username);
         $this->password = $password;
         $this->setStatus($status);
+        $this->setOldUsername($username);
     }
 
     public function getUsername()
@@ -24,9 +25,30 @@ class User
         $this->username = $username;
     }
 
+    public function getOldUsername()
+    {
+        return $this->oldUsername;
+    }
+
+    public function setOldUsername($oldUsername)
+    {
+        if (!self::isUsernameValid($oldUsername)) {
+            throw new Exception("invalid old username");
+        }
+        $this->oldUsername = $oldUsername;
+    }
+
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        if (!self::isPasswordValid($password)) {
+            throw new Exception("password not hashed");
+        }
+        $this->password = $password;
     }
 
     public function getStatus()
@@ -50,6 +72,11 @@ class User
     public static function isUsernameValid($username)
     {
         return is_string($username) && $username !== "";
+    }
+
+    public static function isPasswordValid($password)
+    {
+        return is_string($password) && $password !== "" && substr($password, 0, 7) === "$2y$10$";
     }
 
     public static function isStatusValid($status)
