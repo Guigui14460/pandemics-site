@@ -29,7 +29,7 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
             <ul class="nav-links">
                 <?php
                 foreach ($menu as $text => $link) {
-                    echo "<li><a href=\"$link\">$text</a></li>";
+                    echo "<li><a class=\"li\"href=\"$link\">$text</a></li>";
                 }
                 ?>
             </ul>
@@ -50,6 +50,7 @@ let on=false;
 document.getElementById("burger").addEventListener("click",function(e){
     let menu = document.getElementsByClassName("nav-links");
     let header = document.getElementById("header");
+    let li = document.getElementsByClassName("li");
     
     console.log(window.innerWidth);
     if(!on && window.innerWidth <= 600){
@@ -61,6 +62,17 @@ document.getElementById("burger").addEventListener("click",function(e){
         menu[0].style.left = "0";
         menu[0].style.right = "0";
         header.style.padding = "0 15px 12% 15px";
+       
+     
+        if(li[3].innerText == "Déconnexion" && window.innerWidth <= 450){
+            header.style.padding = "0 15px 15% 15px";
+            for (let i = 0; i < li.length; i++) {
+                li[i].style.fontSize = "80%";
+              
+            }
+        }
+
+        
         on = true
     }else{
         if(window.innerWidth <= 600){
