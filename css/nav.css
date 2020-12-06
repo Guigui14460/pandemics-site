@@ -48,18 +48,29 @@ header .nav-links li a:hover {
 }
 
 #burger {
+  display: none;
+}
+
+/* -------------------------------------------------- */
+
+@media (max-width: 600px) {
+.nav-links  {
+  display: none;
+}
+
+#burger {
+  display: block;
   font-size: 25px;
   color: white;
 }
 
-#burger:hover {
-  color: rgb(190, 182, 182);
+.nav-links {
+  padding: 0;
 }
 
-@media (max-width: 650px){
 
-  .nav-links li a {
-    display: none;
-  }
+header {
+  background-color: rgba(2, 219, 111, 0.315);
+}
 
 }
