@@ -51,3 +51,11 @@ header .nav-links li a:hover {
   font-size: 25px;
   color: white;
 }
+
+@media (max-width: 650px){
+
+  .nav-links li a {
+    display: none;
+  }
+
+}
