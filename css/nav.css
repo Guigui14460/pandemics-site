@@ -52,6 +52,10 @@ header .nav-links li a:hover {
   color: white;
 }
 
+#burger:hover {
+  color: rgb(190, 182, 182);
+}
+
 @media (max-width: 650px){
 
   .nav-links li a {
