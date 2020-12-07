@@ -34,7 +34,7 @@ class GeneralView extends AbstractView
 
         $this->content .= "<h2>Répartition des tâches</h2><p>Nous avons repris la base MVCR de Guillaume car la sienne fonctionnait mieux que celle des autres membres.</p><ul>";
         $this->content .= "<li>Arthur : <ul><li>CSS + site responsive</li><li>Partie du modèle</li><li>Page \"A propos\"</li></ul></li>";
-        $this->content .= "<li>Guillaume : <ul><li>Page \"A propos\"</li><li>Gestion des permissions sur les vues et URL</li><li>Gestion admin des utilisateurs</li><li>Ajout du système de redirection avec un paramètre 'next_url' dans le GET</li><li>Modification du code pour l'intégration sur les serveurs web de la FAC</li><li>Système d'authentification</li><li>Amélioration de la struture et du système d'URLs</li><li>Ajout du système pour éviter les injections de code SQL, PHP, JavaScript</li></ul></li>";
+        $this->content .= "<li>Guillaume : <ul><li>Partie du modèle</li><li>Page \"A propos\"</li><li>Gestion des permissions sur les vues et URL</li><li>Gestion par un admin des comptes utilisateurs</li><li>Ajout du système de redirection avec un paramètre 'next_url' dans le GET</li><li>Modification du code pour l'intégration sur les serveurs web de la FAC</li><li>Système d'authentification</li><li>Amélioration de la structure et du système d'URLs</li><li>Ajout du système pour éviter les injections de code SQL, PHP, JavaScript</li></ul></li>";
         $this->content .= "<li>Corentin : <ul><li>CSS + site responsive</li><li>Partie du modèle</li></ul></li>";
         $this->content .= "<li>Alexandre : <ul><li>Partie du modèle</li><li>Page \"A propos\"</li><li>Implémentation du système de recherche de maladies</li></ul></li>";
         $this->content .= "</ul>";
