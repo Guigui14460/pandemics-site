@@ -38,6 +38,20 @@ class PandemicController
         $this->view->makeListPage($this->storage->readAll());
     }
 
+    public function showListSearch($post)
+    {
+        $pandemicTable = $this->storage->readAll();
+        $pandemicFinalTable = array();
+        
+        foreach($pandemicTable as $cle => $value){
+          if(preg_match("/".$post."/",$value->getName())){
+            $pandemicFinalTable[$cle] = $value;
+          }
+        }
+
+        $this->view->makeListPage($pandemicFinalTable);
+    }
+
     public function newPandemic()
     {
         if ($this->currentPandemicBuilder === null) {
