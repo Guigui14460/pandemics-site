@@ -37,7 +37,7 @@ class PandemicRouter extends AbstractRouter
                 }
                 else{
                     $controller->showList();
-            }
+                }
             } else {
                 if ($path_exploded[0] === "create") {
                     if ($is_user_connected) {

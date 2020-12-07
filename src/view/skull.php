@@ -45,46 +45,19 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
 
     <script type="text/javascript"> 
 
-    
-let on=false;
-document.getElementById("burger").addEventListener("click",function(e){
-    let menu = document.getElementsByClassName("nav-links");
-    let header = document.getElementById("header");
-    let li = document.getElementsByClassName("li");
-    
-    console.log(window.innerWidth);
-    if(!on && window.innerWidth <= 600){
-        menu[0].style.display = "block";
-        menu[0].style.witdh = "100%";
-        menu[0].style.text_align = "left";
-        menu[0].style.position = "absolute";
-        menu[0].style.top = "2em";
-        menu[0].style.left = "0";
-        menu[0].style.right = "0";
-        header.style.padding = "0 15px 12% 15px";
-       
-     
-        if(li[3].innerText == "Déconnexion" && window.innerWidth <= 450){
-            header.style.padding = "0 15px 15% 15px";
-            for (let i = 0; i < li.length; i++) {
-                li[i].style.fontSize = "80%";
-              
+    let on=false;
+    document.getElementById("burger").addEventListener("click",function(e){
+        let menu = document.getElementsByClassName("nav-links");
+        if(!on && window.innerWidth <= 640){
+            menu[0].style.display = "block";
+            on = true
+        }else{
+            if(window.innerWidth <= 640){
+                menu[0].style.display = "none";
+         
+            on=false;
             }
         }
-
-        
-        on = true
-    }else{
-        if(window.innerWidth <= 600){
-            menu[0].style.display = "none";
-        header.style.padding= "0 15px";
-        on=false;
-        }
-       
-    }
-
-
-
 }); 
 
 </script>

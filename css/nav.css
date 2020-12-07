@@ -23,6 +23,7 @@ header .logo,
 }
 
 .nav-links {
+  display: inline-block;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -54,9 +55,19 @@ header .nav-links li a:hover {
 
 /* -------------------------------------------------- */
 
-@media (max-width: 600px) {
+
+@media (max-width: 650px) {
 .nav-links  {
   display: none;
+  background-color: rgba(2, 219, 111, 0.315);
+  
+  width: 100%;
+  text-align : left;
+  position : absolute;
+  top : 1.8rem;
+  left : 0;
+  right : 0;
+  
 }
 
 #burger {
@@ -65,13 +76,27 @@ header .nav-links li a:hover {
   color: white;
 }
 
-.nav-links {
-  padding: 0;
+header {
+  margin-bottom: 5%;
+  background-color: rgba(2, 219, 111, 0.315);
+
+  /* margin-bottom: 2%; */
+}
+
 }
 
 
+@media (max-width: 450px) {
+
+.li {
+  font-size: 80%;
+}
+
 header {
+  margin-bottom: 8%;
   background-color: rgba(2, 219, 111, 0.315);
+
+  /* margin-bottom: 2%; */
 }
 
 }
