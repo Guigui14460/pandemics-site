@@ -72,7 +72,7 @@ class PandemicView extends AbstractView
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Date d\'apparution de la maladie : <input type="number" name="' . $builder->getDiscoveryYearRef() . '" value="';
-		$s .= $builder->getData($builder->getDiscoveryYearRef());
+		$s .= Utils::htmlesc($builder->getData($builder->getDiscoveryYearRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getDiscoveryYearRef());
 		if ($err !== null) {
@@ -128,7 +128,7 @@ class PandemicView extends AbstractView
 		$s .= "</label></p>\n";
 
 		$s .= '<p><label>Date d\'apparution de la maladie : <input type="number" name="' . $builder->getDiscoveryYearRef() . '" value="';
-		$s .= $builder->getData($builder->getDiscoveryYearRef());
+		$s .= Utils::htmlesc($builder->getData($builder->getDiscoveryYearRef()));
 		$s .= "\" />";
 		$err = $builder->getError($builder->getDiscoveryYearRef());
 		if ($err !== null) {
@@ -161,7 +161,7 @@ class PandemicView extends AbstractView
 
 	public function makePandemicDeletionPage($pandemic, $id)
 	{
-		$this->title = "Suppression de {$pandemic->getName()}";
+		$this->title = "Suppression de " . Utils::htmlesc($pandemic->getName());
 
 		$this->content = "<h1>{$this->title}</h1><p>Êtes-vous sûr de vouloir supprimer cette maladie ?<br>
         <form class=\"no-border\" action=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" =>$id))}\" method=\"POST\"><input type=\"hidden\" name=\"pandemic_id\" value=\"$id\"/><button class=\"button danger\">Oui</button><a class=\"button\" href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" =>$id))}\">Annuler</a></form></p>";

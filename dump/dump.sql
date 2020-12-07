@@ -38,7 +38,7 @@ CREATE TABLE `pandemics` (
   `description` text NOT NULL,
   `creator` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `pandemics` (
 
 LOCK TABLES `pandemics` WRITE;
 /*!40000 ALTER TABLE `pandemics` DISABLE KEYS */;
-INSERT INTO `pandemics` VALUES (1,'Covid19','Coronavirus',2019,'Pandémie mondiale parti de Chine','vanier'),(2,'test','test',-1,'DROP TABLE IF EXISTS \'pandemics\';','vanier'),(3,'DROP TABLE `pandemics`','Gros virus sa mère',2020,'Il s\'appelle corona','lecarpentier'),(4,'<script>alert(\"ok\")</script>','ok',-1,'</p><b>ok<b><em>test</em><p>','lecarpentier');
+INSERT INTO `pandemics` VALUES (1,'Covid-19','Coronavirus',2019,'Pandémie mondiale parti de Chine','vanier'),(2,'Test','virus de test',-10,'test et encore test','vanier'),(3,'DROP TABLE `pandemics`;','<script>alert(\"code injecté\");</script>',-10,'<strong>pas <em>ok</em></strong><? php echo \"salut\" ?>','lecarpentier');
 /*!40000 ALTER TABLE `pandemics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,4 +86,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-03 18:56:55
+-- Dump completed on 2020-12-07 13:35:16
