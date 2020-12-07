@@ -36,9 +36,9 @@ class PandemicView extends AbstractView
 		$this->content = "<h1>" . Utils::htmlesc($pandemic->getName()) . "</h1><article><p>" . Utils::htmlesc($pandemic->getName()) . " est une maladie du type " . Utils::htmlesc($pandemic->getType()) . "</p><p>Les premiers signes de son apparition sont vers l'an {$pandemic->getDiscoveryYear()}.</p><p>Information sur la maladie :<br>" . Utils::htmlesc($pandemic->getDescription()) . "</p><p>Information rentrée par : {$pandemic->getCreator()}</p></article>";
 		$this->content .= "<div class=\"buttons\">";
 		if ($has_permission) {
-			$this->content .= "<a class=\"button info\" href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" =>$id))}\">Modifier la maladie</a>&nbsp;&nbsp;<a class=\"button danger\" href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" =>$id))}\">Supprimer la maladie</a><br>";
+			$this->content .= "<a class=\"button info\" href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" =>$id))}\">Modifier la maladie</a><a class=\"button danger\" href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" =>$id))}\">Supprimer la maladie</a><br>";
 		}
-		$this->content .= "<a class=\"button\" style=\"margin-top: 1em;\" href=\"{$this->router->getSimpleURL("pandemics_list")}\">Retourner à la liste des maladies</a></div>";
+		$this->content .= "<a class=\"button\" href=\"{$this->router->getSimpleURL("pandemics_list")}\">Retourner à la liste des maladies</a></div>";
 	}
 
 	public function displayUnknownPandemic()

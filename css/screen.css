@@ -172,6 +172,9 @@ button {
   width: 100%;
   text-align: center;
 }
+.buttons .button {
+  margin: 1em 10px 0 10px;
+}
 .button:hover,
 button:hover {
   color: black;

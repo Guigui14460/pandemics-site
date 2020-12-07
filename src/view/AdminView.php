@@ -32,7 +32,7 @@ class AdminView extends AbstractView
     {
         $this->title = "Page sur " . Utils::htmlesc($user->getUsername());
         $this->content = "<h1>" . Utils::htmlesc($user->getUsername()) . "</h1><article><p>" . Utils::htmlesc($user->getUsername()) . " est un utilisateur qui a le statut \"" . Utils::htmlesc($user->getStatus()) . "\".</p></article>";
-        $this->content .= "<div class=\"buttons\"><a class=\"button info\" href=\"{$this->router->getConfigurableURL("admin_user_update", array("id" =>$id))}\">Modifier l'utilisateur</a>&nbsp;&nbsp;<a class=\"button danger\" href=\"{$this->router->getConfigurableURL("admin_user_delete", array("id" =>$id))}\">Supprimer l'utilisateur</a></div>";
+        $this->content .= "<div class=\"buttons\"><a class=\"button info\" href=\"{$this->router->getConfigurableURL("admin_user_update", array("id" =>$id))}\">Modifier l'utilisateur</a><a class=\"button danger\" href=\"{$this->router->getConfigurableURL("admin_user_delete", array("id" =>$id))}\">Supprimer l'utilisateur</a></div>";
     }
 
     public function displayUnknownUser()
