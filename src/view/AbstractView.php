@@ -27,30 +27,30 @@ abstract class AbstractView
 
     public function show500()
     {
-        http_response_code(500);
         $this->title = "Erreur serveur";
-        $this->content = "<p>Une erreur est survenu avec le serveur. Veuillez réesaayer l'action effectuée.<span class=\"error-code\">Code erreur : 500</span></p>";
+        $this->content = "<h1>Erreur serveur</h1><p>Une erreur est survenu avec le serveur. Veuillez réesaayer l'action effectuée.<br><span class=\"error-code\">Code erreur : 500</span></p>";
+        http_response_code(500);
     }
 
     public function show404()
     {
-        http_response_code(404);
         $this->title = "Page non trouvée";
-        $this->content = "<p>La page que vous recherchez n'existe pas ou plus.<span class=\"error-code\">Code erreur : 404</span></p>";
+        $this->content = "<h1>Page non trouvée</h1><p>La page que vous recherchez n'existe pas ou plus.<br><span class=\"error-code\">Code erreur : 404</span></p>";
+        http_response_code(404);
     }
 
     public function show403($msg)
     {
-        http_response_code(403);
         $this->title = "Accès interdit";
-        $this->content = "<p>Vous n'avez pas la permission d'accéder à cette page !<br><strong>$msg</strong><br><span class=\"error-code\">Code erreur : 403</span></p><br><a href=\"" . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $this->router->getSimpleURL("home")) . "\">Retourner à la page précédente</a>";
+        $this->content = "<h1>Accès interdit</h1><p>Vous n'avez pas la permission d'accéder à cette page !<br><strong>$msg</strong><br><span class=\"error-code\">Code erreur : 403</span></p><br><a href=\"" . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $this->router->getSimpleURL("home")) . "\">Retourner à la page précédente</a>";
+        http_response_code(403);
     }
 
     public function show405()
     {
-        http_response_code(405);
         $this->title = "Mauvaise méthode";
-        $this->content = "<p>Vous avez utilisé une mauvaise méthode !<span class=\"error-code\">Code erreur : 405</span></p>";
+        $this->content = "<h1>Mauvaise méthode</h1><p>Vous avez utilisé une mauvaise méthode !<span class=\"error-code\">Code erreur : 405</span></p>";
+        http_response_code(405);
     }
 
     public function showDebugPage($variable)

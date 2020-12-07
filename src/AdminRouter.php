@@ -64,9 +64,10 @@ class AdminRouter extends AbstractRouter
                 } else {
                     $this->view->show404();
                 }
+            } else {
+                $this->view->show404();
             }
         } catch (Exception $e) {
-            var_export($e);
             $this->view->show500();
         }
     }

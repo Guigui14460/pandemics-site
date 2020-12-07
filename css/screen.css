@@ -46,6 +46,11 @@ img {
   width: 40%;
   height: auto;
 }
+
+.error-code {
+  font-weight: bold;
+  color: red;
+}
 /* End general part */
 
 /* Feedback part */
