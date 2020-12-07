@@ -59,7 +59,7 @@ class AuthenticationRouter extends AbstractRouter
                             $this->view->show405();
                         }
                     } else {
-                        $this->POSTredirect($_SERVER['HTTP_REFERER'], "Vous êtes déjà connecté !", "info");
+                        $this->POSTredirect((isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $this->router->getSimpleURL("home")), "Vous êtes déjà connecté !", "info");
                     }
                 } else {
                     $this->view->show404();

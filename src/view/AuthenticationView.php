@@ -91,8 +91,8 @@ class AuthenticationView extends AbstractView
         $this->title = "Déconnexion";
 
         $this->content = "<h1>{$this->title}</h1><p>" . Utils::htmlesc($user->getUsername()) . ", êtes-vous sûr de vouloir vous déconnecter ?<p>";
-        $this->content .= "<form class=\"no-border\" action=\"{$this->router->getSimpleURL("accounts_logout")}\" method=\"POST\"><input type=\"hidden\" name=\"oui\" value=\"oui\"><button class=\"button danger\">Oui</button>&nbsp";
-        $this->content .= "<a class=\"button\" href=\"{$_SERVER['HTTP_REFERER']}\">Non</a></form>";
+        $this->content .= "<form class=\"no-border\" action=\"{$this->router->getSimpleURL("accounts_logout")}\" method=\"POST\"><input type=\"hidden\" name=\"oui\" value=\"oui\"><button class=\"button danger\">Oui</button>&nbsp;";
+        $this->content .= "<a class=\"button\" href=\"" . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $this->router->getSimpleURL("home")) . "\">Non</a></form>";
     }
 
     public function displayLogoutSuccess()

@@ -70,7 +70,7 @@ abstract class AbstractRouter
 
     public function getSimpleURL($name)
     {
-        return $_SERVER['SCRIPT_NAME'] . $this->urls[$name];
+        return $_SERVER['SCRIPT_NAME'] . (isset($this->urls[$name]) ? $this->urls[$name] : "");
     }
 
     public function getAppName()

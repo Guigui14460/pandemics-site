@@ -27,7 +27,7 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
             <ul class="nav-links">
                 <?php
                 foreach ($menu as $text => $link) {
-                    echo "<li><a class=\"li\"href=\"$link\">$text</a></li>";
+                    echo "<li><a href=\"$link\">$text</a></li>";
                 }
                 ?>
             </ul>
@@ -41,7 +41,7 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
         <?php echo $content; ?>
     </main>
 
-    <script type="text/javascript">
+    <script>
         document.getElementById("burger").addEventListener("click", function(e) {
             document.querySelector(".menu").classList.toggle("show");
         });

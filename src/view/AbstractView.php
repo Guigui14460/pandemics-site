@@ -43,7 +43,7 @@ abstract class AbstractView
     {
         http_response_code(403);
         $this->title = "Accès interdit";
-        $this->content = "<p>Vous n'avez pas la permission d'accéder à cette page !<br><strong>$msg</strong><br><span class=\"error-code\">Code erreur : 403</span></p><br><a href=\"" . $_SERVER["HTTP_REFERER"] . "\">Retourner à la page précédente</a>";
+        $this->content = "<p>Vous n'avez pas la permission d'accéder à cette page !<br><strong>$msg</strong><br><span class=\"error-code\">Code erreur : 403</span></p><br><a href=\"" . (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : $this->router->getSimpleURL("home")) . "\">Retourner à la page précédente</a>";
     }
 
     public function show405()
