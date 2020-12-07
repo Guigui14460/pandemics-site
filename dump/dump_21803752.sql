@@ -47,7 +47,7 @@ CREATE TABLE `pandemics` (
 
 LOCK TABLES `pandemics` WRITE;
 /*!40000 ALTER TABLE `pandemics` DISABLE KEYS */;
-INSERT INTO `pandemics` VALUES (1,'Covid-19','Coronavirus',2019,'Pandémie mondiale parti de Chine','vanier'),(2,'Test','virus de test',-10,'test et encore test','vanier'),(3,'DROP TABLE `pandemics`;','<script>alert(\"code in$
+INSERT INTO `pandemics` VALUES (1,'Covid-19','Coronavirus',2019,'Pandémie mondiale parti de Chine','vanier'),(2,'Test','virus de test',-10,'test et encore test','vanier'),(3,'DROP TABLE `pandemics`;','<script>alert(\"code injecté\");</script>',-10,'<strong>pas <em>ok</em></strong><? php echo \"salut\" ?>','lecarpentier');
 /*!40000 ALTER TABLE `pandemics` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'lecarpentier','$2y$10$IoJbFZTv6Mv9CM4.ipVmcOtXOPxK7futxc2D7BdCUUDZgECjqQSpW','user'),(2,'vanier','$2y$10$WGDSELYNaNS7rbFEqmeOOe8jlvjd3qudoh5zyML7dN5vvLFh3S98a','user'),(3,'admin','$2y$10$3JMOtE$
+INSERT INTO `users` VALUES (1,'lecarpentier','$2y$10$IoJbFZTv6Mv9CM4.ipVmcOtXOPxK7futxc2D7BdCUUDZgECjqQSpW','user'),(2,'vanier','$2y$10$WGDSELYNaNS7rbFEqmeOOe8jlvjd3qudoh5zyML7dN5vvLFh3S98a','user'),(3,'admin','$2y$10$3JMOtE4ZoupJoNMBqhEL8exx56HGzTDy0AZEqdJ2FX6JVJiVUDOW2','admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
