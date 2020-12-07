@@ -13,7 +13,7 @@ class GeneralView extends AbstractView
     {
         $this->title = "";
 
-        $this->content = "<h1>Bienvenue sur notre site Pandémonium !</h1><img src='./images/covid.png'/>";
+        $this->content = "<h1>Bienvenue sur notre site Pandémonium !</h1><img src='./images/covid.png'/><p style=\"text-align: center;\">Venez voir notre <a href=\"{$this->router->getSimpleURL("pandemics_list")}\">liste de maladies</a>.</p>";
     }
 
     public function aboutPage()

@@ -15,6 +15,7 @@ class AdminView extends AbstractView
         $this->title = "";
 
         $this->content = "<h1>Bienvenue sur la partie Administration !</h1>";
+        $this->content .= "<p style=\"text-align: center;\">Allez voir la <a href=\"{$this->router->getSimpleURL("admin_user_list")}\">nos utilisateurs</a>.</p>";
     }
 
     public function makeListPage($users)
@@ -24,7 +25,7 @@ class AdminView extends AbstractView
         foreach ($users as $key => $value) {
             $list .= "<li><a href=\"{$this->router->getConfigurableURL("admin_user_detail", array("id" =>$key))}\">" . Utils::htmlesc($value->getUsername()) . "</a></li>";
         }
-        $this->content = "<h1>Liste des utilisateurs</h1><ul class=\"list\">$list</ul>";
+        $this->content = "<h1>Liste des utilisateurs</h1><div class=\"buttons\"><a class=\"button info\" href=\"{$this->router->getSimpleURL("admin_user_create")}\">Ajouter un utilisateur</a></div><ul class=\"list\">$list</ul>";
     }
 
     public function makeUserPage($user, $id)

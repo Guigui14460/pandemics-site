@@ -18,7 +18,7 @@ class PandemicView extends AbstractView
 			$list .= "<li><a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" =>$key))}\">" . Utils::htmlesc($value->getName()) . "</a></li>";
 		}
 
-		$this->content = "<h1>Liste des maladies</h1>";
+		$this->content = "<h1>Liste des maladies</h1><div class=\"buttons\"><a class=\"button\" href=\"{$this->router->getSimpleURL("pandemics_create")}\">Ajouter la vôtre</a></div>";
 		$this->content .= "<form class=\"no-border\" action={$this->router->getSimpleURL("pandemics_list")} method=\"POST\" >";
 		$this->content .= "<input type=\"text\" id=\"search\" name=\"search\" placeholder=\"Rechercher une maladie\">";
 		$this->content .= "<button class=\"button info\" type=\"submit\">Recherche</button>";
