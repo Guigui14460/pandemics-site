@@ -24,10 +24,6 @@ class AdminRouter extends AbstractRouter
 
     public function main($db, $path_exploded = "", $auth_manager = null)
     {
-        $next = ".";
-        for ($i = 0; $i < count(array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 1)); $i++) {
-            $next .= "/..";
-        }
         try {
             $controller = new AdminController($this->view, $db->getStorage('users'), $this->main_router, $auth_manager);
             if (count($path_exploded) <= 0 || $path_exploded[0] === '') {

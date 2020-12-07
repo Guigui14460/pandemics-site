@@ -52,10 +52,7 @@ class Router extends AbstractRouter
                         break;
                     case 'admin':
                         if (!$auth_manager->isUserConnected()) {
-                            $next = ".";
-                            for ($i = 0; $i < count(array_slice(explode('/', $_SERVER['SCRIPT_NAME']), 1)); $i++) {
-                                $next .= "/..";
-                            }
+                            $next = "./../index.php";
                             $this->POSTredirect($this->getSimpleURL("accounts_login") . "?next=$next" . $_SERVER["PATH_INFO"], null, null);
                         } else {
                             if (!$auth_manager->isAdminConnected()) {
