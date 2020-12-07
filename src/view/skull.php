@@ -21,8 +21,6 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
 </head>
 
 <body>
-
-
     <header id="header">
         <a class="logo" href="<?php echo $this->router->getSimpleURL('home') ?>">Pandémonium</a>
         <nav class="menu">
@@ -43,25 +41,11 @@ if ($_SERVER['SERVER_NAME'] === "localhost") {
         <?php echo $content; ?>
     </main>
 
-    <script type="text/javascript"> 
-
-    let on=false;
-    document.getElementById("burger").addEventListener("click",function(e){
-        let menu = document.getElementsByClassName("nav-links");
-        if(!on && window.innerWidth <= 640){
-            menu[0].style.display = "block";
-            on = true
-        }else{
-            if(window.innerWidth <= 640){
-                menu[0].style.display = "none";
-         
-            on=false;
-            }
-        }
-}); 
-
-</script>
-
+    <script type="text/javascript">
+        document.getElementById("burger").addEventListener("click", function(e) {
+            document.querySelector(".menu").classList.toggle("show");
+        });
+    </script>
 </body>
 
 </html>

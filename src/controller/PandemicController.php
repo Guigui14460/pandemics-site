@@ -42,14 +42,14 @@ class PandemicController
     {
         $pandemicTable = $this->storage->readAll();
         $pandemicFinalTable = array();
-        
-        foreach($pandemicTable as $cle => $value){
-          if(preg_match("/".$post."/",$value->getName())){
-            $pandemicFinalTable[$cle] = $value;
-          }
+
+        foreach ($pandemicTable as $key => $value) {
+            if (preg_match("/" . $post . "/", $value->getName())) {
+                $pandemicFinalTable[$key] = $value;
+            }
         }
 
-        $this->view->makeListPage($pandemicFinalTable);
+        $this->view->makeListPage($pandemicFinalTable, count($pandemicFinalTable) === 0);
     }
 
     public function newPandemic()

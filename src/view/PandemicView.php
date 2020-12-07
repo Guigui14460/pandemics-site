@@ -10,31 +10,35 @@ class PandemicView extends AbstractView
 		parent::__construct($router, "skull.php");
 	}
 
-	public function makeListPage($pandemics)
+	public function makeListPage($pandemics, $no_found = False)
 	{
 		$this->title = "Liste des maladies";
 		$list = "";
 		foreach ($pandemics as $key => $value) {
 			$list .= "<li><a href=\"{$this->router->getConfigurableURL("pandemics_detail", array("id" =>$key))}\">" . Utils::htmlesc($value->getName()) . "</a></li>";
 		}
-		
+
 		$this->content = "<h1>Liste des maladies</h1>";
-		$this->content .= "<form action = {$this->router->getSimpleURL("pandemics_list")} method = \"POST\" >";
-		$this->content .= "<input type=\"text\" id=\"search\" name=\"search\">";
-		$this->content .= "<input type=\"submit\" value=\"recherche\">";
+		$this->content .= "<form class=\"no-border\" action={$this->router->getSimpleURL("pandemics_list")} method=\"POST\" >";
+		$this->content .= "<input type=\"text\" id=\"search\" name=\"search\" placeholder=\"Rechercher une maladie\">";
+		$this->content .= "<button class=\"button info\" type=\"submit\">Recherche</button>";
 		$this->content .= "</form>";
-		
-		
-		$this->content .= "<ul class=\"list\">$list</ul>";
+		if ($no_found) {
+			$this->content .= "<p style=\"text-align:center;\">Nous n'avons pas trouvé de maladies liées à votre recherche</p>";
+		} else {
+			$this->content .= "<ul class=\"list\">$list</ul>";
+		}
 	}
 
 	public function makePandemicPage($pandemic, $id, $has_permission)
 	{
 		$this->title = "Page sur " . Utils::htmlesc($pandemic->getName());
 		$this->content = "<h1>" . Utils::htmlesc($pandemic->getName()) . "</h1><article><p>" . Utils::htmlesc($pandemic->getName()) . " est une maladie du type " . Utils::htmlesc($pandemic->getType()) . "</p><p>Les premiers signes de son apparition sont vers l'an {$pandemic->getDiscoveryYear()}.</p><p>Information sur la maladie :<br>" . Utils::htmlesc($pandemic->getDescription()) . "</p><p>Information rentrée par : {$pandemic->getCreator()}</p></article>";
+		$this->content .= "<div class=\"buttons\">";
 		if ($has_permission) {
-			$this->content .= "<div class=\"buttons\"><a class=\"button info\" href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" =>$id))}\">Modifier la maladie</a>&nbsp;&nbsp;<a class=\"button danger\" href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" =>$id))}\">Supprimer la maladie</a></div>";
+			$this->content .= "<a class=\"button info\" href=\"{$this->router->getConfigurableURL("pandemics_update", array("id" =>$id))}\">Modifier la maladie</a>&nbsp;&nbsp;<a class=\"button danger\" href=\"{$this->router->getConfigurableURL("pandemics_delete", array("id" =>$id))}\">Supprimer la maladie</a><br>";
 		}
+		$this->content .= "<a class=\"button\" style=\"margin-top: 1em;\" href=\"{$this->router->getSimpleURL("pandemics_list")}\">Retourner à la liste des maladies</a></div>";
 	}
 
 	public function displayUnknownPandemic()

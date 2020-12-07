@@ -31,12 +31,12 @@ class PandemicRouter extends AbstractRouter
         try {
             $controller = new PandemicController($this->view, $db->getStorage('pandemics'), $this->main_router, $auth_manager);
             if (count($path_exploded) <= 0 || $path_exploded[0] === '' || $path_exploded[0] === "list") {
-                
-                if ($_SERVER['REQUEST_METHOD'] === "POST"){
+                if ($_SERVER['REQUEST_METHOD'] === "POST") {
                     $controller->showListSearch($_POST["search"]);
-                }
-                else{
+                } else if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     $controller->showList();
+                } else {
+                    $this->view->show405();
                 }
             } else {
                 if ($path_exploded[0] === "create") {
